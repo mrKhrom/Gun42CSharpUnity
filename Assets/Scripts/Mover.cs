@@ -4,7 +4,8 @@ using UnityEngine;
 namespace Netologia.Homework
 {
 	/// <summary>
-	/// Двигает кинематический Rigidbody между _start и _end
+	/// Двигает кинематический Rigidbody между _start и _end.
+	/// Точки — в локальных координатах родителя; без родителя — в мировых.
 	/// </summary>
 	[RequireComponent(typeof(Rigidbody))]
 	public class Mover : MonoBehaviour
@@ -15,13 +16,10 @@ namespace Netologia.Homework
 		[SerializeField, Min(0f)] private float _delay = 1f;
 
 		private Rigidbody _body;
-		// Мировая матрица объекта в момент старта — для точек без родителя.</summary>
-		private Matrix4x4 _initialLocalToWorld;
 
 		private IEnumerator Start()
 		{
 			_body = GetComponent<Rigidbody>();
-			_initialLocalToWorld = transform.localToWorldMatrix;
 
 			while (true)
 			{
@@ -58,16 +56,15 @@ namespace Netologia.Homework
 			_body.MovePosition(to);
 		}
 
-		private Vector3 ToWorld(Vector3 local)
+		// С родителем: local space родителя (как у ObstacleMover).
+		// Без родителя: мировые координаты (как у Player в корне сцены).
+		// Rigidbody.MovePosition принимает только world position.
+		private Vector3 ToWorld(Vector3 point)
 		{
 			if (transform.parent != null)
-				return transform.parent.TransformPoint(local);
+				return transform.parent.TransformPoint(point);
 
-			// Edit Mode (Gizmos) — от текущей позы; Play — от зафиксированной на Start
-			if (Application.isPlaying)
-				return _initialLocalToWorld.MultiplyPoint3x4(local);
-
-			return transform.localToWorldMatrix.MultiplyPoint3x4(local);
+			return point;
 		}
 
 		private void OnDrawGizmos()
