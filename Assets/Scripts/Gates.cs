@@ -1,7 +1,6 @@
-using Netologia.Homework;
 using UnityEngine;
 
-namespace Homework.Netologia
+namespace Netologia.Homework
 {
     public class Gates: MonoBehaviour
     {
@@ -10,7 +9,7 @@ namespace Homework.Netologia
         private void OnTriggerEnter(Collider other)
         {
             // Ищем скрипт Ball на объекте, который вошел в ворота
-            Ball ball = other.GetComponent<Ball>();
+            other.TryGetComponent<Ball>(out var ball);
 
             if (ball == null)
                 return;

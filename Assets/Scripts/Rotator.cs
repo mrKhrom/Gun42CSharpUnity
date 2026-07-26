@@ -1,19 +1,26 @@
 using System.Collections;
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+namespace Netologia.Homework
 {
-    [SerializeField] private Vector3 _rotate;
-    
-    private IEnumerator Start()
+    [RequireComponent(typeof(Rigidbody))]
+
+    public class Rotator : MonoBehaviour
     {
-        Rigidbody body = GetComponent<Rigidbody>();
+        [SerializeField] private Vector3 _rotate;
+        private readonly WaitForFixedUpdate _fixedUpdateWait = new WaitForFixedUpdate();
 
-        while (true)
+        private IEnumerator Start()
         {
-            body.MoveRotation(body.rotation * Quaternion.Euler(_rotate * Time.fixedDeltaTime));
+            Rigidbody body = GetComponent<Rigidbody>();
 
-            yield return new WaitForFixedUpdate();
+            while (true)
+            {
+                body.MoveRotation(body.rotation * Quaternion.Euler(_rotate * Time.fixedDeltaTime));
+
+                yield return _fixedUpdateWait;
+            }
         }
     }
+
 }

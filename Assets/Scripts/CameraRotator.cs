@@ -3,26 +3,29 @@ using System.Collections;
 
 using UnityEngine;
 
-public class CameraRotator : MonoBehaviour
+namespace Netologia.Homework
 {
-	[SerializeField]
-	private Transform _target;
-	[SerializeField, Min(0.1f)]
-	private float _speed = 1f;
-
-	private void Start()
+	public class CameraRotator : MonoBehaviour
 	{
-		StartCoroutine(Rotator());
-	}
+		[SerializeField]
+		private Transform _target;
+		[SerializeField, Min(0.1f)]
+		private float _speed = 1f;
 
-	private IEnumerator Rotator()
-	{
-		var transform = this.transform;
-		while(true)
+		private void Start()
 		{
-			var rotation = Quaternion.LookRotation(_target.position - transform.position);
-			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _speed);
-			yield return new WaitForEndOfFrame();
+			StartCoroutine(Rotator());
 		}
-	}
+
+		private IEnumerator Rotator()
+		{
+			var transform = this.transform;
+			while(true)
+			{
+				var rotation = Quaternion.LookRotation(_target.position - transform.position);
+				transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * _speed);
+				yield return new WaitForEndOfFrame();
+			}
+		}
+	}	
 }

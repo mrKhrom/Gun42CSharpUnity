@@ -16,18 +16,21 @@ namespace Netologia.Homework
 		[SerializeField, Min(0f)] private float _delay = 1f;
 
 		private Rigidbody _body;
+		private readonly WaitForFixedUpdate _fixedUpdateWait = new WaitForFixedUpdate();
+		private WaitForSeconds _delayWait;
 
 		private IEnumerator Start()
 		{
 			_body = GetComponent<Rigidbody>();
+			_delayWait = new WaitForSeconds(_delay);
 
 			while (true)
 			{
 				yield return Move(_start, _end);
-				yield return new WaitForSeconds(_delay);
+				yield return _delayWait;
 
 				yield return Move(_end, _start);
-				yield return new WaitForSeconds(_delay);
+				yield return _delayWait;
 			}
 		}
 
@@ -50,7 +53,7 @@ namespace Netologia.Homework
 				time += Time.fixedDeltaTime;
 				float t = Mathf.Clamp01(time / duration);
 				_body.MovePosition(Vector3.Lerp(from, to, t));
-				yield return new WaitForFixedUpdate();
+				yield return _fixedUpdateWait;
 			}
 
 			_body.MovePosition(to);

@@ -34,7 +34,7 @@ namespace Netologia.Homework
 				StartCoroutine(Reloader());
 				_ball.isKinematic = false;
 				_ball.transform.SetParent(null, true);
-				_ball.linearVelocity = transform.forward * _startVelocity;
+				_ball.velocity = transform.forward * _startVelocity;
 				Destroy(_ball.gameObject, _lifetime);
 			}
 		}
@@ -50,7 +50,7 @@ namespace Netologia.Homework
 		{
 			_ball = Instantiate(_ballPrefab, transform);
 			_ball.isKinematic = true;
-			_ball.linearVelocity = Vector3.zero;
+			_ball.velocity = Vector3.zero;
 			_ball.angularVelocity = Vector3.zero;
 
 			Transform ballTransform = _ball.transform;
