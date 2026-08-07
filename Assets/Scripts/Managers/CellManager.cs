@@ -34,15 +34,14 @@ public class CellManager : MonoBehaviour
         _cells.Clear();
         _cells.AddRange(FindObjectsOfType<Cell>());
 
-        // (позиции 0, 2, 4, ... 14 по X и Z)
-        const float step = 2f;
+        // Клетки размером 1: центры на целых координатах 0..7 по X и Z
+        const float step = 1f;
 
         foreach (var cell in _cells)
         {
             Vector3 p = cell.transform.position;
 
-            // X сетки = мир X / 2
-            // Y сетки = мир Z / 2  (ряды Line1..Line8 идут по оси Z)
+            // X сетки = world X, Y сетки = world Z (ряды Line идут по оси Z)
             int x = Mathf.RoundToInt(p.x / step);
             int y = Mathf.RoundToInt(p.z / step);
 
