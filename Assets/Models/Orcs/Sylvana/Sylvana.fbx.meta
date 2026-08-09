@@ -32,17 +32,7 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material_1_baseColor.png
-    second: {fileID: 2100000, guid: b0855549bc6ea48eb970ab1cebf8b58f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Material_1_basecolor
-    second: {fileID: 2100000, guid: b0855549bc6ea48eb970ab1cebf8b58f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material_1_basecolor.001
     second: {fileID: 2100000, guid: b0855549bc6ea48eb970ab1cebf8b58f, type: 2}
   - first:
       type: UnityEngine:Material
@@ -72,22 +62,12 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Sylvanas_Mat
+      name: blinn1
     second: {fileID: 2100000, guid: b0855549bc6ea48eb970ab1cebf8b58f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: base_color_texture
-    second: {fileID: 2100000, guid: b0855549bc6ea48eb970ab1cebf8b58f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: material
-    second: {fileID: 2100000, guid: b0855549bc6ea48eb970ab1cebf8b58f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: mesh
+      name: lambert1
     second: {fileID: 2100000, guid: b0855549bc6ea48eb970ab1cebf8b58f, type: 2}
   - first:
       type: UnityEngine:Material
@@ -192,7 +172,7 @@ ModelImporter:
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
-  remapMaterialsIfMaterialImportModeIsNone: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
