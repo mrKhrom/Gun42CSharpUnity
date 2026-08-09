@@ -1,0 +1,63 @@
+newmtl Arrow
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.2 0.2 0.2
+d 1
+illum 2
+map_Kd Textures/Arrow_BaseColor.png
+
+newmtl blinn1SG
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.2 0.2 0.2
+d 1
+illum 2
+map_Kd Textures/Arrow_BaseColor.png
+
+newmtl initialShadingGroup
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.2 0.2 0.2
+d 1
+illum 2
+map_Kd Textures/Arrow_BaseColor.png
+
+newmtl pPlane9Mat
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.2 0.2 0.2
+d 1
+illum 2
+map_Kd Textures/Arrow_BaseColor.png
+
+newmtl pPlane10Mat
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.2 0.2 0.2
+d 1
+illum 2
+map_Kd Textures/Arrow_BaseColor.png
+
+newmtl pPlane11Mat
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.2 0.2 0.2
+d 1
+illum 2
+map_Kd Textures/Arrow_BaseColor.png
+
+newmtl polySurface7Mat
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.2 0.2 0.2
+d 1
+illum 2
+map_Kd Textures/Arrow_BaseColor.png
+
+newmtl blinn1
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.2 0.2 0.2
+d 1
+illum 2
+map_Kd Textures/Arrow_BaseColor.png
