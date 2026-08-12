@@ -10,6 +10,9 @@ public class Unit : MonoBehaviour,
 {
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private Team _team = Team.Player1;
+    [Header("Optional combat")]
+    [SerializeField] private ArcheryWeapon _archeryWeapon;
+    [SerializeField] private bool _testArcheryOnClick = false;
 
     public Cell Cell { get; set; }
     public Team Team => _team;
@@ -31,6 +34,16 @@ public class Unit : MonoBehaviour,
     public void OnPointerClick(PointerEventData eventData)
     {
         Cell?.OnPointerClick(eventData);
+        if (_testArcheryOnClick)
+            PlayArcheryAttack();
+    }
+
+    /// <summary>Plays Archery_Shot_1 if ArcheryWeapon is present.</summary>
+    public void PlayArcheryAttack()
+    {
+        if (_archeryWeapon == null)
+            _archeryWeapon = GetComponent<ArcheryWeapon>();
+        _archeryWeapon?.PlayArcheryAttack();
     }
 
     public void Move(Cell targetCell)

@@ -1,0 +1,451 @@
+fileFormatVersion: 2
+guid: 5dcb97c1833740fd8db397ebf4f6060a
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arthas
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lambert
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Main
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_1
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_1_baseColor
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_1_basecolor
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mesh
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Meshy_AI_Lionheart_Champion_biped_Meshy_AI_Meshy_Merged_Animations
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Meshy_AI_Lionheart_Champion_biped_texture_0
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Meshy_AI_Lionheart_Champion_biped_texture_0.png
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn1
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: default
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: initialShadingGroup
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: texture_0
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: texture_0.png
+    second: {fileID: 2100000, guid: eb9f10cb4d8147c99a8dfb24fe4af2bd, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Meshy_AI_Lionheart_Champion_biped_texture_0.png
+    second: {fileID: 2800000, guid: aed0b642605f4901b4cd35cd0887411c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Meshy_AI_Lionheart_Champion_biped_texture_0_normal.png
+    second: {fileID: 2800000, guid: fdbed04268a14c3a86097280c4d46b97, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+  - serializedVersion: 16
+    name: Attack
+    takeName: Attack
+    internalID: 0
+    firstFrame: 0
+    lastFrame: 84
+    wrapMode: 0
+    orientationOffsetY: 0
+    level: 0
+    cycleOffset: 0
+    loop: 0
+    hasAdditiveReferencePose: 0
+    loopTime: 0
+    loopBlend: 0
+    loopBlendOrientation: 0
+    loopBlendPositionY: 0
+    loopBlendPositionXZ: 0
+    keepOriginalOrientation: 0
+    keepOriginalPositionY: 1
+    keepOriginalPositionXZ: 0
+    heightFromFeet: 0
+    mirror: 0
+    bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100
+    curves: []
+    events: []
+    transformMask: []
+    maskType: 3
+    maskSource: {instanceID: 0}
+    additiveReferencePoseFrame: 0
+  - serializedVersion: 16
+    name: Axe_Spin_Attack
+    takeName: Axe_Spin_Attack
+    internalID: 0
+    firstFrame: 0
+    lastFrame: 75
+    wrapMode: 0
+    orientationOffsetY: 0
+    level: 0
+    cycleOffset: 0
+    loop: 0
+    hasAdditiveReferencePose: 0
+    loopTime: 0
+    loopBlend: 0
+    loopBlendOrientation: 0
+    loopBlendPositionY: 0
+    loopBlendPositionXZ: 0
+    keepOriginalOrientation: 0
+    keepOriginalPositionY: 1
+    keepOriginalPositionXZ: 0
+    heightFromFeet: 0
+    mirror: 0
+    bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100
+    curves: []
+    events: []
+    transformMask: []
+    maskType: 3
+    maskSource: {instanceID: 0}
+    additiveReferencePoseFrame: 0
+  - serializedVersion: 16
+    name: Dead
+    takeName: Dead
+    internalID: 0
+    firstFrame: 0
+    lastFrame: 89
+    wrapMode: 0
+    orientationOffsetY: 0
+    level: 0
+    cycleOffset: 0
+    loop: 0
+    hasAdditiveReferencePose: 0
+    loopTime: 0
+    loopBlend: 0
+    loopBlendOrientation: 0
+    loopBlendPositionY: 0
+    loopBlendPositionXZ: 0
+    keepOriginalOrientation: 0
+    keepOriginalPositionY: 1
+    keepOriginalPositionXZ: 0
+    heightFromFeet: 0
+    mirror: 0
+    bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100
+    curves: []
+    events: []
+    transformMask: []
+    maskType: 3
+    maskSource: {instanceID: 0}
+    additiveReferencePoseFrame: 0
+  - serializedVersion: 16
+    name: Fall_Dead_from_Abdominal_Injury
+    takeName: Fall_Dead_from_Abdominal_Injury
+    internalID: 0
+    firstFrame: 0
+    lastFrame: 105
+    wrapMode: 0
+    orientationOffsetY: 0
+    level: 0
+    cycleOffset: 0
+    loop: 0
+    hasAdditiveReferencePose: 0
+    loopTime: 0
+    loopBlend: 0
+    loopBlendOrientation: 0
+    loopBlendPositionY: 0
+    loopBlendPositionXZ: 0
+    keepOriginalOrientation: 0
+    keepOriginalPositionY: 1
+    keepOriginalPositionXZ: 0
+    heightFromFeet: 0
+    mirror: 0
+    bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100
+    curves: []
+    events: []
+    transformMask: []
+    maskType: 3
+    maskSource: {instanceID: 0}
+    additiveReferencePoseFrame: 0
+  - serializedVersion: 16
+    name: Idle_02
+    takeName: Idle_02
+    internalID: 0
+    firstFrame: 0
+    lastFrame: 70
+    wrapMode: 0
+    orientationOffsetY: 0
+    level: 0
+    cycleOffset: 0
+    loop: 0
+    hasAdditiveReferencePose: 0
+    loopTime: 1
+    loopBlend: 0
+    loopBlendOrientation: 0
+    loopBlendPositionY: 0
+    loopBlendPositionXZ: 0
+    keepOriginalOrientation: 0
+    keepOriginalPositionY: 1
+    keepOriginalPositionXZ: 0
+    heightFromFeet: 0
+    mirror: 0
+    bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100
+    curves: []
+    events: []
+    transformMask: []
+    maskType: 3
+    maskSource: {instanceID: 0}
+    additiveReferencePoseFrame: 0
+  - serializedVersion: 16
+    name: Running
+    takeName: Running
+    internalID: 0
+    firstFrame: 0
+    lastFrame: 19
+    wrapMode: 0
+    orientationOffsetY: 0
+    level: 0
+    cycleOffset: 0
+    loop: 0
+    hasAdditiveReferencePose: 0
+    loopTime: 1
+    loopBlend: 0
+    loopBlendOrientation: 0
+    loopBlendPositionY: 0
+    loopBlendPositionXZ: 0
+    keepOriginalOrientation: 0
+    keepOriginalPositionY: 1
+    keepOriginalPositionXZ: 0
+    heightFromFeet: 0
+    mirror: 0
+    bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100
+    curves: []
+    events: []
+    transformMask: []
+    maskType: 3
+    maskSource: {instanceID: 0}
+    additiveReferencePoseFrame: 0
+  - serializedVersion: 16
+    name: Triple_Combo_Attack
+    takeName: Triple_Combo_Attack
+    internalID: 0
+    firstFrame: 0
+    lastFrame: 130
+    wrapMode: 0
+    orientationOffsetY: 0
+    level: 0
+    cycleOffset: 0
+    loop: 0
+    hasAdditiveReferencePose: 0
+    loopTime: 0
+    loopBlend: 0
+    loopBlendOrientation: 0
+    loopBlendPositionY: 0
+    loopBlendPositionXZ: 0
+    keepOriginalOrientation: 0
+    keepOriginalPositionY: 1
+    keepOriginalPositionXZ: 0
+    heightFromFeet: 0
+    mirror: 0
+    bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100
+    curves: []
+    events: []
+    transformMask: []
+    maskType: 3
+    maskSource: {instanceID: 0}
+    additiveReferencePoseFrame: 0
+  - serializedVersion: 16
+    name: Walking
+    takeName: Walking
+    internalID: 0
+    firstFrame: 0
+    lastFrame: 31
+    wrapMode: 0
+    orientationOffsetY: 0
+    level: 0
+    cycleOffset: 0
+    loop: 0
+    hasAdditiveReferencePose: 0
+    loopTime: 1
+    loopBlend: 0
+    loopBlendOrientation: 0
+    loopBlendPositionY: 0
+    loopBlendPositionXZ: 0
+    keepOriginalOrientation: 0
+    keepOriginalPositionY: 1
+    keepOriginalPositionXZ: 0
+    heightFromFeet: 0
+    mirror: 0
+    bodyMask: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100
+    curves: []
+    events: []
+    transformMask: []
+    maskType: 3
+    maskSource: {instanceID: 0}
+    additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

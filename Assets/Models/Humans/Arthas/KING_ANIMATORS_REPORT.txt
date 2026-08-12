@@ -1,0 +1,34 @@
+Arthas: found 8 clips from Assets/Models/Humans/Arthas/Arthas.fbx
+  - Attack (2.80s)
+  - Axe_Spin_Attack (2.50s)
+  - Dead (2.97s)
+  - Fall_Dead_from_Abdominal_Injury (3.50s)
+  - Idle_02 (2.33s)
+  - Running (0.63s)
+  - Triple_Combo_Attack (4.33s)
+  - Walking (1.03s)
+Arthas: default state = Idle_02
+Arthas: Idle -> Attack (trigger) -> Idle wired
+Arthas: controller saved -> Assets/Models/Humans/Arthas/Arthas.controller
+Thrall: found 13 clips from Assets/Models/Orcs/Thrall/Thrall.fbx
+  - Attack (2.80s)
+  - Axe_Spin_Attack (2.50s)
+  - Basic_Jump (5.90s)
+  - Dead (2.97s)
+  - Double_Combo_Attack (2.83s)
+  - Fall_Dead_from_Abdominal_Injury (3.50s)
+  - Idle_02 (2.33s)
+  - Idle_5 (1.87s)
+  - Running (0.63s)
+  - Spear_Walk (1.10s)
+  - Walk_Turn_Right (2.20s)
+  - Walking (1.03s)
+  - Walking_Scan_with_Sudden_Look_Back (6.73s)
+Thrall: default state = Idle_02
+Thrall: Idle -> Attack (trigger) -> Idle wired
+Thrall: controller saved -> Assets/Models/Orcs/Thrall/Thrall.controller
+Using already open GameScene
+Assigned Thrall -> Blackking/Thrall
+Assigned Arthas -> WhiteKing/Arthas
+Scene saved. Assign operations counted: 2
+DONE
