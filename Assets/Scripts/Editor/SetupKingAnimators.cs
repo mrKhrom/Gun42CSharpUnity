@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 /// Creates AnimatorControllers for Arthas (WhiteKing child) and Thrall (Blackking child)
 /// and assigns them in GameScene.
 /// Menu: Tools/Setup King Animators
+/// Knight import: Tools/Setup Knight Model
 /// Batchmode: -executeMethod SetupKingAnimators.Run
 /// Auto-runs once after compile if controllers are missing.
 /// </summary>
@@ -124,7 +125,7 @@ public static class SetupKingAnimators
         foreach (var s in existing)
             sm.RemoveState(s.state);
 
-        // Attack trigger (same name as Sylvana / ArcheryWeapon)
+        // Attack trigger
         if (!controller.parameters.Any(p => p.name == "Attack"))
             controller.AddParameter("Attack", AnimatorControllerParameterType.Trigger);
 

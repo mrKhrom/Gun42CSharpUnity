@@ -105,7 +105,6 @@ public class CellManager : MonoBehaviour
 
             if (closest != null && bestDist < 0.75f)
             {
-                // Только логическая привязка — позицию из сцены не трогаем
                 unit.Cell = closest;
                 closest.Unit = unit;
             }

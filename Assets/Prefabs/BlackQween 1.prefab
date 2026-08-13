@@ -72,8 +72,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 3
   _team: 0
-  _archeryWeapon: {fileID: 0}
-  _testArcheryOnClick: 0
 --- !u!1001 &8413945696528344521
 PrefabInstance:
   m_ObjectHideFlags: 0
