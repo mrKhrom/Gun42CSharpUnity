@@ -60,7 +60,6 @@ public class Unit : MonoBehaviour,
             Cell.Unit = null;
 
         Vector3 targetPos = targetCell.transform.position;
-        targetPos.y += 0.5f;
 
         while (Vector3.Distance(transform.position, targetPos) > 0.01f)
         {

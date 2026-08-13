@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4117971938579302277}
   - component: {fileID: 4632452258381918225}
   - component: {fileID: 1527047310899082172}
+  - component: {fileID: 8368977066981475519}
   m_Layer: 0
   m_Name: BlackQween 1
   m_TagString: Untagged
@@ -369,6 +370,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 1d02d4f01e6ce4d9d8b75e7346b62bd1, type: 2}
+    - target: {fileID: 5866666021909216657, guid: a7ec39d5f06643cead27e7fbbe8d13e7, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6162258519646862899, guid: a7ec39d5f06643cead27e7fbbe8d13e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -10.742019
@@ -432,3 +437,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a7ec39d5f06643cead27e7fbbe8d13e7, type: 3}
   m_PrefabInstance: {fileID: 8413945696528344521}
   m_PrefabAsset: {fileID: 0}
+
+--- !u!114 &8368977066981475519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74416100210125738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f578a398426d92aa9136f409c1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idleStateName: 
+  _animator: {fileID: 0}
+  _sampleInEditMode: 1
+  _forceIdleOnStart: 1

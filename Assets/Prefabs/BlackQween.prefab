@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5408100149358338244}
   - component: {fileID: 1979251525039899934}
   - component: {fileID: 5199111764923151280}
+  - component: {fileID: 1980461857579276078}
   m_Layer: 0
   m_Name: BlackQween
   m_TagString: Untagged
@@ -136,3 +137,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a7ec39d5f06643cead27e7fbbe8d13e7, type: 3}
   m_PrefabInstance: {fileID: 1846591151765563870}
   m_PrefabAsset: {fileID: 0}
+
+--- !u!114 &1980461857579276078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655332266417818410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f578a398426d92aa9136f409c1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idleStateName: 
+  _animator: {fileID: 0}
+  _sampleInEditMode: 1
+  _forceIdleOnStart: 1

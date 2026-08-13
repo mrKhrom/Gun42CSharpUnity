@@ -1,0 +1,56 @@
+Unity Editor version:    2022.3.62f3 (96770f904ca7)
+Branch:                  2022.3/respin/2022.3.62f2-4af31df585-v2
+Build type:              Release
+Batch mode:              YES
+macOS version:           Version 15.6.1 (Build 24G90)
+Darwin version:          24.6.0
+Architecture:            arm64
+Running under Rosetta:   NO
+Available memory:        8192 MB
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-alekseykhromov" at "2026-08-13T16:41:42.068114Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 51026, path: "/Applications/Unity Hub.app/Contents/Frameworks/UnityLicensingClient_V1.app/Contents/MacOS/Unity.Licensing.Client")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.17.4+4293ba1
+  Session Id:              a99a3a8ae9ab4fca879a29f71e2bdc21
+  Correlation Id:          3cdf2c33ddd4bd1ea434a5bdde917205
+  External correlation Id: 4010404733986815621
+  Machine Id:              Xr8NeSexq8i4fAtke4dqHvEVJBg=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-alekseykhromov" (connect: 0.00s, validation: 0.02s, handshake: 0.61s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-alekseykhromov-notifications" at "2026-08-13T16:41:42.69847Z"
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "F4-8A7Q-9QXF-J4FK-SFB2-XXXX"
+[Licensing::Module] Serial number assigned to: "10171553265066-UnityPersXXXX"
+Pro License: NO
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "F4-8A7Q-9QXF-J4FK-SFB2-XXXX"
+[Licensing::Module] Serial number assigned to: "10171553265066-UnityPersXXXX"
+Launching external process: /Applications/Unity/Hub/Editor/2022.3.62f3/Unity.app/Contents/Resources/PackageManager/Server/UnityPackageManager
+
+COMMAND LINE ARGUMENTS:
+/Applications/Unity/Hub/Editor/2022.3.62f3/Unity.app/Contents/MacOS/Unity
+-batchmode
+-nographics
+-quit
+-projectPath
+/Users/alekseykhromov/Library/Mobile Documents/com~apple~CloudDocs/My Cloud/Программирование/GameDev/UnityProjects/CSharpUnity
+-executeMethod
+SetupCharacterIdle.Run
+-logFile
+/Users/alekseykhromov/Library/Mobile Documents/com~apple~CloudDocs/My Cloud/Программирование/GameDev/UnityProjects/CSharpUnity/idle_setup.log
+Successfully changed project path to: /Users/alekseykhromov/Library/Mobile Documents/com~apple~CloudDocs/My Cloud/Программирование/GameDev/UnityProjects/CSharpUnity
+/Users/alekseykhromov/Library/Mobile Documents/com~apple~CloudDocs/My Cloud/Программирование/GameDev/UnityProjects/CSharpUnity
+It looks like another Unity instance is running with this project open.
+
+Multiple Unity instances cannot open the same project.
+
+Project: /Users/alekseykhromov/Library/Mobile Documents/com~apple~CloudDocs/My Cloud/Программирование/GameDev/UnityProjects/CSharpUnity
+Fatal Error! It looks like another Unity instance is running with this project open.
+
+Multiple Unity instances cannot open the same project.
+
+Project: /Users/alekseykhromov/Library/Mobile Documents/com~apple~CloudDocs/My Cloud/Программирование/GameDev/UnityProjects/CSharpUnity
+[Package Manager] Server::Kill -- Server was shutdown

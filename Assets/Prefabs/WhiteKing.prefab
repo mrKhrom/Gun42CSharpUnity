@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2803108342576355544}
   - component: {fileID: 7184884484814328470}
   - component: {fileID: 4487499302654207903}
+  - component: {fileID: 7110404567598300166}
   m_Layer: 0
   m_Name: WhiteKing
   m_TagString: Untagged
@@ -369,6 +370,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3addcf3ceabb04f1c83071ec82992931, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 5dcb97c1833740fd8db397ebf4f6060a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6162258519646862899, guid: 5dcb97c1833740fd8db397ebf4f6060a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 1.6311625
@@ -513,3 +518,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b87532bd84e34d22a73ccb16275ae56d, type: 3}
   m_PrefabInstance: {fileID: 6756816133643573804}
   m_PrefabAsset: {fileID: 0}
+
+--- !u!114 &7110404567598300166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089919659706909006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f578a398426d92aa9136f409c1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idleStateName: 
+  _animator: {fileID: 0}
+  _sampleInEditMode: 1
+  _forceIdleOnStart: 1

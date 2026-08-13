@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5408100149358338244}
   - component: {fileID: 1979251525039899934}
   - component: {fileID: 5199111764923151280}
+  - component: {fileID: 8492353980780113308}
   m_Layer: 0
   m_Name: WhiteQween
   m_TagString: Untagged
@@ -129,6 +130,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 61852821b5de4a5da0fbfefae5ed1b35, type: 2}
+    - target: {fileID: 5866666021909216657, guid: d5e9bf303a2c47df9b8ba7456a2b4aed, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -139,3 +144,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d5e9bf303a2c47df9b8ba7456a2b4aed, type: 3}
   m_PrefabInstance: {fileID: 4288318352967310756}
   m_PrefabAsset: {fileID: 0}
+
+--- !u!114 &8492353980780113308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655332266417818410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f578a398426d92aa9136f409c1f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idleStateName: 
+  _animator: {fileID: 0}
+  _sampleInEditMode: 1
+  _forceIdleOnStart: 1

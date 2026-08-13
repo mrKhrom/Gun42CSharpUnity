@@ -105,11 +105,9 @@ public class CellManager : MonoBehaviour
 
             if (closest != null && bestDist < 0.75f)
             {
+                // Только логическая привязка — позицию из сцены не трогаем
                 unit.Cell = closest;
                 closest.Unit = unit;
-
-                var p = closest.transform.position;
-                unit.transform.position = new Vector3(p.x, p.y + 0.5f, p.z);
             }
         }
     }
