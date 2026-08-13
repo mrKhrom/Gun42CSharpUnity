@@ -9,7 +9,7 @@ public class Unit : MonoBehaviour,
     IPointerClickHandler
 {
     [SerializeField] private float _moveSpeed = 3f;
-    [SerializeField] private Team _team = Team.Player1;
+    [SerializeField] private Team _team = Team.White;
     [Header("Optional combat")]
     [SerializeField] private ArcheryWeapon _archeryWeapon;
     [SerializeField] private bool _testArcheryOnClick = false;

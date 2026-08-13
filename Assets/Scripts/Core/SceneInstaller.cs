@@ -3,7 +3,7 @@ using Zenject;
 /// <summary>
 /// Регистрация входа и зависимостей сцены.
 /// </summary>
-public class GameInstaller : MonoInstaller
+public class SceneInstaller : MonoInstaller
 {
     // Сохраняем Controls, чтобы выключить ввод при удалении объекта.
     private Controls _controls;
