@@ -49,7 +49,19 @@ public class KnightModelPostprocessor : AssetPostprocessor
 
         var imp = (ModelImporter)assetImporter;
         imp.animationType = ModelImporterAnimationType.Generic;
-        imp.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
+        // Keep Stand_1 rest-pose avatar if present (SetupKnightStandAvatar).
+        // Do not wipe CopyFromOther → CreateFromThisModel on every reimport.
+        const string standAvatar = Folder + "Knight_Stand1.avatar";
+        var standAv = AssetDatabase.LoadAssetAtPath<Avatar>(standAvatar);
+        if (standAv != null && assetPath.EndsWith("Knight.fbx"))
+        {
+            imp.avatarSetup = ModelImporterAvatarSetup.CopyFromOther;
+            imp.sourceAvatar = standAv;
+        }
+        else if (imp.avatarSetup != ModelImporterAvatarSetup.CopyFromOther || imp.sourceAvatar == null)
+        {
+            imp.avatarSetup = ModelImporterAvatarSetup.CreateFromThisModel;
+        }
         imp.importAnimation = true;
         imp.animationCompression = ModelImporterAnimationCompression.Off;
         imp.resampleCurves = false;
@@ -358,6 +370,17 @@ public class KnightModelPostprocessor : AssetPostprocessor
 
             AssetDatabase.SaveAssets();
             BuildControllerAndPrefab();
+
+            // Rest pose in Scene view = Stand_1 (not first FBX take Walk)
+            try
+            {
+                SetupKnightStandAvatar.Run();
+            }
+            catch (System.Exception standEx)
+            {
+                Debug.LogWarning("[Knight] Stand_1 avatar setup skipped: " + standEx.Message);
+            }
+
             Debug.Log("[Knight] Setup finished. Select Knight.fbx → Animation tab. Use Prefabs/Knight.prefab.");
         }
         catch (System.Exception ex)

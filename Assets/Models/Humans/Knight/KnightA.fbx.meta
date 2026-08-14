@@ -140,14 +140,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk
       takeName: Walk
-      internalID: 0
+      internalID: 2667949614841947897
       firstFrame: 0
       lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -159,7 +159,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -169,14 +169,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Stand_1
       takeName: Stand_1
-      internalID: 0
+      internalID: -4953782528573291227
       firstFrame: 0
       lastFrame: 85
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -188,7 +188,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -198,14 +198,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Stand_2
       takeName: Stand_2
-      internalID: 0
+      internalID: 2822324780590335187
       firstFrame: 0
       lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -217,7 +217,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -227,14 +227,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Stand_3
       takeName: Stand_3
-      internalID: 0
+      internalID: -7882621228453677560
       firstFrame: 0
       lastFrame: 110
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -246,7 +246,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -256,14 +256,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Stand_4
       takeName: Stand_4
-      internalID: 0
+      internalID: -596414604678558019
       firstFrame: 0
       lastFrame: 58
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -275,7 +275,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -285,7 +285,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Attack_1
       takeName: Attack_1
-      internalID: 0
+      internalID: 8992522252433359312
       firstFrame: 0
       lastFrame: 33
       wrapMode: 0
@@ -304,7 +304,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -314,7 +314,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Attack_2
       takeName: Attack_2
-      internalID: 0
+      internalID: 8457827382905983551
       firstFrame: 0
       lastFrame: 32
       wrapMode: 0
@@ -333,7 +333,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -343,7 +343,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Death
       takeName: Death
-      internalID: 0
+      internalID: 4348485665485846014
       firstFrame: 0
       lastFrame: 153
       wrapMode: 0
@@ -362,7 +362,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -372,7 +372,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Decay_Flesh
       takeName: Decay_Flesh
-      internalID: 0
+      internalID: -991777496863265087
       firstFrame: 0
       lastFrame: 1800
       wrapMode: 0
@@ -391,7 +391,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -401,14 +401,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Stand_Ready
       takeName: Stand_Ready
-      internalID: 0
+      internalID: -750515104545672653
       firstFrame: 0
       lastFrame: 85
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -420,7 +420,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -430,14 +430,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Portrait_1
       takeName: Portrait_1
-      internalID: 0
+      internalID: -4736111592532388984
       firstFrame: 0
       lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -449,7 +449,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -459,14 +459,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Portrait_2
       takeName: Portrait_2
-      internalID: 0
+      internalID: -4200534386855301670
       firstFrame: 0
       lastFrame: 148
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -478,7 +478,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -488,14 +488,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Portrait_3
       takeName: Portrait_3
-      internalID: 0
+      internalID: 8509731916373989864
       firstFrame: 0
       lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -507,7 +507,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -517,14 +517,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Portrait_4
       takeName: Portrait_4
-      internalID: 0
+      internalID: 6665001135896918884
       firstFrame: 0
       lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -536,7 +536,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -546,14 +546,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Portrait_Talk_1
       takeName: Portrait_Talk_1
-      internalID: 0
+      internalID: -2757345823655552637
       firstFrame: 0
       lastFrame: 50
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -565,7 +565,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -575,14 +575,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Portrait_Talk_2
       takeName: Portrait_Talk_2
-      internalID: 0
+      internalID: -6896868392294649171
       firstFrame: 0
       lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -594,7 +594,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -604,14 +604,14 @@ ModelImporter:
     - serializedVersion: 16
       name: Stand_Victory
       takeName: Stand_Victory
-      internalID: 0
+      internalID: -5277671683779173640
       firstFrame: 0
       lastFrame: 85
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -623,7 +623,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -633,7 +633,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Decay_Bone
       takeName: Decay_Bone
-      internalID: 0
+      internalID: -2991945241977908446
       firstFrame: 0
       lastFrame: 1800
       wrapMode: 0
@@ -652,7 +652,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -662,7 +662,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Spell
       takeName: Spell
-      internalID: 0
+      internalID: -2555803891471906358
       firstFrame: 0
       lastFrame: 50
       wrapMode: 0
@@ -681,7 +681,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []
@@ -691,14 +691,14 @@ ModelImporter:
     - serializedVersion: 16
       name: GlobalSeq_0
       takeName: GlobalSeq_0
-      internalID: 0
+      internalID: -7086709456595337388
       firstFrame: 0
       lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
@@ -710,7 +710,7 @@ ModelImporter:
       keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
-      bodyMask: 010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
       transformMask: []

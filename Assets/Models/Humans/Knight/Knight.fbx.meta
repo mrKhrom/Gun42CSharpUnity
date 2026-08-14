@@ -138,11 +138,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walk
-      takeName: Walk
-      internalID: 2667949614841947897
+      name: Stand_1
+      takeName: Stand_1
+      internalID: -4953782528573291227
       firstFrame: 0
-      lastFrame: 17
+      lastFrame: 85
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -150,7 +150,7 @@ ModelImporter:
       loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -167,11 +167,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Stand_1
-      takeName: Stand_1
-      internalID: -4953782528573291227
+      name: Walk
+      takeName: Walk
+      internalID: 2667949614841947897
       firstFrame: 0
-      lastFrame: 85
+      lastFrame: 17
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -633,7 +633,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Decay_Bone
       takeName: Decay_Bone
-      internalID: 0
+      internalID: -2991945241977908446
       firstFrame: 0
       lastFrame: 1800
       wrapMode: 0
@@ -780,11 +780,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 47101386f70794a419cdace4cbaadf4b, type: 2}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

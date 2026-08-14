@@ -16,7 +16,24 @@ public class IdleAnimationDriver : MonoBehaviour
         "Idle_5",
         "Idle",
         "Idle_01",
-        "Idle_1"
+        "Idle_1",
+        "Stand_1",
+        "Stand1",
+        "Stand_Ready",
+        "StandReady",
+        "Stand",
+        "GruntStand",
+        "WolfRider_Stand",
+        "Idle1",
+        "Idle2",
+        "IdleReady",
+        "Tauren_ Idle1",
+        "Tauren_IdleReady",
+        "Militia_Walk",
+        "FootmanWalk",
+        "RiflemanWalk",
+        "Walk",
+        "Run"
     };
 
     [Tooltip("Leave empty to auto-pick Idle_02 / Idle_6 / ... from the controller")]

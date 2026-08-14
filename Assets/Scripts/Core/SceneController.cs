@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
@@ -11,6 +12,22 @@ public class SceneController : MonoBehaviour
     [Tooltip("Камера MainScene: выключится вместе с AudioListener, чтобы не было двух слушателей")]
     [SerializeField] private Camera _mainMenuCamera;
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Additive GameScene must not bring a second EventSystem (MainScene already has one).
+        EnsureSingleEventSystem();
+    }
+
     public void OpenMainScene()
     {
         // Сцена с индексом 0 (MainScene)
@@ -22,6 +39,7 @@ public class SceneController : MonoBehaviour
         if (SceneManager.GetSceneByName("GameScene").isLoaded)
         {
             Debug.Log("[SceneController] GameScene already loaded");
+            EnsureSingleEventSystem();
             return;
         }
 
@@ -33,6 +51,53 @@ public class SceneController : MonoBehaviour
 
         HidePlayButton();
         DisableMenuCameraAndAudio(menuCamera);
+        // sceneLoaded also runs EnsureSingleEventSystem; call once more next frame
+        // in case EventSystem objects finish enabling after the callback.
+        StartCoroutine(EnsureSingleEventSystemNextFrame());
+    }
+
+    private System.Collections.IEnumerator EnsureSingleEventSystemNextFrame()
+    {
+        yield return null;
+        EnsureSingleEventSystem();
+    }
+
+    /// <summary>
+    /// Keeps the first active EventSystem (from MainScene) and destroys extras.
+    /// </summary>
+    public static void EnsureSingleEventSystem()
+    {
+        var systems = Object.FindObjectsOfType<EventSystem>(true);
+        if (systems == null || systems.Length <= 1)
+            return;
+
+        // Prefer EventSystem that lives in MainScene (bootstrap).
+        EventSystem keep = null;
+        foreach (var es in systems)
+        {
+            if (es == null) continue;
+            if (es.gameObject.scene.name == "MainScene")
+            {
+                keep = es;
+                break;
+            }
+        }
+
+        if (keep == null)
+            keep = systems[0];
+
+        int removed = 0;
+        foreach (var es in systems)
+        {
+            if (es == null || es == keep)
+                continue;
+            Debug.Log($"[SceneController] Destroying extra EventSystem on '{es.gameObject.scene.name}/{es.gameObject.name}'");
+            Object.Destroy(es.gameObject);
+            removed++;
+        }
+
+        if (removed > 0)
+            Debug.Log($"[SceneController] Extra EventSystems removed: {removed}. Kept: {keep.gameObject.scene.name}/{keep.name}");
     }
 
     private void HidePlayButton()

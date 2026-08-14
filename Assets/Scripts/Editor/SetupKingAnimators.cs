@@ -79,6 +79,18 @@ public static class SetupKingAnimators
 
             AssignInScene(arthasCtrl, thrallCtrl, L);
 
+            // Optional: white minor pieces (Pawn/Rook/Knight/Bishop) if setup class is present
+            try
+            {
+                var t = System.Type.GetType("SetupWhiteMinorAnimators");
+                t?.GetMethod("Run", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static)
+                    ?.Invoke(null, null);
+            }
+            catch (System.Exception ex)
+            {
+                L("White minor setup: " + ex.Message);
+            }
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             L("DONE");
