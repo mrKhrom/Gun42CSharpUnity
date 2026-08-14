@@ -71,7 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 3
-  _team: 0
+  _team: 1
+  _type: 4
 --- !u!114 &8368977066981475519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,7 +1012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &940869660154290807
 Transform:
   m_ObjectHideFlags: 0
@@ -1034,12 +1035,12 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8324171178196925236}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1000
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 45
   m_InnerSpotAngle: 21.80208

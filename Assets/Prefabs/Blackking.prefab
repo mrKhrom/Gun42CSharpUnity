@@ -71,7 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 3
-  _team: 0
+  _team: 1
+  _type: 5
 --- !u!114 &7935896871437957391
 MonoBehaviour:
   m_ObjectHideFlags: 0

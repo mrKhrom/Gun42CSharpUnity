@@ -10,9 +10,13 @@ public class Unit : MonoBehaviour,
 {
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private Team _team = Team.White;
+    [SerializeField] private ChessPieceType _type = ChessPieceType.Pawn;
 
     public Cell Cell { get; set; }
     public Team Team => _team;
+    public ChessPieceType Type => _type;
+
+    public void SetType(ChessPieceType type) => _type = type;
 
     public event Action OnMoveEndCallback;
 
