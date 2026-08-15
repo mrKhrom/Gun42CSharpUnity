@@ -1,19 +1,29 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
-/// Генерация возможных клеток хода/атаки по правилам шахмат (ТЗ 3.1–3.6, 4.1–4.2).
+/// Генерация возможных клеток хода/атаки по правилам шахмат (ТЗ 3.1–3.6, 4.1–4.2)
+/// + рокировка (необяз. правило) + IsSquareAttacked для классики.
 /// Не двигает фигуры — только считает цели для Command / подсветки.
 /// </summary>
 public static class ChessMoveGenerator
 {
+    public const int KingStartX = 4;
+    public const int KingsideRookX = 7;
+    public const int QueensideRookX = 0;
+
     /// <summary>Направление «вперёд» для пешки: White +Y (world +Z), Black −Y.</summary>
     public static int Forward(Team team) => team == Team.White ? 1 : -1;
+
+    public static Team Opposite(Team team) => team == Team.White ? Team.Black : Team.White;
 
     /// <summary>Стартовый ряд пешек: White y=1, Black y=6.</summary>
     public static bool IsPawnStartRank(Team team, int y)
     {
         return (team == Team.White && y == 1) || (team == Team.Black && y == 6);
     }
+
+    public static int BackRank(Team team) => team == Team.White ? 0 : 7;
 
     /// <summary>На клетке враг относительно mover.</summary>
     public static bool IsCapture(Unit mover, Cell target)
@@ -30,8 +40,7 @@ public static class ChessMoveGenerator
     }
 
     /// <summary>
-    /// Все легальные (без шаха) цели: пустые клетки хода + клетки с врагом (взятие).
-    /// Пешка: вперёд ≠ атака (ТЗ 3.1, 4.1).
+    /// Все цели: quiet + captures (+ рокировка для короля как quiet).
     /// </summary>
     public static List<Cell> GetTargets(Unit unit, Battlefield board)
     {
@@ -40,9 +49,6 @@ public static class ChessMoveGenerator
         return list;
     }
 
-    /// <summary>
-    /// Раздельно: quiet-ходы и взятия — удобно для Move/Attack подсветки.
-    /// </summary>
     public static void GetTargetsSplit(
         Unit unit,
         Battlefield board,
@@ -52,6 +58,84 @@ public static class ChessMoveGenerator
         moves?.Clear();
         attacks?.Clear();
         CollectTargets(unit, board, null, moves, attacks);
+    }
+
+    /// <summary>
+    /// Если клик по клетке рокировки короля — собрать ChessMove с ладьёй.
+    /// </summary>
+    public static bool TryGetCastleMove(Unit king, Cell target, Battlefield board, out ChessMove move)
+    {
+        move = default;
+        if (king == null || target == null || board == null || king.Cell == null)
+            return false;
+        if (king.Type != ChessPieceType.King)
+            return false;
+
+        if (!TryBuildCastle(king, board, target.X, out var built))
+            return false;
+
+        if (built.To != target)
+            return false;
+
+        move = built;
+        return true;
+    }
+
+    /// <summary>
+    /// Клетка (x,y) атакована хотя бы одной фигурой byTeam.
+    /// Без рокировки (только псевдо-атаки).
+    /// </summary>
+    public static bool IsSquareAttacked(Battlefield board, int x, int y, Team byTeam)
+    {
+        if (board == null)
+            return false;
+
+        for (int cx = 0; cx < Battlefield.Size; cx++)
+        {
+            for (int cy = 0; cy < Battlefield.Size; cy++)
+            {
+                var cell = board.GetCell(cx, cy);
+                var u = cell?.Unit;
+                if (u == null || u.Team != byTeam)
+                    continue;
+
+                if (DoesPieceAttackSquare(u, board, x, y))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>Король team под шахом.</summary>
+    public static bool IsKingInCheck(Battlefield board, Team team)
+    {
+        if (board == null)
+            return false;
+
+        var king = FindKing(board, team);
+        if (king?.Cell == null)
+            return false;
+
+        return IsSquareAttacked(board, king.Cell.X, king.Cell.Y, Opposite(team));
+    }
+
+    public static Unit FindKing(Battlefield board, Team team)
+    {
+        if (board == null)
+            return null;
+
+        for (int x = 0; x < Battlefield.Size; x++)
+        {
+            for (int y = 0; y < Battlefield.Size; y++)
+            {
+                var u = board.GetCell(x, y)?.Unit;
+                if (u != null && u.Team == team && u.Type == ChessPieceType.King)
+                    return u;
+            }
+        }
+
+        return null;
     }
 
     private static void CollectTargets(
@@ -77,6 +161,7 @@ public static class ChessMoveGenerator
                 break;
             case ChessPieceType.King:
                 AddOffsets(unit, board, x, y, KingOffsets, combined, moves, attacks);
+                TryAddCastling(unit, board, combined, moves);
                 break;
             case ChessPieceType.Rook:
                 AddRays(unit, board, x, y, RookDirs, combined, moves, attacks);
@@ -124,7 +209,6 @@ public static class ChessMoveGenerator
     {
         int dir = Forward(unit.Team);
 
-        // Ход вперёд (только пустые) — ТЗ 3.1 / 4.1
         var forward = board.GetCell(x, y + dir);
         if (forward != null && forward.Unit == null)
         {
@@ -138,7 +222,6 @@ public static class ChessMoveGenerator
             }
         }
 
-        // Атака только по диагонали вперёд на врага — ТЗ 3.1
         foreach (int dx in new[] { -1, 1 })
         {
             var diag = board.GetCell(x + dx, y + dir);
@@ -157,7 +240,6 @@ public static class ChessMoveGenerator
             var c = board.GetCell(x + dx, y + dy);
             if (c == null) continue;
 
-            // Союзная клетка — недоступна (ТЗ 4.2 для прыжков: просто нельзя встать)
             if (c.Unit != null && c.Unit.Team == unit.Team)
                 continue;
 
@@ -168,9 +250,6 @@ public static class ChessMoveGenerator
         }
     }
 
-    /// <summary>
-    /// Скользящие фигуры: пустые клетки + первая вражеская; союзник блокирует луч (ТЗ 4.2).
-    /// </summary>
     private static void AddRays(
         Unit unit, Battlefield board, int x, int y,
         (int dx, int dy)[] dirs,
@@ -193,10 +272,8 @@ public static class ChessMoveGenerator
                 }
                 else
                 {
-                    // Враг — можно взять, луч дальше не идёт
                     if (c.Unit.Team != unit.Team)
                         AddAttack(c, combined, attacks);
-                    // Союзник — клетка недоступна, луч стоп
                     break;
                 }
 
@@ -204,6 +281,197 @@ public static class ChessMoveGenerator
                 cy += dy;
             }
         }
+    }
+
+    private static void TryAddCastling(
+        Unit king,
+        Battlefield board,
+        List<Cell> combined,
+        List<Cell> moves)
+    {
+        if (king.HasMoved || king.Cell == null)
+            return;
+
+        // O-O
+        if (TryBuildCastle(king, board, king.Cell.X + 2, out var ks))
+            AddMove(ks.To, combined, moves);
+
+        // O-O-O
+        if (TryBuildCastle(king, board, king.Cell.X - 2, out var qs))
+            AddMove(qs.To, combined, moves);
+    }
+
+    /// <summary>
+    /// Собирает рокировку, если kingToX — 6 (O-O) или 2 (O-O-O) на back rank.
+    /// </summary>
+    private static bool TryBuildCastle(
+        Unit king,
+        Battlefield board,
+        int kingToX,
+        out ChessMove move)
+    {
+        move = default;
+
+        if (king == null || board == null || king.Cell == null)
+            return false;
+        if (king.Type != ChessPieceType.King || king.HasMoved)
+            return false;
+
+        int y = king.Cell.Y;
+        int fromX = king.Cell.X;
+
+        if (fromX != KingStartX)
+            return false;
+        if (y != BackRank(king.Team))
+            return false;
+
+        SpecialMoveKind kind;
+        int rookFromX;
+        int rookToX;
+        int[] mustBeEmpty;
+        int[] mustBeSafe; // клетки, которые король занимает/проходит (включая start для шаха)
+
+        if (kingToX == KingStartX + 2)
+        {
+            // O-O: king 4→6, rook 7→5
+            kind = SpecialMoveKind.CastleKingSide;
+            rookFromX = KingsideRookX;
+            rookToX = 5;
+            mustBeEmpty = new[] { 5, 6 };
+            mustBeSafe = new[] { 4, 5, 6 }; // e, f, g
+        }
+        else if (kingToX == KingStartX - 2)
+        {
+            // O-O-O: king 4→2, rook 0→3
+            kind = SpecialMoveKind.CastleQueenSide;
+            rookFromX = QueensideRookX;
+            rookToX = 3;
+            mustBeEmpty = new[] { 1, 2, 3 };
+            mustBeSafe = new[] { 4, 3, 2 }; // e, d, c
+        }
+        else
+        {
+            return false;
+        }
+
+        // Путь пуст
+        foreach (int px in mustBeEmpty)
+        {
+            var c = board.GetCell(px, y);
+            if (c == null || c.Unit != null)
+                return false;
+        }
+
+        // Ладья
+        var rookCell = board.GetCell(rookFromX, y);
+        var rook = rookCell?.Unit;
+        if (rook == null || rook.Team != king.Team || rook.Type != ChessPieceType.Rook)
+            return false;
+        if (rook.HasMoved)
+            return false;
+
+        // Шах / проход / финиш
+        var enemy = Opposite(king.Team);
+        foreach (int sx in mustBeSafe)
+        {
+            if (IsSquareAttacked(board, sx, y, enemy))
+                return false;
+        }
+
+        var kingTo = board.GetCell(kingToX, y);
+        var rookTo = board.GetCell(rookToX, y);
+        if (kingTo == null || rookTo == null)
+            return false;
+
+        move = new ChessMove(
+            king,
+            king.Cell,
+            kingTo,
+            kind,
+            rook,
+            rookCell,
+            rookTo);
+
+        return true;
+    }
+
+    /// <summary>
+    /// Псевдо-атака фигуры на клетку (x,y). Без рокировки.
+    /// </summary>
+    private static bool DoesPieceAttackSquare(Unit attacker, Battlefield board, int tx, int ty)
+    {
+        if (attacker?.Cell == null || board == null)
+            return false;
+
+        int ax = attacker.Cell.X;
+        int ay = attacker.Cell.Y;
+        int dx = tx - ax;
+        int dy = ty - ay;
+
+        switch (attacker.Type)
+        {
+            case ChessPieceType.Pawn:
+            {
+                int dir = Forward(attacker.Team);
+                return dy == dir && (dx == 1 || dx == -1);
+            }
+            case ChessPieceType.Knight:
+                return (Mathf.Abs(dx) == 1 && Mathf.Abs(dy) == 2)
+                       || (Mathf.Abs(dx) == 2 && Mathf.Abs(dy) == 1);
+            case ChessPieceType.King:
+                return Mathf.Abs(dx) <= 1 && Mathf.Abs(dy) <= 1 && (dx != 0 || dy != 0);
+            case ChessPieceType.Bishop:
+                return IsClearDiagonal(board, ax, ay, tx, ty);
+            case ChessPieceType.Rook:
+                return IsClearOrthogonal(board, ax, ay, tx, ty);
+            case ChessPieceType.Queen:
+                return IsClearOrthogonal(board, ax, ay, tx, ty)
+                       || IsClearDiagonal(board, ax, ay, tx, ty);
+            default:
+                return false;
+        }
+    }
+
+    private static bool IsClearOrthogonal(Battlefield board, int ax, int ay, int tx, int ty)
+    {
+        if (ax != tx && ay != ty)
+            return false;
+        if (ax == tx && ay == ty)
+            return false;
+        return IsClearRay(board, ax, ay, tx, ty);
+    }
+
+    private static bool IsClearDiagonal(Battlefield board, int ax, int ay, int tx, int ty)
+    {
+        if (Mathf.Abs(tx - ax) != Mathf.Abs(ty - ay))
+            return false;
+        if (ax == tx && ay == ty)
+            return false;
+        return IsClearRay(board, ax, ay, tx, ty);
+    }
+
+    /// <summary>Путь от (ax,ay) к (tx,ty) свободен; целевая клетка может быть занята.</summary>
+    private static bool IsClearRay(Battlefield board, int ax, int ay, int tx, int ty)
+    {
+        int stepX = tx.CompareTo(ax);
+        int stepY = ty.CompareTo(ay);
+        // CompareTo: -1,0,1 — ok for diagonal/ortho
+
+        int cx = ax + stepX;
+        int cy = ay + stepY;
+
+        while (cx != tx || cy != ty)
+        {
+            var c = board.GetCell(cx, cy);
+            if (c == null)
+                return false;
+            if (c.Unit != null)
+                return false;
+            cx += stepX;
+            cy += stepY;
+        }
+
+        return true;
     }
 
     private static void AddMove(Cell cell, List<Cell> combined, List<Cell> moves)

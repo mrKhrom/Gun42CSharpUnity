@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 1773
+  controlID: 1970
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 1774
+  controlID: 1971
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 1721
+  controlID: 1918
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -242,9 +242,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 1aa20000
+      m_SelectedIDs: 56970000
       m_LastClickedID: 0
-      m_ExpandedIDs: b060ffff5eaaffff1efbffff3ea10000
+      m_ExpandedIDs: aef5fdffe83cfeffb060ffff5eaaffff1efbffff3ea1000034ac0000c8ad0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -844,7 +844,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 1775
+  controlID: 1972
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -918,7 +918,7 @@ MonoBehaviour:
     m_SceneHandles: 
     m_ShowAllHits: 0
     m_SkipHidden: 0
-    m_SearchArea: 0
+    m_SearchArea: 1
     m_Folders:
     - Assets/Scenes
     m_Globs: []
@@ -991,9 +991,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 1aa20000
-    m_LastClickedInstanceID: 41498
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 56970000
+    m_LastClickedInstanceID: 38742
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 0000000000000000000000000000000000000000de730000e473000000000000ca010000ac7c00000000000000000000d2aa000040ab00001ead0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

@@ -55,14 +55,28 @@ public class ChessCommand : IGameplayCommand
             return;
         }
 
-        // --- Клик по допустимой клетке: ход ---
+        // --- Клик по допустимой клетке: ход / рокировка ---
         if (_targets.Contains(cell))
         {
             var moving = _selected;
             var to = cell;
 
             ClearSelection();
-            _player.ExecuteMove(moving, to, OnMoveResolved);
+
+            if (ChessMoveGenerator.TryGetCastleMove(moving, to, _board, out var castle))
+            {
+                _player.ExecuteCastle(
+                    castle.Mover,
+                    castle.To,
+                    castle.Rook,
+                    castle.RookTo,
+                    OnMoveResolved);
+            }
+            else
+            {
+                _player.ExecuteMove(moving, to, OnMoveResolved);
+            }
+
             return;
         }
 

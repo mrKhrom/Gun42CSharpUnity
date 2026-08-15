@@ -37,6 +37,31 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MoveRoutine(unit, target, onCompleted));
     }
 
+    /// <summary>
+    /// Рокировка: одновременно король и ладья. Без взятия и без promotion.
+    /// </summary>
+    public void ExecuteCastle(
+        Unit king,
+        Cell kingTo,
+        Unit rook,
+        Cell rookTo,
+        Action onCompleted)
+    {
+        if (IsBusy)
+        {
+            Debug.LogWarning("[PlayerController] Уже идёт ход (castle)");
+            return;
+        }
+
+        if (king == null || kingTo == null || rook == null || rookTo == null)
+        {
+            onCompleted?.Invoke();
+            return;
+        }
+
+        StartCoroutine(CastleRoutine(king, kingTo, rook, rookTo, onCompleted));
+    }
+
     private IEnumerator MoveRoutine(Unit unit, Cell target, Action onCompleted)
     {
         IsBusy = true;
@@ -63,13 +88,10 @@ public class PlayerController : MonoBehaviour
 
             if (_promotionUI != null)
             {
-                // IsBusy остаётся true → ChessCommand.Interact игнорирует клики по доске.
-                // Cancel/Esc панель не закрывает — только кнопка выбора.
                 yield return _promotionUI.WaitForSelection(unit.Team, type => chosen = type);
             }
             else
             {
-                // Fallback (UI не забинжен): прежнее поведение ТЗ п.5
                 Debug.LogWarning("[PlayerController] IPromotionUI missing — auto Queen");
             }
 
@@ -83,6 +105,45 @@ public class PlayerController : MonoBehaviour
         unit.HasMoved = true;
         IsBusy = false;
         onCompleted?.Invoke();
+    }
+
+    private IEnumerator CastleRoutine(
+        Unit king,
+        Cell kingTo,
+        Unit rook,
+        Cell rookTo,
+        Action onCompleted)
+    {
+        IsBusy = true;
+
+        Debug.Log(
+            $"[Chess] Castle {king.Team}: King→({kingTo.X},{kingTo.Y}), Rook→({rookTo.X},{rookTo.Y})");
+
+        // Логика клеток сразу
+        king.BindToCell(kingTo, snap: false);
+        rook.BindToCell(rookTo, snap: false);
+
+        // Параллельная анимация обеих фигур
+        bool kingDone = false;
+        bool rookDone = false;
+
+        StartCoroutine(AnimateUnitToThen(king, kingTo.transform.position, () => kingDone = true));
+        StartCoroutine(AnimateUnitToThen(rook, rookTo.transform.position, () => rookDone = true));
+
+        while (!kingDone || !rookDone)
+            yield return null;
+
+        king.HasMoved = true;
+        rook.HasMoved = true;
+
+        IsBusy = false;
+        onCompleted?.Invoke();
+    }
+
+    private IEnumerator AnimateUnitToThen(Unit unit, Vector3 worldTarget, Action onDone)
+    {
+        yield return AnimateUnitTo(unit, worldTarget);
+        onDone?.Invoke();
     }
 
     private static bool IsPromotable(ChessPieceType type)
