@@ -1,7 +1,15 @@
 /// <summary>
-/// Этап 14: контракт UI для отображения текущего хода.
+/// Этап 14: UI текущего хода + статус (шах / мат / пат).
 /// </summary>
 public interface ITurnInfoView
 {
     void ShowTurn(Team team);
+
+    void ShowCheck(Team teamInCheck);
+
+    void ShowCheckmate(Team winner);
+
+    void ShowStalemate();
+
+    void ShowStatus(string message);
 }

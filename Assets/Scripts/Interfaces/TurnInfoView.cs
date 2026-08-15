@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using Zenject;
 
 /// <summary>
-/// UI текущего хода. Если Label не задан — создаёт Text под Canvas в runtime.
+/// UI текущего хода и статуса партии. Если Label не задан — создаёт Text под Canvas.
 /// </summary>
 public class TurnInfoView : MonoBehaviour, ITurnInfoView
 {
@@ -28,12 +28,37 @@ public class TurnInfoView : MonoBehaviour, ITurnInfoView
 
     public void ShowTurn(Team team)
     {
-        EnsureLabel();
-        if (_label == null)
-            return;
-
-        _label.text = string.Format(_format, team == Team.White ? "White" : "Black");
+        SetText(string.Format(_format, TeamName(team)));
     }
+
+    public void ShowCheck(Team teamInCheck)
+    {
+        SetText($"Шах! Ход: {TeamName(teamInCheck)}");
+    }
+
+    public void ShowCheckmate(Team winner)
+    {
+        SetText($"Мат! Победа: {TeamName(winner)}");
+    }
+
+    public void ShowStalemate()
+    {
+        SetText("Пат — ничья");
+    }
+
+    public void ShowStatus(string message)
+    {
+        SetText(message ?? string.Empty);
+    }
+
+    private void SetText(string text)
+    {
+        EnsureLabel();
+        if (_label != null)
+            _label.text = text;
+    }
+
+    private static string TeamName(Team team) => team == Team.White ? "White" : "Black";
 
     private void EnsureLabel()
     {
@@ -44,7 +69,6 @@ public class TurnInfoView : MonoBehaviour, ITurnInfoView
         if (_label != null)
             return;
 
-        // Runtime UI: поверх Canvas (или собственный Canvas)
         var canvas = GetComponentInParent<Canvas>();
         if (canvas == null)
             canvas = FindObjectOfType<Canvas>();
@@ -59,7 +83,7 @@ public class TurnInfoView : MonoBehaviour, ITurnInfoView
         rt.anchorMax = new Vector2(0.5f, 1f);
         rt.pivot = new Vector2(0.5f, 1f);
         rt.anchoredPosition = new Vector2(0f, -24f);
-        rt.sizeDelta = new Vector2(480f, 48f);
+        rt.sizeDelta = new Vector2(560f, 48f);
 
         _label = textGo.AddComponent<Text>();
         _label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
@@ -73,7 +97,6 @@ public class TurnInfoView : MonoBehaviour, ITurnInfoView
         _label.raycastTarget = false;
         _label.text = string.Format(_format, "White");
 
-        // Обводка для читаемости на светлой доске
         var outline = textGo.AddComponent<Outline>();
         outline.effectColor = new Color(0f, 0f, 0f, 0.85f);
         outline.effectDistance = new Vector2(1.2f, -1.2f);

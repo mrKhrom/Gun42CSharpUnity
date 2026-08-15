@@ -12,8 +12,10 @@ public class ChessCommand : IGameplayCommand
     private Team _currentTeam = Team.White;
     private Unit _selected;
     private readonly List<Cell> _targets = new();
+    private bool _gameOver;
 
     public Team CurrentTeam => _currentTeam;
+    public bool IsGameOver => _gameOver;
 
     public ChessCommand(
         Battlefield board,
@@ -29,12 +31,17 @@ public class ChessCommand : IGameplayCommand
 
     public void SetFirstTeam(Team team)
     {
+        _gameOver = false;
         _currentTeam = team;
         _turnView?.ShowTurn(_currentTeam);
+        EvaluatePosition(showTurnIfQuiet: true);
     }
 
     public void Interact(Cell cell)
     {
+        if (_gameOver)
+            return;
+
         if (_player != null && _player.IsBusy)
             return;
 
@@ -58,7 +65,7 @@ public class ChessCommand : IGameplayCommand
             return;
         }
 
-        // --- Клик по допустимой клетке: ход / рокировка / en passant ---
+        // --- Клик по допустимой (легальной) клетке ---
         if (_targets.Contains(cell))
         {
             var moving = _selected;
@@ -98,6 +105,8 @@ public class ChessCommand : IGameplayCommand
 
     public void Cancel()
     {
+        if (_gameOver)
+            return;
         ClearSelection();
     }
 
@@ -120,9 +129,17 @@ public class ChessCommand : IGameplayCommand
         if (unit?.Cell == null)
             return;
 
+        var legal = ChessLegality.GetLegalTargets(unit, _board, _enPassant);
+        if (legal.Count == 0)
+        {
+            // Фигура без легальных ходов (булавка / шах) — не выбираем
+            Debug.Log($"[Chess] {unit.Team}/{unit.Type}: 0 legal moves");
+            return;
+        }
+
         _selected = unit;
         _targets.Clear();
-        _targets.AddRange(ChessMoveGenerator.GetTargets(unit, _board, _enPassant));
+        _targets.AddRange(legal);
 
         if (_board != null)
         {
@@ -133,6 +150,14 @@ public class ChessCommand : IGameplayCommand
                     ? CellHighlight.Attack
                     : CellHighlight.Move;
                 _board.HighlightCell(t, mode);
+            }
+
+            // Король под шахом — подсветить его клетку
+            if (ChessMoveGenerator.IsKingInCheck(_board, _currentTeam))
+            {
+                var king = ChessMoveGenerator.FindKing(_board, _currentTeam);
+                if (king?.Cell != null && king.Cell != unit.Cell)
+                    _board.HighlightCell(king.Cell, CellHighlight.Attack);
             }
         }
         else
@@ -157,7 +182,54 @@ public class ChessCommand : IGameplayCommand
     private void OnMoveResolved()
     {
         _currentTeam = _currentTeam == Team.White ? Team.Black : Team.White;
-        _turnView?.ShowTurn(_currentTeam);
         Debug.Log($"[Chess] Now playing: {_currentTeam}");
+        EvaluatePosition(showTurnIfQuiet: true);
+    }
+
+    /// <summary>
+    /// После смены стороны (или старта): шах / мат / пат.
+    /// </summary>
+    public void EvaluatePosition(bool showTurnIfQuiet)
+    {
+        if (_board == null)
+            return;
+
+        _board.EnsureInitialized();
+
+        bool inCheck = ChessMoveGenerator.IsKingInCheck(_board, _currentTeam);
+        bool hasMove = ChessLegality.SideHasLegalMove(_board, _currentTeam, _enPassant);
+
+        if (inCheck && !hasMove)
+        {
+            _gameOver = true;
+            ClearSelection();
+            var winner = ChessMoveGenerator.Opposite(_currentTeam);
+            _turnView?.ShowCheckmate(winner);
+            Debug.Log($"[Chess] CHECKMATE — {winner} wins. {_currentTeam} is mated.");
+            return;
+        }
+
+        if (!inCheck && !hasMove)
+        {
+            _gameOver = true;
+            ClearSelection();
+            _turnView?.ShowStalemate();
+            Debug.Log("[Chess] STALEMATE — draw.");
+            return;
+        }
+
+        if (inCheck)
+        {
+            _turnView?.ShowCheck(_currentTeam);
+            Debug.Log($"[Chess] CHECK — {_currentTeam} is in check.");
+
+            var king = ChessMoveGenerator.FindKing(_board, _currentTeam);
+            if (king?.Cell != null)
+                _board.HighlightCell(king.Cell, CellHighlight.Attack);
+            return;
+        }
+
+        if (showTurnIfQuiet)
+            _turnView?.ShowTurn(_currentTeam);
     }
 }

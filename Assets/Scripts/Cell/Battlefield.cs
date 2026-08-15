@@ -174,8 +174,8 @@ public class Battlefield : MonoBehaviour
 
         HighlightCell(unit.Cell, CellHighlight.Selected);
 
-        // Debug-подсветка без EnPassantState (игровой путь — ChessCommand + EP state)
-        foreach (var target in ChessMoveGenerator.GetTargets(unit, this))
+        // Debug: легальные ходы (без EP state — EP в debug не учитывается)
+        foreach (var target in ChessLegality.GetLegalTargets(unit, this, null))
         {
             bool attack = ChessMoveGenerator.IsCapture(unit, target);
             HighlightCell(target, attack ? CellHighlight.Attack : CellHighlight.Move);

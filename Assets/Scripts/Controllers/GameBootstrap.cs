@@ -54,20 +54,18 @@ public class GameBootstrap : MonoBehaviour
         // 3. Подписка кликов (на случай раннего OnEnable до готовности доски)
         _battleController?.EnsureSubscribed();
 
-        // 4. Первый ход
+        // 4. Первый ход + оценка позиции (шах/мат на старте — маловероятно)
         Team first = ResolveFirstTeam();
         if (_command is ChessCommand chess)
         {
-            chess.SetFirstTeam(first);
+            chess.SetFirstTeam(first); // внутри ShowTurn / EvaluatePosition
             Debug.Log($"[GameBootstrap] First team: {first}");
         }
         else
         {
             Debug.LogWarning("[GameBootstrap] Command is not ChessCommand");
+            _turnView?.ShowTurn(first);
         }
-
-        // 5. UI
-        _turnView?.ShowTurn(first);
 
         _started = true;
         Debug.Log("[GameBootstrap] Ready");
