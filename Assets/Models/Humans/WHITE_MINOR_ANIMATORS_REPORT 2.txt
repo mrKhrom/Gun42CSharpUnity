@@ -1,0 +1,49 @@
+WhitePawn: found 7 clips from Assets/Models/Humans/PeasantMilitia/Militia_Final.fbx
+  - MilitiaRig|Militia_Attack1 (1.00s)
+  - MilitiaRig|Militia_Attack2 (1.25s)
+  - MilitiaRig|Militia_Death (3.33s)
+  - MilitiaRig|Militia_Stand (1.50s)
+  - MilitiaRig|Militia_Stand2 (2.67s)
+  - MilitiaRig|Militia_Stand3 (4.00s)
+  - MilitiaRig|Militia_Walk (0.79s)
+WhitePawn: default state = MilitiaRig|Militia_Stand
+WhitePawn: MilitiaRig|Militia_Stand -> MilitiaRig|Militia_Attack1 (Attack trigger) -> MilitiaRig|Militia_Stand
+WhitePawn: controller saved -> Assets/Models/Humans/PeasantMilitia/Militia.controller
+WhiteRook: found 11 clips from Assets/Models/Humans/Footman/Footman_Final.fbx
+  - FootmanRig|FootmanAttack1 (1.00s)
+  - FootmanRig|FootmanAttack2 (1.00s)
+  - FootmanRig|FootmanDeath (3.04s)
+  - FootmanRig|FootmanDefendAttack (1.00s)
+  - FootmanRig|FootmanDefendWalk (1.08s)
+  - FootmanRig|FootmanStand1 (1.50s)
+  - FootmanRig|FootmanStand2 (2.50s)
+  - FootmanRig|FootmanStand3 (5.25s)
+  - FootmanRig|FootmanStandDefend (1.00s)
+  - FootmanRig|FootmanStandVictory (2.33s)
+  - FootmanRig|FootmanWalk (0.79s)
+WhiteRook: default state = FootmanRig|FootmanStand1
+WhiteRook: FootmanRig|FootmanStand1 -> FootmanRig|FootmanAttack1 (Attack trigger) -> FootmanRig|FootmanStand1
+WhiteRook: controller saved -> Assets/Models/Humans/Footman/Footman.controller
+WhiteKnight: reusing existing controller Assets/Models/Humans/Knight/Knight.controller
+WhiteBishop: found 8 clips from Assets/Models/Humans/Rifleman/Rifleman.fbx
+  - RiflemanRig|RiflemanAttack (0.88s)
+  - RiflemanRig|RiflemanDeath (1.71s)
+  - RiflemanRig|RiflemanSpell (1.13s)
+  - RiflemanRig|RiflemanStand1 (1.33s)
+  - RiflemanRig|RiflemanStand2 (2.00s)
+  - RiflemanRig|RiflemanStand3 (3.96s)
+  - RiflemanRig|RiflemanStandReady (1.08s)
+  - RiflemanRig|RiflemanWalk (0.83s)
+WhiteBishop: default state = RiflemanRig|RiflemanStand1
+WhiteBishop: RiflemanRig|RiflemanStand1 -> RiflemanRig|RiflemanAttack (Attack trigger) -> RiflemanRig|RiflemanStand1
+WhiteBishop: controller saved -> Assets/Models/Humans/Rifleman/Rifleman.controller
+Using already open GameScene
+Assigned Militia -> WhitePawn/Militia_Final
+Added IdleAnimationDriver on WhitePawn
+Assigned Footman -> WhiteRook/Footman_Final
+Added IdleAnimationDriver on WhiteRook
+WARN: WhiteKnight has no child model to assign
+Assigned Rifleman -> WhiteBishop/Rifleman
+Added IdleAnimationDriver on WhiteBishop
+Scene saved. Assign operations: 3
+DONE

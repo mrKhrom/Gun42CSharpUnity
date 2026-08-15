@@ -24,6 +24,8 @@ public class Cell : MonoBehaviour,
 
     public event Action<Cell> OnPointerClickEvent;
 
+    private bool _isFocused;
+
     public void Init(int x, int y)
     {
         _x = x;
@@ -39,14 +41,12 @@ public class Cell : MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_focusRenderer != null)
-            _focusRenderer.enabled = true;
+        SetFocusVisible(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_focusRenderer != null)
-            _focusRenderer.enabled = false;
+        SetFocusVisible(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -54,9 +54,29 @@ public class Cell : MonoBehaviour,
         OnPointerClickEvent?.Invoke(this);
     }
 
+    /// <summary>
+    /// Hover highlight (Focus child). Also called from Unit when ray hits figure collider.
+    /// </summary>
+    public void SetFocusVisible(bool visible)
+    {
+        _isFocused = visible;
+        if (_focusRenderer == null)
+            return;
+
+        // Keep GO active so references stay valid; toggle renderer only.
+        if (!_focusRenderer.gameObject.activeSelf)
+            _focusRenderer.gameObject.SetActive(true);
+
+        _focusRenderer.enabled = visible;
+    }
+
     public void SetSelect(Material material)
     {
         if (_selectRenderer == null) return;
+
+        if (!_selectRenderer.gameObject.activeSelf)
+            _selectRenderer.gameObject.SetActive(true);
+
         _selectRenderer.enabled = true;
         if (material != null)
             _selectRenderer.material = material;
@@ -70,7 +90,34 @@ public class Cell : MonoBehaviour,
 
     private void Awake()
     {
-        if (_focusRenderer != null) _focusRenderer.enabled = false;
-        if (_selectRenderer != null) _selectRenderer.enabled = false;
+        // Auto-wire if Inspector refs lost
+        if (_focusRenderer == null)
+        {
+            var t = transform.Find("Focus");
+            if (t != null) _focusRenderer = t.GetComponent<MeshRenderer>();
+        }
+
+        if (_selectRenderer == null)
+        {
+            var t = transform.Find("Select");
+            if (t != null) _selectRenderer = t.GetComponent<MeshRenderer>();
+        }
+
+        if (_focusRenderer != null)
+            _focusRenderer.enabled = false;
+        if (_selectRenderer != null)
+            _selectRenderer.enabled = false;
+
+        // Focus/Select must NOT have colliders — they steal raycasts from Cell.
+        // Hover is delivered only to the hit collider's object; click walks parents.
+        DisableHighlightColliders(_focusRenderer);
+        DisableHighlightColliders(_selectRenderer);
+    }
+
+    private static void DisableHighlightColliders(MeshRenderer renderer)
+    {
+        if (renderer == null) return;
+        foreach (var col in renderer.GetComponents<Collider>())
+            col.enabled = false;
     }
 }
