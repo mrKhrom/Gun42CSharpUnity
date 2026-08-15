@@ -24,7 +24,9 @@ public class SceneController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Additive GameScene must not bring a second EventSystem (MainScene already has one).
+        // Additive GameScene: один EventSystem (MainScene). GameScene ES inactive + guard.
+        EventSystemGuard.CleanupDuplicates();
+        EventSystemGuard.EnsureOneActive();
         EnsureSingleEventSystem();
     }
 

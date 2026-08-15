@@ -10,6 +10,10 @@ public class GameBootstrap : MonoBehaviour
     private ChessSetup _chessSetup;
     private BattleController _battleController;
 
+    /// <summary>
+    /// Защита от повторного полного старта в одном lifecycle сцены.
+    /// После LoadScene (Restart) объект создаётся заново — флаг снова false.
+    /// </summary>
     private bool _started;
 
     [Inject]
@@ -29,36 +33,65 @@ public class GameBootstrap : MonoBehaviour
         _battleController = battleController;
     }
 
+    private void Awake()
+    {
+        // До OnEnable чужих ES / после load: один EventSystem
+        EventSystemGuard.CleanupDuplicates();
+        EventSystemGuard.EnsureOneActive();
+    }
+
     private void Start()
     {
         RunBootstrap();
     }
 
-    /// <summary>Можно вызвать повторно после reload логики без смены сцены.</summary>
+    /// <summary>
+    /// Старт партии: доска, опциональный spawn, input, первый ход.
+    /// Повторный вызов в той же сессии игнорируется (см. ForceRunBootstrap).
+    /// </summary>
     public void RunBootstrap()
     {
+        if (_started)
+            return;
+
+        RunBootstrapInternal();
+        _started = true;
+    }
+
+    /// <summary>Принудительный повтор bootstrap (debug / ручной reset без reload).</summary>
+    public void ForceRunBootstrap()
+    {
+        _started = false;
+        RunBootstrap();
+    }
+
+    private void RunBootstrapInternal()
+    {
+        EventSystemGuard.CleanupDuplicates();
+        EventSystemGuard.EnsureOneActive();
+
         if (_board == null)
         {
             Debug.LogError("[GameBootstrap] Battlefield not injected");
             return;
         }
 
-        // 1. Доска (клетки, граф, link scene units)
+        // 1. Доска (клетки, граф, link scene units — фигуры уже в сцене)
         _board.EnsureInitialized();
 
-        // 2. Опциональный spawn — только если ChessSetup сам настроен на auto-spawn.
-        //    Не форсируем: пользователь может держать фигуры в сцене.
+        // 2. Опциональный spawn — только если ChessSetup настроен на auto-spawn.
+        //    При расстановке в сцене TrySpawnIfConfigured — no-op.
         if (_chessSetup != null)
             _chessSetup.TrySpawnIfConfigured();
 
         // 3. Подписка кликов (на случай раннего OnEnable до готовности доски)
         _battleController?.EnsureSubscribed();
 
-        // 4. Первый ход + оценка позиции (шах/мат на старте — маловероятно)
+        // 4. Первый ход + UI / оценка позиции
         Team first = ResolveFirstTeam();
         if (_command is ChessCommand chess)
         {
-            chess.SetFirstTeam(first); // внутри ShowTurn / EvaluatePosition
+            chess.SetFirstTeam(first);
             Debug.Log($"[GameBootstrap] First team: {first}");
         }
         else
@@ -67,7 +100,6 @@ public class GameBootstrap : MonoBehaviour
             _turnView?.ShowTurn(first);
         }
 
-        _started = true;
         Debug.Log("[GameBootstrap] Ready");
     }
 
@@ -86,8 +118,7 @@ public class GameBootstrap : MonoBehaviour
     [ContextMenu("Debug/Run Bootstrap Again")]
     private void DebugRerun()
     {
-        _started = false;
-        RunBootstrap();
+        ForceRunBootstrap();
     }
 #endif
 }

@@ -28,12 +28,49 @@ public class PieceVisualLibrary : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        // Если слоты пусты — подтянуть из ChessSetup (сцена уже содержит ссылки на префабы)
+        if (!HasAnyPrefabAssigned())
+        {
+            var setup = FindObjectOfType<ChessSetup>();
+            if (setup != null)
+                FillFromChessSetup(setup);
+        }
     }
 
     private void OnDestroy()
     {
         if (Instance == this)
             Instance = null;
+    }
+
+    /// <summary>Заполнить слоты из ChessSetup (без warning, если setup null).</summary>
+    public void FillFromChessSetup(ChessSetup setup)
+    {
+        if (setup == null)
+            return;
+
+        _whitePawn = setup.GetPrefab(Team.White, ChessPieceType.Pawn) ?? _whitePawn;
+        _whiteRook = setup.GetPrefab(Team.White, ChessPieceType.Rook) ?? _whiteRook;
+        _whiteKnight = setup.GetPrefab(Team.White, ChessPieceType.Knight) ?? _whiteKnight;
+        _whiteBishop = setup.GetPrefab(Team.White, ChessPieceType.Bishop) ?? _whiteBishop;
+        _whiteQueen = setup.GetPrefab(Team.White, ChessPieceType.Queen) ?? _whiteQueen;
+        _whiteKing = setup.GetPrefab(Team.White, ChessPieceType.King) ?? _whiteKing;
+
+        _blackPawn = setup.GetPrefab(Team.Black, ChessPieceType.Pawn) ?? _blackPawn;
+        _blackRook = setup.GetPrefab(Team.Black, ChessPieceType.Rook) ?? _blackRook;
+        _blackKnight = setup.GetPrefab(Team.Black, ChessPieceType.Knight) ?? _blackKnight;
+        _blackBishop = setup.GetPrefab(Team.Black, ChessPieceType.Bishop) ?? _blackBishop;
+        _blackQueen = setup.GetPrefab(Team.Black, ChessPieceType.Queen) ?? _blackQueen;
+        _blackKing = setup.GetPrefab(Team.Black, ChessPieceType.King) ?? _blackKing;
+    }
+
+    public bool HasAnyPrefabAssigned()
+    {
+        return _whiteQueen != null || _whiteRook != null || _whiteKnight != null
+               || _whiteBishop != null || _blackQueen != null || _blackRook != null
+               || _blackKnight != null || _blackBishop != null
+               || _whitePawn != null || _blackPawn != null
+               || _whiteKing != null || _blackKing != null;
     }
 
     public Unit GetPrefab(Team team, ChessPieceType type)

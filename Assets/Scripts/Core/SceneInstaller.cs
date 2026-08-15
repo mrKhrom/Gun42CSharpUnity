@@ -88,8 +88,11 @@ public class SceneInstaller : MonoInstaller
             .FromInstance(promotion)
             .AsSingle();
 
-        // --- Visual library for promote model swap ---
-        BindFromHierarchyOptional<PieceVisualLibrary>();
+        // --- Visual library for promote model swap (создаём, если нет на сцене) ---
+        var visualLib = EnsurePieceVisualLibrary();
+        Container.Bind<PieceVisualLibrary>()
+            .FromInstance(visualLib)
+            .AsSingle();
 
         // --- Command: один instance как интерфейс и класс ---
         Container.BindInterfacesAndSelfTo<ChessCommand>()
@@ -112,12 +115,28 @@ public class SceneInstaller : MonoInstaller
     {
         var c = FindObjectOfType<T>(true);
         if (c == null)
-        {
-            Debug.LogWarning($"[SceneInstaller] Опциональный {typeof(T).Name} отсутствует");
-            return;
-        }
+            return; // опционально — без warning в Console
 
         Container.Bind<T>().FromInstance(c).AsSingle();
+    }
+
+    private static PieceVisualLibrary EnsurePieceVisualLibrary()
+    {
+        var lib = Object.FindObjectOfType<PieceVisualLibrary>(true);
+        if (lib == null)
+        {
+            var parent = GameObject.Find("Systems");
+            var go = new GameObject("PieceVisualLibrary");
+            if (parent != null)
+                go.transform.SetParent(parent.transform, false);
+            lib = go.AddComponent<PieceVisualLibrary>();
+        }
+
+        var setup = Object.FindObjectOfType<ChessSetup>(true);
+        if (setup != null && !lib.HasAnyPrefabAssigned())
+            lib.FillFromChessSetup(setup);
+
+        return lib;
     }
 
     private static TurnInfoView CreateTurnInfoView()
