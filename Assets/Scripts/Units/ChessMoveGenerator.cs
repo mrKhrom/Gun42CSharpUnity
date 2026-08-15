@@ -32,6 +32,23 @@ public static class ChessMoveGenerator
         return target.Unit.Team != mover.Team;
     }
 
+    /// <summary>Подсветка Attack: обычное взятие или en passant landing.</summary>
+    public static bool IsAttackTarget(Unit mover, Cell target, EnPassantState enPassant = null)
+    {
+        if (IsCapture(mover, target))
+            return true;
+        return IsEnPassantLanding(mover, target, enPassant);
+    }
+
+    public static bool IsEnPassantLanding(Unit mover, Cell target, EnPassantState enPassant)
+    {
+        if (mover == null || target == null || enPassant == null || !enPassant.IsAvailable)
+            return false;
+        if (mover.Type != ChessPieceType.Pawn)
+            return false;
+        return enPassant.MatchesLanding(target) && enPassant.CanCaptureBy(mover);
+    }
+
     /// <summary>На клетке союзник.</summary>
     public static bool IsBlockedByAlly(Unit mover, Cell target)
     {
@@ -40,12 +57,15 @@ public static class ChessMoveGenerator
     }
 
     /// <summary>
-    /// Все цели: quiet + captures (+ рокировка для короля как quiet).
+    /// Все цели: quiet + captures (+ рокировка / en passant).
     /// </summary>
-    public static List<Cell> GetTargets(Unit unit, Battlefield board)
+    public static List<Cell> GetTargets(
+        Unit unit,
+        Battlefield board,
+        EnPassantState enPassant = null)
     {
         var list = new List<Cell>();
-        CollectTargets(unit, board, list, null, null);
+        CollectTargets(unit, board, list, null, null, enPassant);
         return list;
     }
 
@@ -53,11 +73,12 @@ public static class ChessMoveGenerator
         Unit unit,
         Battlefield board,
         List<Cell> moves,
-        List<Cell> attacks)
+        List<Cell> attacks,
+        EnPassantState enPassant = null)
     {
         moves?.Clear();
         attacks?.Clear();
-        CollectTargets(unit, board, null, moves, attacks);
+        CollectTargets(unit, board, null, moves, attacks, enPassant);
     }
 
     /// <summary>
@@ -78,6 +99,28 @@ public static class ChessMoveGenerator
             return false;
 
         move = built;
+        return true;
+    }
+
+    /// <summary>
+    /// Если клик — en passant landing для пешки.
+    /// </summary>
+    public static bool TryGetEnPassantMove(
+        Unit pawn,
+        Cell target,
+        Battlefield board,
+        EnPassantState enPassant,
+        out ChessMove move)
+    {
+        move = default;
+        if (pawn == null || target == null || board == null || enPassant == null)
+            return false;
+        if (pawn.Type != ChessPieceType.Pawn || pawn.Cell == null)
+            return false;
+        if (!enPassant.MatchesLanding(target) || !enPassant.CanCaptureBy(pawn))
+            return false;
+
+        move = ChessMove.EnPassant(pawn, target, enPassant.VictimPawn);
         return true;
     }
 
@@ -143,7 +186,8 @@ public static class ChessMoveGenerator
         Battlefield board,
         List<Cell> combined,
         List<Cell> moves,
-        List<Cell> attacks)
+        List<Cell> attacks,
+        EnPassantState enPassant)
     {
         if (unit == null || unit.Cell == null || board == null)
             return;
@@ -154,7 +198,7 @@ public static class ChessMoveGenerator
         switch (unit.Type)
         {
             case ChessPieceType.Pawn:
-                AddPawn(unit, board, x, y, combined, moves, attacks);
+                AddPawn(unit, board, x, y, combined, moves, attacks, enPassant);
                 break;
             case ChessPieceType.Knight:
                 AddOffsets(unit, board, x, y, KnightOffsets, combined, moves, attacks);
@@ -205,7 +249,8 @@ public static class ChessMoveGenerator
 
     private static void AddPawn(
         Unit unit, Battlefield board, int x, int y,
-        List<Cell> combined, List<Cell> moves, List<Cell> attacks)
+        List<Cell> combined, List<Cell> moves, List<Cell> attacks,
+        EnPassantState enPassant)
     {
         int dir = Forward(unit.Team);
 
@@ -225,8 +270,24 @@ public static class ChessMoveGenerator
         foreach (int dx in new[] { -1, 1 })
         {
             var diag = board.GetCell(x + dx, y + dir);
-            if (diag?.Unit != null && diag.Unit.Team != unit.Team)
+            if (diag == null)
+                continue;
+
+            // Обычное взятие
+            if (diag.Unit != null && diag.Unit.Team != unit.Team)
+            {
                 AddAttack(diag, combined, attacks);
+                continue;
+            }
+
+            // En passant: landing пуст, право активно
+            if (diag.Unit == null
+                && enPassant != null
+                && enPassant.MatchesLanding(diag)
+                && enPassant.CanCaptureBy(unit))
+            {
+                AddAttack(diag, combined, attacks);
+            }
         }
     }
 

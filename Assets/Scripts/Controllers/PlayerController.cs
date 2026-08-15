@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     private GameSettings _settings;
     private IPromotionUI _promotionUI;
+    private EnPassantState _enPassant;
+    private Battlefield _board;
 
     public bool IsBusy { get; private set; }
 
@@ -14,10 +16,14 @@ public class PlayerController : MonoBehaviour
     [Inject]
     private void Construct(
         [InjectOptional] GameSettings settings,
-        [InjectOptional] IPromotionUI promotionUI)
+        [InjectOptional] IPromotionUI promotionUI,
+        [InjectOptional] EnPassantState enPassant,
+        [InjectOptional] Battlefield board)
     {
         _settings = settings;
         _promotionUI = promotionUI;
+        _enPassant = enPassant;
+        _board = board;
     }
 
     public void ExecuteMove(Unit unit, Cell target, Action onCompleted)
@@ -62,11 +68,39 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(CastleRoutine(king, kingTo, rook, rookTo, onCompleted));
     }
 
+    /// <summary>
+    /// En passant: attacker → пустой landing, victim снимается со своей клетки.
+    /// </summary>
+    public void ExecuteEnPassant(
+        Unit attacker,
+        Cell landing,
+        Unit victim,
+        Action onCompleted)
+    {
+        if (IsBusy)
+        {
+            Debug.LogWarning("[PlayerController] Уже идёт ход (en passant)");
+            return;
+        }
+
+        if (attacker == null || landing == null || victim == null)
+        {
+            onCompleted?.Invoke();
+            return;
+        }
+
+        StartCoroutine(EnPassantRoutine(attacker, landing, victim, onCompleted));
+    }
+
     private IEnumerator MoveRoutine(Unit unit, Cell target, Action onCompleted)
     {
         IsBusy = true;
 
-        // 1) Взятие
+        // From — до BindToCell (для double-step en passant)
+        int fromX = unit.Cell != null ? unit.Cell.X : -1;
+        int fromY = unit.Cell != null ? unit.Cell.Y : -1;
+
+        // 1) Взятие на клетке назначения
         if (target.Unit != null && target.Unit != unit)
         {
             var enemy = target.Unit;
@@ -74,13 +108,13 @@ public class PlayerController : MonoBehaviour
             Destroy(enemy.gameObject);
         }
 
-        // 2) Логика клетки сразу (генератор ходов видит новую позицию)
+        // 2) Логика клетки
         unit.BindToCell(target, snap: false);
 
         // 3) Анимация
         yield return AnimateUnitTo(unit, target.transform.position);
 
-        // 4) Превращение пешки (ТЗ необяз. п.6 — UI; fallback: авто-Queen)
+        // 4) Превращение пешки
         int lastRank = unit.Team == Team.White ? 7 : 0;
         if (unit.Type == ChessPieceType.Pawn && unit.Cell != null && unit.Cell.Y == lastRank)
         {
@@ -103,6 +137,10 @@ public class PlayerController : MonoBehaviour
         }
 
         unit.HasMoved = true;
+
+        // 5) En passant state: clear + set if double pawn step
+        RegisterEnPassantAfterMove(unit, fromX, fromY, target);
+
         IsBusy = false;
         onCompleted?.Invoke();
     }
@@ -119,11 +157,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log(
             $"[Chess] Castle {king.Team}: King→({kingTo.X},{kingTo.Y}), Rook→({rookTo.X},{rookTo.Y})");
 
-        // Логика клеток сразу
         king.BindToCell(kingTo, snap: false);
         rook.BindToCell(rookTo, snap: false);
 
-        // Параллельная анимация обеих фигур
         bool kingDone = false;
         bool rookDone = false;
 
@@ -136,8 +172,65 @@ public class PlayerController : MonoBehaviour
         king.HasMoved = true;
         rook.HasMoved = true;
 
+        _enPassant?.Clear();
+
         IsBusy = false;
         onCompleted?.Invoke();
+    }
+
+    private IEnumerator EnPassantRoutine(
+        Unit attacker,
+        Cell landing,
+        Unit victim,
+        Action onCompleted)
+    {
+        IsBusy = true;
+
+        Debug.Log(
+            $"[Chess] En passant: {attacker.Team} → ({landing.X},{landing.Y}), " +
+            $"captures {victim.Team} pawn");
+
+        // Жертва не на landing
+        victim.BindToCell(null, snap: false);
+        Destroy(victim.gameObject);
+
+        attacker.BindToCell(landing, snap: false);
+        yield return AnimateUnitTo(attacker, landing.transform.position);
+
+        attacker.HasMoved = true;
+        _enPassant?.Clear();
+
+        IsBusy = false;
+        onCompleted?.Invoke();
+    }
+
+    private void RegisterEnPassantAfterMove(Unit unit, int fromX, int fromY, Cell to)
+    {
+        if (_enPassant == null)
+            return;
+
+        _enPassant.Clear();
+
+        if (unit == null || to == null)
+            return;
+        if (unit.Type != ChessPieceType.Pawn)
+            return;
+        if (fromX < 0 || fromY < 0)
+            return;
+
+        // Double step: |Δy| == 2, same file
+        if (fromX != to.X)
+            return;
+        if (Mathf.Abs(to.Y - fromY) != 2)
+            return;
+
+        int midY = (fromY + to.Y) / 2;
+        var board = _board != null ? _board : UnityEngine.Object.FindObjectOfType<Battlefield>();
+        var landing = board != null ? board.GetCell(to.X, midY) : null;
+        if (landing == null)
+            return;
+
+        _enPassant.Set(unit, landing);
     }
 
     private IEnumerator AnimateUnitToThen(Unit unit, Vector3 worldTarget, Action onDone)

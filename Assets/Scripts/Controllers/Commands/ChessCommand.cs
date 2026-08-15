@@ -7,6 +7,7 @@ public class ChessCommand : IGameplayCommand
     private readonly Battlefield _board;
     private readonly PlayerController _player;
     private readonly ITurnInfoView _turnView;
+    private readonly EnPassantState _enPassant;
 
     private Team _currentTeam = Team.White;
     private Unit _selected;
@@ -17,11 +18,13 @@ public class ChessCommand : IGameplayCommand
     public ChessCommand(
         Battlefield board,
         PlayerController player,
-        [InjectOptional] ITurnInfoView turnView)
+        [InjectOptional] ITurnInfoView turnView,
+        [InjectOptional] EnPassantState enPassant)
     {
         _board = board;
         _player = player;
         _turnView = turnView;
+        _enPassant = enPassant;
     }
 
     public void SetFirstTeam(Team team)
@@ -55,7 +58,7 @@ public class ChessCommand : IGameplayCommand
             return;
         }
 
-        // --- Клик по допустимой клетке: ход / рокировка ---
+        // --- Клик по допустимой клетке: ход / рокировка / en passant ---
         if (_targets.Contains(cell))
         {
             var moving = _selected;
@@ -70,6 +73,15 @@ public class ChessCommand : IGameplayCommand
                     castle.To,
                     castle.Rook,
                     castle.RookTo,
+                    OnMoveResolved);
+            }
+            else if (ChessMoveGenerator.TryGetEnPassantMove(
+                         moving, to, _board, _enPassant, out var ep))
+            {
+                _player.ExecuteEnPassant(
+                    ep.Mover,
+                    ep.To,
+                    ep.CapturedUnit,
                     OnMoveResolved);
             }
             else
@@ -110,14 +122,14 @@ public class ChessCommand : IGameplayCommand
 
         _selected = unit;
         _targets.Clear();
-        _targets.AddRange(ChessMoveGenerator.GetTargets(unit, _board));
+        _targets.AddRange(ChessMoveGenerator.GetTargets(unit, _board, _enPassant));
 
         if (_board != null)
         {
             _board.HighlightCell(unit.Cell, CellHighlight.Selected);
             foreach (var t in _targets)
             {
-                var mode = ChessMoveGenerator.IsCapture(unit, t)
+                var mode = ChessMoveGenerator.IsAttackTarget(unit, t, _enPassant)
                     ? CellHighlight.Attack
                     : CellHighlight.Move;
                 _board.HighlightCell(t, mode);
@@ -128,7 +140,8 @@ public class ChessCommand : IGameplayCommand
             unit.Cell.SetHighlight(CellHighlight.Selected);
             foreach (var t in _targets)
             {
-                bool isAttack = t.Unit != null;
+                bool isAttack = t.Unit != null
+                    || ChessMoveGenerator.IsEnPassantLanding(unit, t, _enPassant);
                 t.SetHighlight(isAttack ? CellHighlight.Attack : CellHighlight.Move);
             }
         }

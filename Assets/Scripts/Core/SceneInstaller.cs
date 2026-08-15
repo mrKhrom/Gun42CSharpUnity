@@ -49,6 +49,10 @@ public class SceneInstaller : MonoInstaller
                 "[SceneInstaller] GameSettings не найден — default-значения в коде.");
         }
 
+        // --- En passant (необяз. ТЗ: взятие на проходе) ---
+        Container.Bind<EnPassantState>()
+            .AsSingle();
+
         // --- Core scene components ---
         BindFromHierarchy<Battlefield>();
         BindFromHierarchy<PlayerController>();
