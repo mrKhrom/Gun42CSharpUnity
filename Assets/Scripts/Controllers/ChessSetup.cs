@@ -151,7 +151,8 @@ public class ChessSetup : MonoBehaviour
             unit.transform.rotation = Quaternion.identity;
     }
 
-    private Unit GetPrefab(Team team, ChessPieceType type)
+    /// <summary>Префаб фигуры по команде и типу (spawn + promote visual).</summary>
+    public Unit GetPrefab(Team team, ChessPieceType type)
     {
         if (team == Team.White)
         {

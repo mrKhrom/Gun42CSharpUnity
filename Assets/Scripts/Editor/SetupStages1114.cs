@@ -42,15 +42,7 @@ public static class SetupStages1114
         var turnView = Object.FindObjectOfType<TurnInfoView>();
         if (turnView == null)
         {
-            var canvas = Object.FindObjectOfType<Canvas>();
-            if (canvas == null)
-            {
-                var canvasGo = new GameObject("Canvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
-                canvas = canvasGo.GetComponent<Canvas>();
-                canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-                Undo.RegisterCreatedObjectUndo(canvasGo, "Create Canvas");
-            }
-
+            var canvas = EnsureCanvas();
             var turnGo = new GameObject("TurnInfoView", typeof(RectTransform));
             turnGo.transform.SetParent(canvas.transform, false);
             var rt = turnGo.GetComponent<RectTransform>();
@@ -61,6 +53,8 @@ public static class SetupStages1114
             turnView = turnGo.AddComponent<TurnInfoView>();
             Undo.RegisterCreatedObjectUndo(turnGo, "Create TurnInfoView");
         }
+
+        EnsurePromotionPanel();
 
         // SceneInstaller → GameSettings reference
         var installer = Object.FindObjectOfType<SceneInstaller>();
@@ -99,8 +93,49 @@ public static class SetupStages1114
         AssetDatabase.SaveAssets();
 
         Debug.Log(
-            "[SetupStages1114] Готово: GameBootstrap, TurnInfoView, GameSettings → SceneInstaller. " +
+            "[SetupStages1114] Готово: GameBootstrap, TurnInfoView, PromotionPanel, GameSettings → SceneInstaller. " +
             "Сцена сохранена.");
+    }
+
+    [MenuItem("Tools/Chess/Setup Promotion Panel (pawn UI)")]
+    public static void SetupPromotionOnly()
+    {
+        var scene = EditorSceneManager.OpenScene(GameScenePath, OpenSceneMode.Single);
+        EnsurePromotionPanel();
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+        Debug.Log("[SetupStages1114] PromotionPanel готов на GameScene.");
+    }
+
+    private static Canvas EnsureCanvas()
+    {
+        var canvas = Object.FindObjectOfType<Canvas>();
+        if (canvas != null)
+            return canvas;
+
+        var canvasGo = new GameObject("Canvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+        canvas = canvasGo.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        Undo.RegisterCreatedObjectUndo(canvasGo, "Create Canvas");
+        return canvas;
+    }
+
+    private static void EnsurePromotionPanel()
+    {
+        var panel = Object.FindObjectOfType<PromotionPanel>(true);
+        if (panel != null)
+            return;
+
+        var canvas = EnsureCanvas();
+        var go = new GameObject("PromotionPanel", typeof(RectTransform));
+        go.transform.SetParent(canvas.transform, false);
+        var rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+        go.AddComponent<PromotionPanel>();
+        Undo.RegisterCreatedObjectUndo(go, "Create PromotionPanel");
     }
 
     private static void EnsureGameSettingsAsset()

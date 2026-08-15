@@ -60,11 +60,55 @@ public class Unit : MonoBehaviour,
         HasMoved = false;
     }
 
-    /// <summary>ТЗ п.5: пешка на последнем ряду → смена типа (обычно Queen).</summary>
+    /// <summary>
+    /// Превращение пешки: меняет Type и подменяет child-модель/Animator
+    /// по префабу своей команды (PieceVisualLibrary → ChessSetup).
+    /// Root Unit, Cell, Collider, position сохраняются.
+    /// </summary>
     public void PromoteTo(ChessPieceType newType)
     {
+        if (newType == ChessPieceType.Pawn || newType == ChessPieceType.King)
+        {
+            Debug.LogWarning($"[Unit] PromoteTo rejected: {newType}");
+            return;
+        }
+
         _type = newType;
         name = $"{_team}_{_type}";
+
+        ApplyPromotedVisual(newType);
+
+        Debug.Log($"[Unit] {_team} promoted → {_type}");
+    }
+
+    private void ApplyPromotedVisual(ChessPieceType newType)
+    {
+        // 1) PieceVisualLibrary (если есть на сцене)
+        var lib = PieceVisualLibrary.Instance != null
+            ? PieceVisualLibrary.Instance
+            : FindObjectOfType<PieceVisualLibrary>();
+
+        if (lib != null)
+        {
+            lib.ApplyVisual(this, newType);
+            return;
+        }
+
+        // 2) Fallback: префабы из ChessSetup
+        var setup = FindObjectOfType<ChessSetup>();
+        if (setup != null)
+        {
+            var prefab = setup.GetPrefab(_team, newType);
+            if (prefab != null)
+            {
+                PieceVisualLibrary.ReplaceVisualFromPrefab(this, prefab.gameObject);
+                return;
+            }
+        }
+
+        Debug.LogWarning(
+            $"[Unit] Нет префаба для визуала {_team}/{newType}. " +
+            "Назначь префабы в ChessSetup или PieceVisualLibrary.");
     }
 
     public void OnPointerEnter(PointerEventData eventData)

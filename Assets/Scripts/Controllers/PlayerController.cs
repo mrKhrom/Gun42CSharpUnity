@@ -6,14 +6,18 @@ using Zenject;
 public class PlayerController : MonoBehaviour
 {
     private GameSettings _settings;
+    private IPromotionUI _promotionUI;
 
     public bool IsBusy { get; private set; }
 
     // Optional только на параметре: [Inject(Optional=true)] на методе ломает Zenject Install.
     [Inject]
-    private void Construct([InjectOptional] GameSettings settings)
+    private void Construct(
+        [InjectOptional] GameSettings settings,
+        [InjectOptional] IPromotionUI promotionUI)
     {
         _settings = settings;
+        _promotionUI = promotionUI;
     }
 
     public void ExecuteMove(Unit unit, Cell target, Action onCompleted)
@@ -51,17 +55,42 @@ public class PlayerController : MonoBehaviour
         // 3) Анимация
         yield return AnimateUnitTo(unit, target.transform.position);
 
-        // 4) Превращение пешки (ТЗ п.5 — авто-ферзь)
+        // 4) Превращение пешки (ТЗ необяз. п.6 — UI; fallback: авто-Queen)
         int lastRank = unit.Team == Team.White ? 7 : 0;
         if (unit.Type == ChessPieceType.Pawn && unit.Cell != null && unit.Cell.Y == lastRank)
         {
-            unit.PromoteTo(ChessPieceType.Queen);
-            Debug.Log($"[Chess] {unit.Team} pawn promoted to Queen");
+            ChessPieceType chosen = ChessPieceType.Queen;
+
+            if (_promotionUI != null)
+            {
+                // IsBusy остаётся true → ChessCommand.Interact игнорирует клики по доске.
+                // Cancel/Esc панель не закрывает — только кнопка выбора.
+                yield return _promotionUI.WaitForSelection(unit.Team, type => chosen = type);
+            }
+            else
+            {
+                // Fallback (UI не забинжен): прежнее поведение ТЗ п.5
+                Debug.LogWarning("[PlayerController] IPromotionUI missing — auto Queen");
+            }
+
+            if (!IsPromotable(chosen))
+                chosen = ChessPieceType.Queen;
+
+            unit.PromoteTo(chosen);
+            Debug.Log($"[Chess] {unit.Team} pawn promoted to {chosen}");
         }
 
         unit.HasMoved = true;
         IsBusy = false;
         onCompleted?.Invoke();
+    }
+
+    private static bool IsPromotable(ChessPieceType type)
+    {
+        return type == ChessPieceType.Queen
+               || type == ChessPieceType.Rook
+               || type == ChessPieceType.Bishop
+               || type == ChessPieceType.Knight;
     }
 
     private IEnumerator AnimateUnitTo(Unit unit, Vector3 worldTarget)

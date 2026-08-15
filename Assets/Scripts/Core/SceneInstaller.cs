@@ -71,6 +71,22 @@ public class SceneInstaller : MonoInstaller
             .FromInstance(turnView)
             .AsSingle();
 
+        // --- UI: promotion (необяз. ТЗ п.6) ---
+        var promotion = FindObjectOfType<PromotionPanel>(true);
+        if (promotion == null)
+            promotion = CreatePromotionPanel();
+
+        Container.Bind<IPromotionUI>()
+            .FromInstance(promotion)
+            .AsSingle();
+
+        Container.Bind<PromotionPanel>()
+            .FromInstance(promotion)
+            .AsSingle();
+
+        // --- Visual library for promote model swap ---
+        BindFromHierarchyOptional<PieceVisualLibrary>();
+
         // --- Command: один instance как интерфейс и класс ---
         Container.BindInterfacesAndSelfTo<ChessCommand>()
             .AsSingle();
@@ -102,17 +118,7 @@ public class SceneInstaller : MonoInstaller
 
     private static TurnInfoView CreateTurnInfoView()
     {
-        var canvas = Object.FindObjectOfType<Canvas>();
-        if (canvas == null)
-        {
-            var canvasGo = new GameObject(
-                "Canvas",
-                typeof(Canvas),
-                typeof(UnityEngine.UI.CanvasScaler),
-                typeof(UnityEngine.UI.GraphicRaycaster));
-            canvas = canvasGo.GetComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        }
+        var canvas = EnsureCanvas();
 
         var go = new GameObject("TurnInfoView", typeof(RectTransform));
         go.transform.SetParent(canvas.transform, false);
@@ -125,6 +131,39 @@ public class SceneInstaller : MonoInstaller
         var view = go.AddComponent<TurnInfoView>();
         Debug.Log("[SceneInstaller] TurnInfoView создан runtime");
         return view;
+    }
+
+    private static PromotionPanel CreatePromotionPanel()
+    {
+        var canvas = EnsureCanvas();
+
+        var go = new GameObject("PromotionPanel", typeof(RectTransform));
+        go.transform.SetParent(canvas.transform, false);
+        var rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+
+        var panel = go.AddComponent<PromotionPanel>();
+        Debug.Log("[SceneInstaller] PromotionPanel создан runtime");
+        return panel;
+    }
+
+    private static Canvas EnsureCanvas()
+    {
+        var canvas = Object.FindObjectOfType<Canvas>();
+        if (canvas != null)
+            return canvas;
+
+        var canvasGo = new GameObject(
+            "Canvas",
+            typeof(Canvas),
+            typeof(UnityEngine.UI.CanvasScaler),
+            typeof(UnityEngine.UI.GraphicRaycaster));
+        canvas = canvasGo.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        return canvas;
     }
 
     private void OnDestroy()

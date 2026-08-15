@@ -1,11 +1,6 @@
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// Этап 11: единый порядок старта сцены.
-/// 1) Доска  2) (опц.) ChessSetup  3) первый ход  4) UI хода.
-/// Фигуры могут уже стоять в сцене — spawn не обязателен.
-/// </summary>
 public class GameBootstrap : MonoBehaviour
 {
     private Battlefield _board;
