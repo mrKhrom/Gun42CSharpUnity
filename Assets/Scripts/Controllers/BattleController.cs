@@ -14,8 +14,10 @@ public class BattleController : MonoBehaviour
     private IGameplayCommand _command;
     private Battlefield _board;
     private Controls.GameActions _game;
+    private bool _injected;
 
     private bool _subscribedToBoard;
+    private bool _inputBound;
 
     [Inject]
     private void Construct(
@@ -26,19 +28,44 @@ public class BattleController : MonoBehaviour
         _command = command;
         _board = board;
         _game = gameActions;
+        _injected = true;
+
+        // OnEnable мог сработать до Inject — подпишемся сейчас.
+        if (isActiveAndEnabled)
+            BindInputAndBoard();
     }
 
     private void OnEnable()
     {
-        _game.Cancel.performed += OnCancelPerformed;
-        _game.Confirm.performed += OnConfirmPerformed;
-        SubscribeBoard();
+        BindInputAndBoard();
     }
 
     private void OnDisable()
     {
-        _game.Cancel.performed -= OnCancelPerformed;
-        _game.Confirm.performed -= OnConfirmPerformed;
+        UnbindInputAndBoard();
+    }
+
+    private void BindInputAndBoard()
+    {
+        // До Inject _game — default struct, Cancel/Restart бросают NRE.
+        if (!_injected || _inputBound)
+            return;
+
+        _game.Cancel.performed += OnCancelPerformed;
+        _game.Confirm.performed += OnConfirmPerformed;
+        _inputBound = true;
+        SubscribeBoard();
+    }
+
+    private void UnbindInputAndBoard()
+    {
+        if (_inputBound)
+        {
+            _game.Cancel.performed -= OnCancelPerformed;
+            _game.Confirm.performed -= OnConfirmPerformed;
+            _inputBound = false;
+        }
+
         UnsubscribeBoard();
     }
 

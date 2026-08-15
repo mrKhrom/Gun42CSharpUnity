@@ -11,6 +11,8 @@ public class InputManager : MonoBehaviour
 
     private Controls.GameActions _gameActions;
     private GameSettings _settings;
+    private bool _injected;
+    private bool _restartBound;
     private bool _isRestartHeld;
     private float _fillProgress;
 
@@ -21,20 +23,44 @@ public class InputManager : MonoBehaviour
     {
         _gameActions = gameActions;
         _settings = settings;
+        _injected = true;
         if (_settings != null && _settings.restartHoldDuration > 0f)
             _fillDuration = _settings.restartHoldDuration;
+
+        // OnEnable мог сработать до Inject.
+        if (isActiveAndEnabled)
+            BindRestartActions();
     }
 
     private void OnEnable()
     {
-        _gameActions.Restart.started += OnRestartStarted;
-        _gameActions.Restart.canceled += OnRestartCanceled;
+        BindRestartActions();
     }
 
     private void OnDisable()
     {
+        UnbindRestartActions();
+    }
+
+    private void BindRestartActions()
+    {
+        // До Inject GameActions default → Restart бросает NRE.
+        if (!_injected || _restartBound)
+            return;
+
+        _gameActions.Restart.started += OnRestartStarted;
+        _gameActions.Restart.canceled += OnRestartCanceled;
+        _restartBound = true;
+    }
+
+    private void UnbindRestartActions()
+    {
+        if (!_restartBound)
+            return;
+
         _gameActions.Restart.started -= OnRestartStarted;
         _gameActions.Restart.canceled -= OnRestartCanceled;
+        _restartBound = false;
     }
 
     private void Start() => HideRestartUI();

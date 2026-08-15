@@ -12,8 +12,9 @@ public class TurnInfoView : MonoBehaviour, ITurnInfoView
 
     private GameSettings _settings;
 
-    [Inject(Optional = true)]
-    private void Construct(GameSettings settings)
+    // Optional только на параметре: [Inject(Optional=true)] на методе ломает Zenject Install.
+    [Inject]
+    private void Construct([InjectOptional] GameSettings settings)
     {
         _settings = settings;
         if (_settings != null && !string.IsNullOrEmpty(_settings.turnLabelFormat))

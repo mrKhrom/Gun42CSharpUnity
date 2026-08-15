@@ -283,6 +283,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <summary>
         /// Provides access to the underlying input action "Game/Restart".
         /// </summary>
+
         public InputAction @Restart => m_Wrapper.m_Game_Restart;
         /// <summary>
         /// Provides access to the underlying input action "Game/Cancel".
