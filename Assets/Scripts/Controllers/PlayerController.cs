@@ -1,13 +1,28 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 public class PlayerController : MonoBehaviour
 {
+    private GameSettings _settings;
+
     public bool IsBusy { get; private set; }
+
+    [Inject(Optional = true)]
+    private void Construct(GameSettings settings)
+    {
+        _settings = settings;
+    }
 
     public void ExecuteMove(Unit unit, Cell target, Action onCompleted)
     {
+        if (IsBusy)
+        {
+            Debug.LogWarning("[PlayerController] Уже идёт ход");
+            return;
+        }
+
         if (unit == null || target == null)
         {
             onCompleted?.Invoke();
@@ -32,8 +47,7 @@ public class PlayerController : MonoBehaviour
         // 2) Логика клетки сразу (генератор ходов видит новую позицию)
         unit.BindToCell(target, snap: false);
 
-        // 3) Анимация только здесь — не вызываем Unit.AnimateMoveTo
-        //    (Unit.MoveRoutine / AnimateMoveTo private/public для других сценариев)
+        // 3) Анимация
         yield return AnimateUnitTo(unit, target.transform.position);
 
         // 4) Превращение пешки (ТЗ п.5 — авто-ферзь)
@@ -49,11 +63,13 @@ public class PlayerController : MonoBehaviour
         onCompleted?.Invoke();
     }
 
-    /// <summary>Визуальный сдвиг фигуры. Не зависит от coroutine API на Unit.</summary>
-    private static IEnumerator AnimateUnitTo(Unit unit, Vector3 worldTarget)
+    private IEnumerator AnimateUnitTo(Unit unit, Vector3 worldTarget)
     {
         worldTarget.y = unit.transform.position.y;
+
         float speed = unit.MoveSpeed > 0f ? unit.MoveSpeed : 3f;
+        if (_settings != null && _settings.unitMoveSpeed > 0f)
+            speed = _settings.unitMoveSpeed;
 
         while ((unit.transform.position - worldTarget).sqrMagnitude > 0.0001f)
         {

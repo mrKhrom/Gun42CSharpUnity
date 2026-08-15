@@ -28,10 +28,10 @@ public class ChessSetup : MonoBehaviour
 
     [Header("Опции")]
     [Tooltip("Удалить все Unit на сцене перед спавном")]
-    [SerializeField] private bool _clearExistingUnits = true;
+    [SerializeField] private bool _clearExistingUnits = false;
 
-    [Tooltip("Спавнить в Start автоматически")]
-    [SerializeField] private bool _spawnOnStart = true;
+    [Tooltip("Спавнить автоматически (Start / GameBootstrap). Выкл — фигуры из сцены.")]
+    [SerializeField] private bool _spawnOnStart = false;
 
     [SerializeField] private float _heightOffset = 0f; // если модель утопает — подними
 
@@ -48,6 +48,17 @@ public class ChessSetup : MonoBehaviour
     };
 
     private void Start()
+    {
+        // Если есть GameBootstrap — spawn вызовет он через TrySpawnIfConfigured.
+        // Если bootstrap нет — уважаем флаг здесь.
+        if (_spawnOnStart && FindObjectOfType<GameBootstrap>() == null)
+            SpawnStandardPosition();
+    }
+
+    /// <summary>
+    /// Вызывается из GameBootstrap. Спавнит только если _spawnOnStart включён.
+    /// </summary>
+    public void TrySpawnIfConfigured()
     {
         if (_spawnOnStart)
             SpawnStandardPosition();

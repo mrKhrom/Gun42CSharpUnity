@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ChessCommand : IGameplayCommand
 {
     private readonly Battlefield _board;
     private readonly PlayerController _player;
+    private readonly ITurnInfoView _turnView;
 
     private Team _currentTeam = Team.White;
     private Unit _selected;
@@ -12,13 +14,21 @@ public class ChessCommand : IGameplayCommand
 
     public Team CurrentTeam => _currentTeam;
 
-    public ChessCommand(Battlefield board, PlayerController player)
+    public ChessCommand(
+        Battlefield board,
+        PlayerController player,
+        [InjectOptional] ITurnInfoView turnView)
     {
         _board = board;
         _player = player;
+        _turnView = turnView;
     }
 
-    public void SetFirstTeam(Team team) => _currentTeam = team;
+    public void SetFirstTeam(Team team)
+    {
+        _currentTeam = team;
+        _turnView?.ShowTurn(_currentTeam);
+    }
 
     public void Interact(Cell cell)
     {
@@ -27,6 +37,9 @@ public class ChessCommand : IGameplayCommand
 
         if (cell == null)
             return;
+
+        if (_board != null)
+            _board.EnsureInitialized();
 
         // --- Нет выбранной фигуры ---
         if (_selected == null)
@@ -65,7 +78,6 @@ public class ChessCommand : IGameplayCommand
     public void Confirm()
     {
         // MVP: ход подтверждается вторым кликом.
-        // Можно позже: Confirm применяет "предвыбранную" цель.
     }
 
     private void TrySelectFromCell(Cell cell)
@@ -79,22 +91,38 @@ public class ChessCommand : IGameplayCommand
     {
         ClearSelection();
 
+        if (unit?.Cell == null)
+            return;
+
         _selected = unit;
         _targets.Clear();
         _targets.AddRange(ChessMoveGenerator.GetTargets(unit, _board));
 
-        unit.Cell.SetHighlight(CellHighlight.Selected);
-
-        foreach (var t in _targets)
+        if (_board != null)
         {
-            bool isAttack = t.Unit != null;
-            t.SetHighlight(isAttack ? CellHighlight.Attack : CellHighlight.Move);
+            _board.HighlightCell(unit.Cell, CellHighlight.Selected);
+            foreach (var t in _targets)
+            {
+                var mode = ChessMoveGenerator.IsCapture(unit, t)
+                    ? CellHighlight.Attack
+                    : CellHighlight.Move;
+                _board.HighlightCell(t, mode);
+            }
+        }
+        else
+        {
+            unit.Cell.SetHighlight(CellHighlight.Selected);
+            foreach (var t in _targets)
+            {
+                bool isAttack = t.Unit != null;
+                t.SetHighlight(isAttack ? CellHighlight.Attack : CellHighlight.Move);
+            }
         }
     }
 
     private void ClearSelection()
     {
-        _board.ClearAllHighlights();
+        _board?.ClearAllHighlights();
         _selected = null;
         _targets.Clear();
     }
@@ -102,6 +130,7 @@ public class ChessCommand : IGameplayCommand
     private void OnMoveResolved()
     {
         _currentTeam = _currentTeam == Team.White ? Team.Black : Team.White;
+        _turnView?.ShowTurn(_currentTeam);
         Debug.Log($"[Chess] Now playing: {_currentTeam}");
     }
 }

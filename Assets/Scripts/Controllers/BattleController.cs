@@ -7,6 +7,7 @@ using Zenject;
 /// Select = клик по Cell/Unit (EventSystem).
 /// Cancel = Esc, Confirm = Space (Input System).
 /// Restart (R) обрабатывает InputManager — здесь не трогаем.
+/// Первый ход выставляет GameBootstrap (этап 11).
 /// </summary>
 public class BattleController : MonoBehaviour
 {
@@ -29,11 +30,8 @@ public class BattleController : MonoBehaviour
 
     private void OnEnable()
     {
-        // Клавиатура
-        // _game — struct; после Inject должен быть валиден
         _game.Cancel.performed += OnCancelPerformed;
         _game.Confirm.performed += OnConfirmPerformed;
-
         SubscribeBoard();
     }
 
@@ -41,34 +39,26 @@ public class BattleController : MonoBehaviour
     {
         _game.Cancel.performed -= OnCancelPerformed;
         _game.Confirm.performed -= OnConfirmPerformed;
-
         UnsubscribeBoard();
     }
 
     private void Start()
     {
         if (_board != null)
-        {
             _board.EnsureInitialized();
-            SubscribeBoard();
-        }
 
-        // Первый ход: White (по ТЗ можно random)
-        if (_command is ChessCommand chess)
-        {
-            chess.SetFirstTeam(Team.White);
-            Debug.Log($"[BattleController] First team: {chess.CurrentTeam}");
-        }
-        else
-        {
-            Debug.LogWarning(
-                "[BattleController] IGameplayCommand is not ChessCommand — SetFirstTeam skipped");
-        }
+        EnsureSubscribed();
 
         if (_command == null)
             Debug.LogError("[BattleController] IGameplayCommand not injected!");
         if (_board == null)
             Debug.LogError("[BattleController] Battlefield not injected!");
+    }
+
+    /// <summary>Вызывается из GameBootstrap после init доски.</summary>
+    public void EnsureSubscribed()
+    {
+        SubscribeBoard();
     }
 
     private void SubscribeBoard()
@@ -90,7 +80,6 @@ public class BattleController : MonoBehaviour
         _subscribedToBoard = false;
     }
 
-    /// <summary>Select: ЛКМ по клетке или фигуре.</summary>
     private void OnCellClicked(Cell cell)
     {
         if (_command == null)

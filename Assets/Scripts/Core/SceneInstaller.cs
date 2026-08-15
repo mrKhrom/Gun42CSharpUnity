@@ -1,59 +1,134 @@
+using UnityEngine;
 using Zenject;
 
 /// <summary>
-/// Регистрация входа и зависимостей сцены.
+/// Этап 12: регистрация зависимостей сцены (ТЗ: SceneInstaller).
 /// </summary>
 public class SceneInstaller : MonoInstaller
 {
-    // Сохраняем Controls, чтобы выключить ввод при удалении объекта.
+    [Header("Settings (этап 13)")]
+    [SerializeField] private GameSettings _gameSettings;
+
     private Controls _controls;
 
     public override void InstallBindings()
     {
-        // Создаём экземпляр Input System.
+        // --- Input ---
         _controls = new Controls();
-
-        // Включаем ввод.
         _controls.Enable();
 
-        // Регистрируем Controls как общий объект сцены.
         Container.Bind<Controls>()
             .FromInstance(_controls)
             .AsSingle();
 
-        // Подключаем карту экшенов Game.
         Container.Bind<Controls.GameActions>()
             .FromInstance(_controls.Game)
             .AsSingle();
 
-        // Подключаем карту экшенов UI.
-        Container.Bind<PlayerController>()
-            .FromComponentInHierarchy()
+        // --- Settings ---
+        if (_gameSettings == null)
+            _gameSettings = Resources.Load<GameSettings>("GameSettings");
+
+#if UNITY_EDITOR
+        if (_gameSettings == null)
+        {
+            _gameSettings = UnityEditor.AssetDatabase.LoadAssetAtPath<GameSettings>(
+                "Assets/ScriptableObjects/GameSettings.asset");
+        }
+#endif
+
+        if (_gameSettings != null)
+        {
+            Container.Bind<GameSettings>()
+                .FromInstance(_gameSettings)
+                .AsSingle();
+        }
+        else
+        {
+            Debug.LogWarning(
+                "[SceneInstaller] GameSettings не найден — default-значения в коде.");
+        }
+
+        // --- Core scene components ---
+        BindFromHierarchy<Battlefield>();
+        BindFromHierarchy<PlayerController>();
+        BindFromHierarchy<BattleController>();
+        BindFromHierarchyOptional<ChessSetup>();
+        BindFromHierarchyOptional<GameBootstrap>();
+        BindFromHierarchyOptional<InputManager>();
+        BindFromHierarchyOptional<CellManager>();
+
+        // --- UI (этап 14) ---
+        var turnView = FindObjectOfType<TurnInfoView>(true);
+        if (turnView == null)
+            turnView = CreateTurnInfoView();
+
+        Container.Bind<ITurnInfoView>()
+            .FromInstance(turnView)
             .AsSingle();
 
-        // Доска — единый источник клеток, графа и привязки фигур (ТЗ Battlefield).
-        Container.Bind<Battlefield>()
-            .FromComponentInHierarchy()
+        Container.Bind<TurnInfoView>()
+            .FromInstance(turnView)
             .AsSingle();
 
-        // Команда шахматного режима
-        Container.Bind<IGameplayCommand>()
-            .To<ChessCommand>()
+        // --- Command: один instance как интерфейс и класс ---
+        Container.BindInterfacesAndSelfTo<ChessCommand>()
             .AsSingle();
+    }
 
-        // Регистрируем менеджеры, которые уже есть в сцене.
-        Container.Bind<InputManager>()
-            .FromComponentInHierarchy()
-            .AsSingle();
+    private void BindFromHierarchy<T>() where T : Component
+    {
+        var c = FindObjectOfType<T>(true);
+        if (c == null)
+        {
+            Debug.LogError($"[SceneInstaller] Не найден обязательный {typeof(T).Name}");
+            return;
+        }
 
-        Container.Bind<CellManager>()
-            .FromComponentInHierarchy()
-            .AsSingle();
+        Container.Bind<T>().FromInstance(c).AsSingle();
+    }
+
+    private void BindFromHierarchyOptional<T>() where T : Component
+    {
+        var c = FindObjectOfType<T>(true);
+        if (c == null)
+        {
+            Debug.LogWarning($"[SceneInstaller] Опциональный {typeof(T).Name} отсутствует");
+            return;
+        }
+
+        Container.Bind<T>().FromInstance(c).AsSingle();
+    }
+
+    private static TurnInfoView CreateTurnInfoView()
+    {
+        var canvas = Object.FindObjectOfType<Canvas>();
+        if (canvas == null)
+        {
+            var canvasGo = new GameObject(
+                "Canvas",
+                typeof(Canvas),
+                typeof(UnityEngine.UI.CanvasScaler),
+                typeof(UnityEngine.UI.GraphicRaycaster));
+            canvas = canvasGo.GetComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        }
+
+        var go = new GameObject("TurnInfoView", typeof(RectTransform));
+        go.transform.SetParent(canvas.transform, false);
+        var rt = go.GetComponent<RectTransform>();
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
+
+        var view = go.AddComponent<TurnInfoView>();
+        Debug.Log("[SceneInstaller] TurnInfoView создан runtime");
+        return view;
     }
 
     private void OnDestroy()
     {
-        // Выключаем ввод и освобождаем ресурсы.
         if (_controls == null)
             return;
 

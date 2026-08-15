@@ -10,13 +10,19 @@ public class InputManager : MonoBehaviour
     [SerializeField] private float _fillDuration = 1.5f;
 
     private Controls.GameActions _gameActions;
+    private GameSettings _settings;
     private bool _isRestartHeld;
     private float _fillProgress;
 
     [Inject]
-    private void Construct(Controls.GameActions gameActions)
+    private void Construct(
+        Controls.GameActions gameActions,
+        [InjectOptional] GameSettings settings)
     {
         _gameActions = gameActions;
+        _settings = settings;
+        if (_settings != null && _settings.restartHoldDuration > 0f)
+            _fillDuration = _settings.restartHoldDuration;
     }
 
     private void OnEnable()
