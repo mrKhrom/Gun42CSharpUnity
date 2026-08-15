@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 3391
+  controlID: 6726
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 3392
+  controlID: 6727
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 3341
+  controlID: 6799
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -242,9 +242,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 56970000
       m_LastClickedID: 0
-      m_ExpandedIDs: aef5fdffe83cfeffb060ffff5eaaffff1efbffff3ea1000034ac0000c8ad0000
+      m_ExpandedIDs: fa40faffe887faff00d3fafff065fbff9cadfbff80f7fbffa43efcffaef5fdffe83cfeffb060ffff5eaaffff1efbffff3ea1000034ac0000c8ad0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -844,7 +844,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 3393
+  controlID: 6728
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -920,7 +920,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Controllers
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -928,17 +928,17 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/Controllers
+  - Assets/Scenes
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "/Users/alekseykhromov/Library/Mobile Documents/com~apple~CloudDocs/My
     Cloud/\u041F\u0440\u043E\u0433\u0440\u0430\u043C\u043C\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435/GameDev/UnityProjects/CSharpUnity"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 92}
-    m_SelectedIDs: 74b10000
-    m_LastClickedID: 45428
-    m_ExpandedIDs: 000000009495000096950000989500004e97000000ca9a3b
+    scrollPos: {x: 0, y: 112}
+    m_SelectedIDs: 4a970000
+    m_LastClickedID: 38730
+    m_ExpandedIDs: 0000000094950000969500009895000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -991,9 +991,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 56970000
+    m_LastClickedInstanceID: 38742
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 0000000000000000000000000000000000000000de730000e473000000000000ca010000ac7c00000000000000000000d2aa000040ab00001ead0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1213,7 +1213,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 44648
+  m_LastSelectedObjectID: 53686
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1259,8 +1259,8 @@ MonoBehaviour:
     y: 0
     width: 354
     height: 850
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}

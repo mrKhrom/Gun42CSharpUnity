@@ -84,6 +84,9 @@ public class GameBootstrap : MonoBehaviour
         if (_chessSetup != null)
             _chessSetup.TrySpawnIfConfigured();
 
+        // 2b. Меньше shadow casters на multi-mesh моделях (тени остаются у основного mesh)
+        GraphicsPerformance.OptimizeUnitShadowCasters();
+
         // 3. Подписка кликов (на случай раннего OnEnable до готовности доски)
         _battleController?.EnsureSubscribed();
 
