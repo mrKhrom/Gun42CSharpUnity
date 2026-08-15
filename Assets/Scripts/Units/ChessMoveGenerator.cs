@@ -1,39 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Генерация возможных клеток хода/атаки по правилам шахмат (ТЗ 3.1–3.6, 4.1–4.2)
-/// + рокировка (необяз. правило) + IsSquareAttacked для классики.
-/// Не двигает фигуры — только считает цели для Command / подсветки.
-/// </summary>
 public static class ChessMoveGenerator
 {
     public const int KingStartX = 4;
     public const int KingsideRookX = 7;
     public const int QueensideRookX = 0;
 
-    /// <summary>Направление «вперёд» для пешки: White +Y (world +Z), Black −Y.</summary>
-    public static int Forward(Team team) => team == Team.White ? 1 : -1;
+public static int Forward(Team team) => team == Team.White ? 1 : -1;
 
     public static Team Opposite(Team team) => team == Team.White ? Team.Black : Team.White;
 
-    /// <summary>Стартовый ряд пешек: White y=1, Black y=6.</summary>
-    public static bool IsPawnStartRank(Team team, int y)
+public static bool IsPawnStartRank(Team team, int y)
     {
         return (team == Team.White && y == 1) || (team == Team.Black && y == 6);
     }
 
     public static int BackRank(Team team) => team == Team.White ? 0 : 7;
 
-    /// <summary>На клетке враг относительно mover.</summary>
-    public static bool IsCapture(Unit mover, Cell target)
+public static bool IsCapture(Unit mover, Cell target)
     {
         if (mover == null || target?.Unit == null) return false;
         return target.Unit.Team != mover.Team;
     }
 
-    /// <summary>Подсветка Attack: обычное взятие или en passant landing.</summary>
-    public static bool IsAttackTarget(Unit mover, Cell target, EnPassantState enPassant = null)
+public static bool IsAttackTarget(Unit mover, Cell target, EnPassantState enPassant = null)
     {
         if (IsCapture(mover, target))
             return true;
@@ -49,17 +40,13 @@ public static class ChessMoveGenerator
         return enPassant.MatchesLanding(target) && enPassant.CanCaptureBy(mover);
     }
 
-    /// <summary>На клетке союзник.</summary>
-    public static bool IsBlockedByAlly(Unit mover, Cell target)
+public static bool IsBlockedByAlly(Unit mover, Cell target)
     {
         if (mover == null || target?.Unit == null) return false;
         return target.Unit.Team == mover.Team;
     }
 
-    /// <summary>
-    /// Все цели: quiet + captures (+ рокировка / en passant).
-    /// </summary>
-    public static List<Cell> GetTargets(
+public static List<Cell> GetTargets(
         Unit unit,
         Battlefield board,
         EnPassantState enPassant = null)
@@ -81,10 +68,7 @@ public static class ChessMoveGenerator
         CollectTargets(unit, board, null, moves, attacks, enPassant);
     }
 
-    /// <summary>
-    /// Если клик по клетке рокировки короля — собрать ChessMove с ладьёй.
-    /// </summary>
-    public static bool TryGetCastleMove(Unit king, Cell target, Battlefield board, out ChessMove move)
+public static bool TryGetCastleMove(Unit king, Cell target, Battlefield board, out ChessMove move)
     {
         move = default;
         if (king == null || target == null || board == null || king.Cell == null)
@@ -102,10 +86,7 @@ public static class ChessMoveGenerator
         return true;
     }
 
-    /// <summary>
-    /// Если клик — en passant landing для пешки.
-    /// </summary>
-    public static bool TryGetEnPassantMove(
+public static bool TryGetEnPassantMove(
         Unit pawn,
         Cell target,
         Battlefield board,
@@ -124,11 +105,7 @@ public static class ChessMoveGenerator
         return true;
     }
 
-    /// <summary>
-    /// Клетка (x,y) атакована хотя бы одной фигурой byTeam.
-    /// Без рокировки (только псевдо-атаки).
-    /// </summary>
-    public static bool IsSquareAttacked(Battlefield board, int x, int y, Team byTeam)
+public static bool IsSquareAttacked(Battlefield board, int x, int y, Team byTeam)
     {
         if (board == null)
             return false;
@@ -150,8 +127,7 @@ public static class ChessMoveGenerator
         return false;
     }
 
-    /// <summary>Король team под шахом.</summary>
-    public static bool IsKingInCheck(Battlefield board, Team team)
+public static bool IsKingInCheck(Battlefield board, Team team)
     {
         if (board == null)
             return false;
@@ -362,10 +338,7 @@ public static class ChessMoveGenerator
             AddMove(qs.To, combined, moves);
     }
 
-    /// <summary>
-    /// Собирает рокировку, если kingToX — 6 (O-O) или 2 (O-O-O) на back rank.
-    /// </summary>
-    private static bool TryBuildCastle(
+private static bool TryBuildCastle(
         Unit king,
         Battlefield board,
         int kingToX,
@@ -394,7 +367,7 @@ public static class ChessMoveGenerator
 
         if (kingToX == KingStartX + 2)
         {
-            // O-O: king 4→6, rook 7→5
+            // O-O: король 4→6, ладья 7→5
             kind = SpecialMoveKind.CastleKingSide;
             rookFromX = KingsideRookX;
             rookToX = 5;
@@ -403,7 +376,7 @@ public static class ChessMoveGenerator
         }
         else if (kingToX == KingStartX - 2)
         {
-            // O-O-O: king 4→2, rook 0→3
+            // O-O-O: король 4→2, ладья 0→3
             kind = SpecialMoveKind.CastleQueenSide;
             rookFromX = QueensideRookX;
             rookToX = 3;
@@ -456,10 +429,7 @@ public static class ChessMoveGenerator
         return true;
     }
 
-    /// <summary>
-    /// Псевдо-атака фигуры на клетку (x,y). Без рокировки.
-    /// </summary>
-    private static bool DoesPieceAttackSquare(Unit attacker, Battlefield board, int tx, int ty)
+private static bool DoesPieceAttackSquare(Unit attacker, Battlefield board, int tx, int ty)
     {
         if (attacker?.Cell == null || board == null)
             return false;
@@ -511,12 +481,11 @@ public static class ChessMoveGenerator
         return IsClearRay(board, ax, ay, tx, ty);
     }
 
-    /// <summary>Путь от (ax,ay) к (tx,ty) свободен; целевая клетка может быть занята.</summary>
-    private static bool IsClearRay(Battlefield board, int ax, int ay, int tx, int ty)
+private static bool IsClearRay(Battlefield board, int ax, int ay, int tx, int ty)
     {
         int stepX = tx.CompareTo(ax);
         int stepY = ty.CompareTo(ay);
-        // CompareTo: -1,0,1 — ok for diagonal/ortho
+        // CompareTo: -1,0,1 — достаточно для диагонали/ортогонали
 
         int cx = ax + stepX;
         int cy = ay + stepY;

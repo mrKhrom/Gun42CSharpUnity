@@ -1,9 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Fixes Meshy biped orientation: mesh is Y-up in FBX but authored lying on side.
-/// Put on the ROOT of a raw Jaina FBX instance (or leave default on prefab Orient child).
-/// </summary>
 [ExecuteAlways]
 public class MeshyModelOrient : MonoBehaviour
 {

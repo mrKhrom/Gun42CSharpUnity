@@ -186,10 +186,7 @@ public class ChessCommand : IGameplayCommand
         EvaluatePosition(showTurnIfQuiet: true);
     }
 
-    /// <summary>
-    /// После смены стороны (или старта): шах / мат / пат.
-    /// </summary>
-    public void EvaluatePosition(bool showTurnIfQuiet)
+public void EvaluatePosition(bool showTurnIfQuiet)
     {
         if (_board == null)
             return;

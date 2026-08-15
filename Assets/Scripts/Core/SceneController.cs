@@ -53,8 +53,8 @@ public class SceneController : MonoBehaviour
 
         HidePlayButton();
         DisableMenuCameraAndAudio(menuCamera);
-        // sceneLoaded also runs EnsureSingleEventSystem; call once more next frame
-        // in case EventSystem objects finish enabling after the callback.
+        // sceneLoaded тоже вызывает EnsureSingleEventSystem; повтор на следующий кадр
+        // на случай, если EventSystem активируется после callback
         StartCoroutine(EnsureSingleEventSystemNextFrame());
     }
 
@@ -64,16 +64,13 @@ public class SceneController : MonoBehaviour
         EnsureSingleEventSystem();
     }
 
-    /// <summary>
-    /// Keeps the first active EventSystem (from MainScene) and destroys extras.
-    /// </summary>
-    public static void EnsureSingleEventSystem()
+public static void EnsureSingleEventSystem()
     {
         var systems = Object.FindObjectsOfType<EventSystem>(true);
         if (systems == null || systems.Length <= 1)
             return;
 
-        // Prefer EventSystem that lives in MainScene (bootstrap).
+        // Предпочитаем EventSystem из MainScene (bootstrap).
         EventSystem keep = null;
         foreach (var es in systems)
         {

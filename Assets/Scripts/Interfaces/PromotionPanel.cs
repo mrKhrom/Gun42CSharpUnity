@@ -3,10 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// UI превращения пешки: Queen / Rook / Bishop / Knight.
-/// Пока открыт — блокирует raycast на доску (полный Image-blocker).
-/// </summary>
 public class PromotionPanel : MonoBehaviour, IPromotionUI
 {
     [SerializeField] private GameObject _panelRoot;
@@ -96,8 +92,7 @@ public class PromotionPanel : MonoBehaviour, IPromotionUI
                || type == ChessPieceType.Knight;
     }
 
-    /// <summary>Создаёт UI runtime, если слоты не заполнены в Inspector.</summary>
-    private void EnsureUiBuilt()
+private void EnsureUiBuilt()
     {
         if (_panelRoot != null && _queenButton != null && _rookButton != null
             && _bishopButton != null && _knightButton != null)
@@ -118,7 +113,7 @@ public class PromotionPanel : MonoBehaviour, IPromotionUI
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         }
 
-        // Root of this component under canvas
+        // Корень компонента под Canvas
         if (transform.parent != canvas.transform)
             transform.SetParent(canvas.transform, false);
 
@@ -150,7 +145,7 @@ public class PromotionPanel : MonoBehaviour, IPromotionUI
             cg.interactable = true;
         }
 
-        // Center dialog
+        // Диалог по центру
         Transform dialog = _panelRoot.transform.Find("Dialog");
         if (dialog == null)
         {

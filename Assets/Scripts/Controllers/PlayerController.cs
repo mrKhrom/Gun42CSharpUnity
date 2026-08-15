@@ -43,10 +43,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MoveRoutine(unit, target, onCompleted));
     }
 
-    /// <summary>
-    /// Рокировка: одновременно король и ладья. Без взятия и без promotion.
-    /// </summary>
-    public void ExecuteCastle(
+public void ExecuteCastle(
         Unit king,
         Cell kingTo,
         Unit rook,
@@ -68,10 +65,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(CastleRoutine(king, kingTo, rook, rookTo, onCompleted));
     }
 
-    /// <summary>
-    /// En passant: attacker → пустой landing, victim снимается со своей клетки.
-    /// </summary>
-    public void ExecuteEnPassant(
+public void ExecuteEnPassant(
         Unit attacker,
         Cell landing,
         Unit victim,
@@ -138,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
         unit.HasMoved = true;
 
-        // 5) En passant state: clear + set if double pawn step
+        // 5) En passant: сброс; при двойном ходе пешки — Set
         RegisterEnPassantAfterMove(unit, fromX, fromY, target);
 
         IsBusy = false;
@@ -218,7 +212,7 @@ public class PlayerController : MonoBehaviour
         if (fromX < 0 || fromY < 0)
             return;
 
-        // Double step: |Δy| == 2, same file
+        // Двойной шаг: |Δy| == 2, та же вертикаль (file)
         if (fromX != to.X)
             return;
         if (Mathf.Abs(to.Y - fromY) != 2)

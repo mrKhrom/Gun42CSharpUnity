@@ -1,16 +1,12 @@
 using UnityEngine;
 
-/// <summary>
-/// Этап 10: классическая расстановка 32 фигур.
-/// Клетки уже на сцене (Battlefield.InitializeFromScene).
-/// </summary>
 public class ChessSetup : MonoBehaviour
 {
     [Header("Ссылки")]
     [SerializeField] private Battlefield _board;
     [SerializeField] private Transform _unitsRoot;
 
-    [Header("White prefabs")]
+    [Header("Префабы белых")]
     [SerializeField] private Unit _whitePawn;
     [SerializeField] private Unit _whiteRook;
     [SerializeField] private Unit _whiteKnight;
@@ -18,7 +14,7 @@ public class ChessSetup : MonoBehaviour
     [SerializeField] private Unit _whiteQueen;
     [SerializeField] private Unit _whiteKing;
 
-    [Header("Black prefabs")]
+    [Header("Префабы чёрных")]
     [SerializeField] private Unit _blackPawn;
     [SerializeField] private Unit _blackRook;
     [SerializeField] private Unit _blackKnight;
@@ -55,17 +51,13 @@ public class ChessSetup : MonoBehaviour
             SpawnStandardPosition();
     }
 
-    /// <summary>
-    /// Вызывается из GameBootstrap. Спавнит только если _spawnOnStart включён.
-    /// </summary>
-    public void TrySpawnIfConfigured()
+public void TrySpawnIfConfigured()
     {
         if (_spawnOnStart)
             SpawnStandardPosition();
     }
 
-    /// <summary>Полный старт / рестарт позиции без reload сцены.</summary>
-    [ContextMenu("Spawn Standard Position")]
+[ContextMenu("Spawn Standard Position")]
     public void SpawnStandardPosition()
     {
         if (_board == null)
@@ -82,12 +74,12 @@ public class ChessSetup : MonoBehaviour
         if (_clearExistingUnits)
             ClearAllUnits();
 
-        // White back + pawns
+        // Белые: последний ряд + пешки
         SpawnBackRank(Team.White, y: 0);
         for (int x = 0; x < 8; x++)
             Spawn(Team.White, ChessPieceType.Pawn, x, 1);
 
-        // Black back + pawns
+        // Чёрные: последний ряд + пешки
         SpawnBackRank(Team.Black, y: 7);
         for (int x = 0; x < 8; x++)
             Spawn(Team.Black, ChessPieceType.Pawn, x, 6);
@@ -151,8 +143,7 @@ public class ChessSetup : MonoBehaviour
             unit.transform.rotation = Quaternion.identity;
     }
 
-    /// <summary>Префаб фигуры по команде и типу (spawn + promote visual).</summary>
-    public Unit GetPrefab(Team team, ChessPieceType type)
+public Unit GetPrefab(Team team, ChessPieceType type)
     {
         if (team == Team.White)
         {

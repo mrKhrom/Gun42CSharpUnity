@@ -1,19 +1,16 @@
 using UnityEngine;
 using Zenject;
 
-/// <summary>
-/// Этап 12: регистрация зависимостей сцены (ТЗ: SceneInstaller).
-/// </summary>
 public class SceneInstaller : MonoInstaller
 {
-    [Header("Settings (этап 13)")]
+    [Header("Настройки (этап 13)")]
     [SerializeField] private GameSettings _gameSettings;
 
     private Controls _controls;
 
     public override void InstallBindings()
     {
-        // --- Input ---
+        // --- Ввод ---
         _controls = new Controls();
         _controls.Enable();
 
@@ -25,7 +22,7 @@ public class SceneInstaller : MonoInstaller
             .FromInstance(_controls.Game)
             .AsSingle();
 
-        // --- Settings ---
+        // --- Настройки ---
         if (_gameSettings == null)
             _gameSettings = Resources.Load<GameSettings>("GameSettings");
 
@@ -53,7 +50,7 @@ public class SceneInstaller : MonoInstaller
         Container.Bind<EnPassantState>()
             .AsSingle();
 
-        // --- Core scene components ---
+        // --- Основные компоненты сцены ---
         BindFromHierarchy<Battlefield>();
         BindFromHierarchy<PlayerController>();
         BindFromHierarchy<BattleController>();
@@ -75,7 +72,7 @@ public class SceneInstaller : MonoInstaller
             .FromInstance(turnView)
             .AsSingle();
 
-        // --- UI: promotion (необяз. ТЗ п.6) ---
+        // --- UI: превращение пешки (необяз. ТЗ п.6) ---
         var promotion = FindObjectOfType<PromotionPanel>(true);
         if (promotion == null)
             promotion = CreatePromotionPanel();
@@ -88,13 +85,7 @@ public class SceneInstaller : MonoInstaller
             .FromInstance(promotion)
             .AsSingle();
 
-        // --- Visual library for promote model swap (создаём, если нет на сцене) ---
-        var visualLib = EnsurePieceVisualLibrary();
-        Container.Bind<PieceVisualLibrary>()
-            .FromInstance(visualLib)
-            .AsSingle();
-
-        // --- Command: один instance как интерфейс и класс ---
+        // --- Команда: один instance как интерфейс и класс ---
         Container.BindInterfacesAndSelfTo<ChessCommand>()
             .AsSingle();
     }
@@ -118,25 +109,6 @@ public class SceneInstaller : MonoInstaller
             return; // опционально — без warning в Console
 
         Container.Bind<T>().FromInstance(c).AsSingle();
-    }
-
-    private static PieceVisualLibrary EnsurePieceVisualLibrary()
-    {
-        var lib = Object.FindObjectOfType<PieceVisualLibrary>(true);
-        if (lib == null)
-        {
-            var parent = GameObject.Find("Systems");
-            var go = new GameObject("PieceVisualLibrary");
-            if (parent != null)
-                go.transform.SetParent(parent.transform, false);
-            lib = go.AddComponent<PieceVisualLibrary>();
-        }
-
-        var setup = Object.FindObjectOfType<ChessSetup>(true);
-        if (setup != null && !lib.HasAnyPrefabAssigned())
-            lib.FillFromChessSetup(setup);
-
-        return lib;
     }
 
     private static TurnInfoView CreateTurnInfoView()

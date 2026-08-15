@@ -2,10 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Игровое поле 8×8: инициализация клеток, граф соседей,
-/// связь клеток с фигурами, API подсветки и соседей.
-/// </summary>
 public class Battlefield : MonoBehaviour
 {
     public const int Size = 8;
@@ -22,8 +18,7 @@ public class Battlefield : MonoBehaviour
     private bool _ready;
     private bool _clicksSubscribed;
 
-    /// <summary>Select: клик по клетке (и по фигуре через прокидывание Unit → Cell).</summary>
-    public event Action<Cell> OnCellClicked;
+public event Action<Cell> OnCellClicked;
 
     public bool IsReady => _ready;
     public IReadOnlyList<Unit> Units => _units;
@@ -39,12 +34,7 @@ public class Battlefield : MonoBehaviour
         UnsubscribeCellClicks();
     }
 
-    /// <summary>
-    /// Находит Cell на сцене, проставляет координаты, строит граф,
-    /// связывает фигуры, подписывается на клики.
-    /// x = world X, y = world Z.
-    /// </summary>
-    public void InitializeFromScene()
+public void InitializeFromScene()
     {
         if (_ready)
             return;
@@ -92,8 +82,7 @@ public class Battlefield : MonoBehaviour
             Debug.LogWarning($"[Battlefield] Ожидалось {Size * Size} клеток, найдено {placed}");
     }
 
-    /// <summary>Повторная привязка фигур (после спавна / перезагрузки).</summary>
-    public void RelinkUnits()
+public void RelinkUnits()
     {
         LinkUnitsToCells();
     }
@@ -111,15 +100,13 @@ public class Battlefield : MonoBehaviour
         return _cells[x, y];
     }
 
-    /// <summary>Сосед по типу (если граф построен).</summary>
-    public Cell GetNeighbour(Cell cell, NeighbourType type)
+public Cell GetNeighbour(Cell cell, NeighbourType type)
     {
         if (cell == null) return null;
         return cell.TryGetNeighbour(type, out var n) ? n : null;
     }
 
-    /// <summary>Все 8 соседей (null-слоты пропускаются в перечислении значений).</summary>
-    public IEnumerable<Cell> GetNeighbours(Cell cell)
+public IEnumerable<Cell> GetNeighbours(Cell cell)
     {
         if (cell == null) yield break;
         foreach (var pair in cell.Neighbours)
@@ -162,11 +149,7 @@ public class Battlefield : MonoBehaviour
         cell.SetHighlight(mode, MaterialFor(mode));
     }
 
-    /// <summary>
-    /// Подсветка возможных ходов фигуры (этапы 5+6 вместе, для проверки / Command).
-    /// Selected = клетка фигуры, Move = пустые, Attack = враг.
-    /// </summary>
-    public void HighlightMovesFor(Unit unit)
+public void HighlightMovesFor(Unit unit)
     {
         ClearAllHighlights();
         if (unit == null || unit.Cell == null)

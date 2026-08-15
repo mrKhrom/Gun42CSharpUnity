@@ -1,6 +1,3 @@
-/// <summary>
-/// Специальный ход (рокировка, en passant).
-/// </summary>
 public enum SpecialMoveKind
 {
     None = 0,
@@ -9,9 +6,6 @@ public enum SpecialMoveKind
     EnPassant = 3
 }
 
-/// <summary>
-/// Описание хода: обычный, рокировка или en passant.
-/// </summary>
 public readonly struct ChessMove
 {
     public readonly Unit Mover;
@@ -21,8 +15,7 @@ public readonly struct ChessMove
     public readonly Unit Rook;
     public readonly Cell RookFrom;
     public readonly Cell RookTo;
-    /// <summary>Жертва en passant (не стоит на To).</summary>
-    public readonly Unit CapturedUnit;
+public readonly Unit CapturedUnit;
 
     public bool IsCastle =>
         Special == SpecialMoveKind.CastleKingSide ||

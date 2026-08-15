@@ -1,17 +1,12 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
-/// <summary>
-/// Лёгкий preset плавности для шахматного прототипа:
-/// VSync + cap FPS, hard shadows на короткой дистанции, меньше shadow casters на multi-mesh юнитах.
-/// </summary>
 public static class GraphicsPerformance
 {
     public const int TargetFps = 60;
     public const float ShadowDistance = 18f;
 
-    /// <summary>Medium quality index (Very Low=0 … Ultra=5).</summary>
-    public const int PreferredQualityLevel = 2;
+public const int PreferredQualityLevel = 2;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void ApplyBeforeSceneLoad()
@@ -42,11 +37,7 @@ public static class GraphicsPerformance
         QualitySettings.billboardsFaceCameraPosition = false;
     }
 
-    /// <summary>
-    /// Оставляет Cast Shadows только на одном Renderer на Unit (самый «тяжёлый» по bounds),
-    /// остальным — Off. Модель видна, shadow map дешевле.
-    /// </summary>
-    public static void OptimizeUnitShadowCasters()
+public static void OptimizeUnitShadowCasters()
     {
         var units = Object.FindObjectsOfType<Unit>(includeInactive: false);
         int reduced = 0;

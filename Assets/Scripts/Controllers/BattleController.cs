@@ -2,13 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-/// <summary>
-/// ТЗ: обрабатывает input (Select / Cancel / Confirm) и отдаёт в IGameplayCommand.
-/// Select = клик по Cell/Unit (EventSystem).
-/// Cancel = Esc, Confirm = Space (Input System).
-/// Restart (R) обрабатывает InputManager — здесь не трогаем.
-/// Первый ход выставляет GameBootstrap (этап 11).
-/// </summary>
 public class BattleController : MonoBehaviour
 {
     private IGameplayCommand _command;
@@ -82,8 +75,7 @@ public class BattleController : MonoBehaviour
             Debug.LogError("[BattleController] Battlefield not injected!");
     }
 
-    /// <summary>Вызывается из GameBootstrap после init доски.</summary>
-    public void EnsureSubscribed()
+public void EnsureSubscribed()
     {
         SubscribeBoard();
     }

@@ -1,10 +1,6 @@
 using System;
 using UnityEngine;
 
-/// <summary>
-/// Тонкая обёртка над Battlefield: событие клика для подписчиков.
-/// Инициализацию доски, граф и привязку фигур делает только Battlefield (ТЗ).
-/// </summary>
 public class CellManager : MonoBehaviour
 {
     [SerializeField] private Battlefield _battlefield;

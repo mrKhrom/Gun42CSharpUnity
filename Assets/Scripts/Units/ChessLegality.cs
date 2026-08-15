@@ -1,13 +1,8 @@
 using System.Collections.Generic;
 
-/// <summary>
-/// Легальность ходов: симуляция make/unmake + фильтр «не оставлять своего короля под шахом».
-/// Мат/пат: SideHasLegalMove + IsKingInCheck.
-/// </summary>
 public static class ChessLegality
 {
-    /// <summary>Снимок временного хода (без Destroy / Promote).</summary>
-    public struct BoardDelta
+public struct BoardDelta
     {
         public Unit Mover;
         public Cell From;
@@ -20,10 +15,7 @@ public static class ChessLegality
         public SpecialMoveKind Kind;
     }
 
-    /// <summary>
-    /// Pseudo-legal targets, отфильтрованные: после хода свой король не под шахом.
-    /// </summary>
-    public static List<Cell> GetLegalTargets(
+public static List<Cell> GetLegalTargets(
         Unit unit,
         Battlefield board,
         EnPassantState enPassant = null)
@@ -42,8 +34,7 @@ public static class ChessLegality
         return legal;
     }
 
-    /// <summary>true, если после хода mover.Team окажется под шахом.</summary>
-    public static bool WouldLeaveKingInCheck(
+public static bool WouldLeaveKingInCheck(
         Unit mover,
         Cell to,
         Battlefield board,
@@ -125,7 +116,7 @@ public static class ChessLegality
             return true;
         }
 
-        // Ordinary: capture on `to` if enemy
+        // Обычный ход: взятие на to, если враг
         Unit captured = null;
         if (to.Unit != null && to.Unit != mover && to.Unit.Team != mover.Team)
             captured = to.Unit;

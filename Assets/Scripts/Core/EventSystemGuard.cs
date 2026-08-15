@@ -2,11 +2,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Гарантирует один EventSystem при additive-загрузке GameScene поверх MainScene.
-/// Вешать на Systems / GameBootstrap (активный объект). EventSystem в GameScene
-/// лучше держать inactive — тогда Unity не пишет warning при OnEnable.
-/// </summary>
 [DefaultExecutionOrder(-10000)]
 public class EventSystemGuard : MonoBehaviour
 {
@@ -23,8 +18,7 @@ public class EventSystemGuard : MonoBehaviour
         EnsureOneActive();
     }
 
-    /// <summary>Удаляет лишние EventSystem; предпочитает MainScene.</summary>
-    public static void CleanupDuplicates()
+public static void CleanupDuplicates()
     {
         var systems = FindObjectsOfType<EventSystem>(true);
         if (systems == null || systems.Length <= 1)
@@ -69,10 +63,7 @@ public class EventSystemGuard : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Если нет ни одного активного ES (GameScene solo + ES был inactive) — включить один.
-    /// </summary>
-    public static void EnsureOneActive()
+public static void EnsureOneActive()
     {
         var systems = FindObjectsOfType<EventSystem>(true);
         if (systems == null || systems.Length == 0)

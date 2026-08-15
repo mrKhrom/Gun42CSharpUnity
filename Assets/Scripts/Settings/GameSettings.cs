@@ -1,8 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Этап 13: общие настройки прототипа (ScriptableObject).
-/// </summary>
 [CreateAssetMenu(
     fileName = "GameSettings",
     menuName = "Chess/Game Settings")]

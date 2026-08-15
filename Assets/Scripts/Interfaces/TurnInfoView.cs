@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-/// <summary>
-/// UI текущего хода и статуса партии. Если Label не задан — создаёт Text под Canvas.
-/// </summary>
 public class TurnInfoView : MonoBehaviour, ITurnInfoView
 {
     [SerializeField] private Text _label;

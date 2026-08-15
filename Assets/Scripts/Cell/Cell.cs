@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// Клетка доски: pointer-события, ссылка на Unit, граф соседей, подсветка.
-/// </summary>
 public class Cell : MonoBehaviour,
     IPointerEnterHandler,
     IPointerExitHandler,
@@ -25,8 +22,7 @@ public class Cell : MonoBehaviour,
     public int X => _x;
     public int Y => _y;
 
-    /// <summary>Текущий «игровой» режим подсветки (не hover).</summary>
-    public CellHighlight HighlightMode { get; private set; } = CellHighlight.None;
+public CellHighlight HighlightMode { get; private set; } = CellHighlight.None;
 
     public event Action<Cell> OnPointerClickEvent;
     public event Action<Cell> Clicked
@@ -78,10 +74,7 @@ public class Cell : MonoBehaviour,
         OnPointerClickEvent?.Invoke(this);
     }
 
-    /// <summary>
-    /// Подсветка клетки. material — для Select-рендерера (Selected/Move/Attack).
-    /// </summary>
-    public void SetHighlight(CellHighlight mode, Material material = null)
+public void SetHighlight(CellHighlight mode, Material material = null)
     {
         if (mode == CellHighlight.Hover)
         {

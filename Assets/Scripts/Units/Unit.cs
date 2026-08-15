@@ -3,9 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// Фигура: команда, тип, клетка, pointer → Cell (Select).
-/// </summary>
 public class Unit : MonoBehaviour,
     IPointerEnterHandler,
     IPointerExitHandler,
@@ -30,10 +27,7 @@ public class Unit : MonoBehaviour,
 
     public void SetType(ChessPieceType type) => _type = type;
 
-    /// <summary>
-    /// Привязка к клетке (Battlefield / ход). Старую клетку очищает.
-    /// </summary>
-    public void BindToCell(Cell cell, bool snap = false)
+public void BindToCell(Cell cell, bool snap = false)
     {
         if (Cell != null && Cell.Unit == this)
             Cell.Unit = null;
@@ -60,12 +54,7 @@ public class Unit : MonoBehaviour,
         HasMoved = false;
     }
 
-    /// <summary>
-    /// Превращение пешки: меняет Type и подменяет child-модель/Animator
-    /// по префабу своей команды (PieceVisualLibrary → ChessSetup).
-    /// Root Unit, Cell, Collider, position сохраняются.
-    /// </summary>
-    public void PromoteTo(ChessPieceType newType)
+public void PromoteTo(ChessPieceType newType)
     {
         if (newType == ChessPieceType.Pawn || newType == ChessPieceType.King)
         {
@@ -83,32 +72,82 @@ public class Unit : MonoBehaviour,
 
     private void ApplyPromotedVisual(ChessPieceType newType)
     {
-        // 1) PieceVisualLibrary (если есть на сцене)
-        var lib = PieceVisualLibrary.Instance != null
-            ? PieceVisualLibrary.Instance
-            : FindObjectOfType<PieceVisualLibrary>();
-
-        if (lib != null)
+        // includeInactive: ChessSetup может быть выключен на Systems
+        var setup = FindObjectOfType<ChessSetup>(true);
+        if (setup == null)
         {
-            lib.ApplyVisual(this, newType);
+            Debug.LogWarning(
+                $"[Unit] Нет ChessSetup — визуал {_team}/{newType} не сменён. " +
+                "Назначь префабы в ChessSetup на Systems.");
             return;
         }
 
-        // 2) Fallback: префабы из ChessSetup
-        var setup = FindObjectOfType<ChessSetup>();
-        if (setup != null)
+        var prefab = setup.GetPrefab(_team, newType);
+        if (prefab == null)
         {
-            var prefab = setup.GetPrefab(_team, newType);
-            if (prefab != null)
+            Debug.LogWarning(
+                $"[Unit] Нет префаба {_team}/{newType} в ChessSetup — тип изменён, визуал старый.");
+            return;
+        }
+
+        ReplaceVisualFromPrefab(prefab.gameObject);
+    }
+
+private void ReplaceVisualFromPrefab(GameObject prefabRoot)
+    {
+        if (prefabRoot == null)
+            return;
+
+        var hostTf = transform;
+
+        for (int i = hostTf.childCount - 1; i >= 0; i--)
+            DestroyImmediate(hostTf.GetChild(i).gameObject);
+
+        var temp = Instantiate(prefabRoot);
+        temp.name = $"{prefabRoot.name}_PromoteTemp";
+        temp.transform.SetPositionAndRotation(hostTf.position, hostTf.rotation);
+
+        var srcAnim = temp.GetComponent<Animator>();
+        var dstAnim = GetComponent<Animator>();
+        if (srcAnim != null)
+        {
+            if (dstAnim == null)
+                dstAnim = gameObject.AddComponent<Animator>();
+
+            dstAnim.runtimeAnimatorController = srcAnim.runtimeAnimatorController;
+            dstAnim.avatar = srcAnim.avatar;
+            dstAnim.applyRootMotion = false;
+            dstAnim.cullingMode = srcAnim.cullingMode;
+            dstAnim.updateMode = srcAnim.updateMode;
+        }
+
+        while (temp.transform.childCount > 0)
+        {
+            var child = temp.transform.GetChild(0);
+            child.SetParent(hostTf, false);
+        }
+
+        var rootMf = temp.GetComponent<MeshFilter>();
+        if (rootMf != null)
+        {
+            var visualGo = new GameObject("PromotedMesh");
+            visualGo.transform.SetParent(hostTf, false);
+            var mf = visualGo.AddComponent<MeshFilter>();
+            mf.sharedMesh = rootMf.sharedMesh;
+            var mrSrc = temp.GetComponent<MeshRenderer>();
+            if (mrSrc != null)
             {
-                PieceVisualLibrary.ReplaceVisualFromPrefab(this, prefab.gameObject);
-                return;
+                var mr = visualGo.AddComponent<MeshRenderer>();
+                mr.sharedMaterials = mrSrc.sharedMaterials;
             }
         }
 
-        Debug.LogWarning(
-            $"[Unit] Нет префаба для визуала {_team}/{newType}. " +
-            "Назначь префабы в ChessSetup или PieceVisualLibrary.");
+        if (Application.isPlaying)
+            Destroy(temp);
+        else
+            DestroyImmediate(temp);
+
+        Debug.Log($"[Unit] Visual → {prefabRoot.name} on {name}");
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -128,20 +167,13 @@ public class Unit : MonoBehaviour,
         Cell?.OnPointerClick(eventData);
     }
 
-    /// <summary>
-    /// Полный ход: логика клетки + анимация (если вызываешь без PlayerController).
-    /// </summary>
-    public void Move(Cell targetCell)
+public void Move(Cell targetCell)
     {
         if (targetCell == null || _isMoving) return;
         StartCoroutine(MoveRoutine(targetCell));
     }
 
-    /// <summary>
-    /// Только визуальное перемещение. Логику BindToCell делает PlayerController.
-    /// public — чтобы можно было: yield return unit.AnimateMoveTo(pos);
-    /// </summary>
-    public IEnumerator AnimateMoveTo(Vector3 worldTarget)
+public IEnumerator AnimateMoveTo(Vector3 worldTarget)
     {
         _isMoving = true;
 

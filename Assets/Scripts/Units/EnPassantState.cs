@@ -1,8 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Право en passant: действует только следующий полуход после double-step пешки.
-/// </summary>
 public class EnPassantState
 {
     public bool IsAvailable { get; private set; }
@@ -40,10 +37,7 @@ public class EnPassantState
         return IsAvailable && cell != null && LandingCell == cell;
     }
 
-    /// <summary>
-    /// Валидность для attacker-пешки: victim жив, на соседнем x, том же y, landing пуст.
-    /// </summary>
-    public bool CanCaptureBy(Unit attacker)
+public bool CanCaptureBy(Unit attacker)
     {
         if (!IsAvailable || attacker == null || attacker.Type != ChessPieceType.Pawn)
             return false;

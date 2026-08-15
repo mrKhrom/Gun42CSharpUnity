@@ -10,11 +10,7 @@ public class GameBootstrap : MonoBehaviour
     private ChessSetup _chessSetup;
     private BattleController _battleController;
 
-    /// <summary>
-    /// Защита от повторного полного старта в одном lifecycle сцены.
-    /// После LoadScene (Restart) объект создаётся заново — флаг снова false.
-    /// </summary>
-    private bool _started;
+private bool _started;
 
     [Inject]
     private void Construct(
@@ -45,11 +41,7 @@ public class GameBootstrap : MonoBehaviour
         RunBootstrap();
     }
 
-    /// <summary>
-    /// Старт партии: доска, опциональный spawn, input, первый ход.
-    /// Повторный вызов в той же сессии игнорируется (см. ForceRunBootstrap).
-    /// </summary>
-    public void RunBootstrap()
+public void RunBootstrap()
     {
         if (_started)
             return;
@@ -58,8 +50,7 @@ public class GameBootstrap : MonoBehaviour
         _started = true;
     }
 
-    /// <summary>Принудительный повтор bootstrap (debug / ручной reset без reload).</summary>
-    public void ForceRunBootstrap()
+public void ForceRunBootstrap()
     {
         _started = false;
         RunBootstrap();
