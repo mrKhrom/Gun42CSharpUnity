@@ -26,6 +26,21 @@ public class SceneInstaller : MonoInstaller
             .FromInstance(_controls.Game)
             .AsSingle();
 
+        // Подключаем карту экшенов UI.
+        Container.Bind<PlayerController>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+
+        // Доска — единый источник клеток, графа и привязки фигур (ТЗ Battlefield).
+        Container.Bind<Battlefield>()
+            .FromComponentInHierarchy()
+            .AsSingle();
+
+        // Команда шахматного режима
+        Container.Bind<IGameplayCommand>()
+            .To<ChessCommand>()
+            .AsSingle();
+
         // Регистрируем менеджеры, которые уже есть в сцене.
         Container.Bind<InputManager>()
             .FromComponentInHierarchy()

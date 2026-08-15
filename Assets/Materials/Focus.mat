@@ -14,6 +14,8 @@ Material:
   m_ValidKeywords:
   - _ALPHABLEND_ON
   - _EMISSION
+  - _GLOSSYREFLECTIONS_OFF
+  - _SPECULARHIGHLIGHTS_OFF
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -81,6 +83,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.92, b: 0.2, a: 0.55}
-    - _EmissionColor: {r: 0.6, g: 0.5, b: 0.05, a: 1}
+    - _Color: {r: 0.016312122, g: 1, b: 0, a: 1}
+    - _EmissionColor: {r: 0.25531155, g: 1.1999999, b: 0.101960786, a: 1}
   m_BuildTextureStacks: []

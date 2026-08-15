@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Клетка доски: pointer-события, ссылка на Unit, граф соседей, подсветка.
+/// </summary>
 public class Cell : MonoBehaviour,
     IPointerEnterHandler,
     IPointerExitHandler,
@@ -22,9 +25,15 @@ public class Cell : MonoBehaviour,
     public int X => _x;
     public int Y => _y;
 
-    public event Action<Cell> OnPointerClickEvent;
+    /// <summary>Текущий «игровой» режим подсветки (не hover).</summary>
+    public CellHighlight HighlightMode { get; private set; } = CellHighlight.None;
 
-    private bool _isFocused;
+    public event Action<Cell> OnPointerClickEvent;
+    public event Action<Cell> Clicked
+    {
+        add => OnPointerClickEvent += value;
+        remove => OnPointerClickEvent -= value;
+    }
 
     public void Init(int x, int y)
     {
@@ -39,31 +48,70 @@ public class Cell : MonoBehaviour,
         Neighbours[type] = cell;
     }
 
+    public bool TryGetNeighbour(NeighbourType type, out Cell neighbour)
+    {
+        return Neighbours.TryGetValue(type, out neighbour) && neighbour != null;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        // Не перебиваем Selected / Move / Attack
+        if (IsPersistentHighlight())
+            return;
+
         SetFocusVisible(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (IsPersistentHighlight())
+            return;
+
         SetFocusVisible(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData != null && eventData.button != PointerEventData.InputButton.Left)
+            return;
+
         OnPointerClickEvent?.Invoke(this);
     }
 
     /// <summary>
-    /// Hover highlight (Focus child). Also called from Unit when ray hits figure collider.
+    /// Подсветка клетки. material — для Select-рендерера (Selected/Move/Attack).
     /// </summary>
+    public void SetHighlight(CellHighlight mode, Material material = null)
+    {
+        if (mode == CellHighlight.Hover)
+        {
+            if (!IsPersistentHighlight())
+                SetFocusVisible(true);
+            return;
+        }
+
+        HighlightMode = mode;
+
+        switch (mode)
+        {
+            case CellHighlight.None:
+                ClearHighlight();
+                break;
+
+            case CellHighlight.Selected:
+            case CellHighlight.Move:
+            case CellHighlight.Attack:
+                SetFocusVisible(false);
+                ApplySelect(material, mode);
+                break;
+        }
+    }
+
     public void SetFocusVisible(bool visible)
     {
-        _isFocused = visible;
         if (_focusRenderer == null)
             return;
 
-        // Keep GO active so references stay valid; toggle renderer only.
         if (!_focusRenderer.gameObject.activeSelf)
             _focusRenderer.gameObject.SetActive(true);
 
@@ -72,14 +120,9 @@ public class Cell : MonoBehaviour,
 
     public void SetSelect(Material material)
     {
-        if (_selectRenderer == null) return;
-
-        if (!_selectRenderer.gameObject.activeSelf)
-            _selectRenderer.gameObject.SetActive(true);
-
-        _selectRenderer.enabled = true;
-        if (material != null)
-            _selectRenderer.material = material;
+        ApplySelect(material, HighlightMode == CellHighlight.None
+            ? CellHighlight.Selected
+            : HighlightMode);
     }
 
     public void ResetSelect()
@@ -88,9 +131,48 @@ public class Cell : MonoBehaviour,
         _selectRenderer.enabled = false;
     }
 
+    public void ClearHighlight()
+    {
+        HighlightMode = CellHighlight.None;
+        SetFocusVisible(false);
+        ResetSelect();
+    }
+
+    private void ApplySelect(Material material, CellHighlight mode)
+    {
+        if (_selectRenderer == null) return;
+
+        if (!_selectRenderer.gameObject.activeSelf)
+            _selectRenderer.gameObject.SetActive(true);
+
+        _selectRenderer.enabled = true;
+
+        if (material != null)
+        {
+            _selectRenderer.sharedMaterial = material;
+            return;
+        }
+
+        // Fallback-цвет, если материал не передан
+        var mat = _selectRenderer.material;
+        mat.color = mode switch
+        {
+            CellHighlight.Selected => new Color(0.2f, 0.45f, 1f, 0.65f),
+            CellHighlight.Move => new Color(0.2f, 0.85f, 0.3f, 0.55f),
+            CellHighlight.Attack => new Color(1f, 0.25f, 0.2f, 0.6f),
+            _ => Color.white
+        };
+    }
+
+    private bool IsPersistentHighlight()
+    {
+        return HighlightMode == CellHighlight.Selected
+            || HighlightMode == CellHighlight.Move
+            || HighlightMode == CellHighlight.Attack;
+    }
+
     private void Awake()
     {
-        // Auto-wire if Inspector refs lost
         if (_focusRenderer == null)
         {
             var t = transform.Find("Focus");
@@ -108,8 +190,6 @@ public class Cell : MonoBehaviour,
         if (_selectRenderer != null)
             _selectRenderer.enabled = false;
 
-        // Focus/Select must NOT have colliders — they steal raycasts from Cell.
-        // Hover is delivered only to the hit collider's object; click walks parents.
         DisableHighlightColliders(_focusRenderer);
         DisableHighlightColliders(_selectRenderer);
     }
