@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
 
     public bool IsBusy { get; private set; }
 
-    // Optional только на параметре: [Inject(Optional=true)] на методе ломает Zenject Install.
     [Inject]
     private void Construct(
         [InjectOptional] GameSettings settings,
@@ -43,7 +42,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(MoveRoutine(unit, target, onCompleted));
     }
 
-public void ExecuteCastle(
+    public void ExecuteCastle(
         Unit king,
         Cell kingTo,
         Unit rook,
@@ -65,7 +64,7 @@ public void ExecuteCastle(
         StartCoroutine(CastleRoutine(king, kingTo, rook, rookTo, onCompleted));
     }
 
-public void ExecuteEnPassant(
+    public void ExecuteEnPassant(
         Unit attacker,
         Cell landing,
         Unit victim,
@@ -90,38 +89,31 @@ public void ExecuteEnPassant(
     {
         IsBusy = true;
 
-        // From — до BindToCell (для double-step en passant)
         int fromX = unit.Cell != null ? unit.Cell.X : -1;
         int fromY = unit.Cell != null ? unit.Cell.Y : -1;
+        Cell fromCell = unit.Cell;
 
-        // 1) Взятие на клетке назначения
-        if (target.Unit != null && target.Unit != unit)
-        {
-            var enemy = target.Unit;
-            enemy.BindToCell(null, snap: false);
-            Destroy(enemy.gameObject);
-        }
+        var anim = unit.GetComponent<UnitAnimationDriver>();
+        Unit enemy = target.Unit != null && target.Unit != unit ? target.Unit : null;
 
-        // 2) Логика клетки
+        if (enemy != null)
+            yield return CaptureSequence(unit, fromCell, target, enemy, anim);
+        else
+            yield return QuietMoveSequence(unit, target, anim);
+
+        // Логика клетки (враг уже снят / уничтожен)
         unit.BindToCell(target, snap: false);
 
-        // 3) Анимация
-        yield return AnimateUnitTo(unit, target.transform.position);
-
-        // 4) Превращение пешки
+        // Превращение пешки
         int lastRank = unit.Team == Team.White ? 7 : 0;
         if (unit.Type == ChessPieceType.Pawn && unit.Cell != null && unit.Cell.Y == lastRank)
         {
             ChessPieceType chosen = ChessPieceType.Queen;
 
             if (_promotionUI != null)
-            {
                 yield return _promotionUI.WaitForSelection(unit.Team, type => chosen = type);
-            }
             else
-            {
                 Debug.LogWarning("[PlayerController] IPromotionUI missing — auto Queen");
-            }
 
             if (!IsPromotable(chosen))
                 chosen = ChessPieceType.Queen;
@@ -131,12 +123,165 @@ public void ExecuteEnPassant(
         }
 
         unit.HasMoved = true;
-
-        // 5) En passant: сброс; при двойном ходе пешки — Set
         RegisterEnPassantAfterMove(unit, fromX, fromY, target);
 
         IsBusy = false;
         onCompleted?.Invoke();
+    }
+
+    // Тихий ход: Face → Walk → клетка → Idle
+    private IEnumerator QuietMoveSequence(Unit unit, Cell target, UnitAnimationDriver anim)
+    {
+        if (anim != null)
+            yield return anim.FacePoint(target.transform.position);
+
+        anim?.StartWalk();
+        yield return AnimateUnitTo(unit, target.transform.position);
+        anim?.StopWalkToIdle();
+    }
+
+    // Взятие:
+    // 1) подойти на соседнюю к жертве клетку
+    // 2) Attack; через attackHitTime — Death жертвы
+    // 3) дождаться Death
+    // 4) встать на клетку жертвы
+    private IEnumerator CaptureSequence(
+        Unit unit,
+        Cell fromCell,
+        Cell target,
+        Unit enemy,
+        UnitAnimationDriver anim)
+    {
+        var enemyAnim = enemy.GetComponent<UnitAnimationDriver>();
+        var board = _board != null ? _board : FindObjectOfType<Battlefield>();
+
+        Cell approach = GetApproachCell(board, fromCell, target);
+        Vector3 approachPos = approach != null
+            ? approach.transform.position
+            : Vector3.Lerp(unit.transform.position, target.transform.position, 0.85f);
+
+        // Уже стоим на approach (например король бьёт соседнюю) — не ходим
+        bool needApproachWalk = approach == null
+            || fromCell == null
+            || approach != fromCell
+            || (unit.transform.position - approachPos).sqrMagnitude > 0.01f;
+
+        if (needApproachWalk)
+        {
+            if (anim != null)
+                yield return anim.FacePoint(approachPos);
+
+            anim?.StartWalk();
+            yield return AnimateUnitTo(unit, approachPos);
+            anim?.StopWalkToIdle();
+        }
+
+        // Лицом к жертве
+        if (anim != null)
+            yield return anim.FacePoint(enemy.transform.position);
+
+        // Death стартует на hit-frame, ждём завершения death после/во время attack
+        bool deathStarted = false;
+        bool deathDone = false;
+
+        void StartDeath()
+        {
+            if (deathStarted || enemy == null)
+                return;
+            deathStarted = true;
+
+            enemy.BindToCell(null, snap: false);
+
+            if (enemyAnim != null && !enemyAnim.IsDead)
+            {
+                StartCoroutine(RunAndFlag(enemyAnim.PlayDeathSinkAndHide(), () => deathDone = true));
+            }
+            else
+            {
+                if (enemy != null)
+                    Destroy(enemy.gameObject);
+                deathDone = true;
+            }
+        }
+
+        if (anim != null)
+            yield return anim.PlayAttackAndWait(StartDeath);
+        else
+            StartDeath();
+
+        while (!deathDone)
+            yield return null;
+
+        // Занять клетку убитой
+        if (anim != null)
+            yield return anim.FacePoint(target.transform.position);
+
+        anim?.StartWalk();
+        yield return AnimateUnitTo(unit, target.transform.position);
+        anim?.StopWalkToIdle();
+    }
+
+    private static IEnumerator RunAndFlag(IEnumerator routine, Action onDone)
+    {
+        if (routine != null)
+            yield return routine;
+        onDone?.Invoke();
+    }
+
+    // Соседняя к target клетка «перед» жертвой (шаг назад к from).
+    // Если already adjacent — fromCell. Конь — ближайшая соседняя к target к from.
+    private static Cell GetApproachCell(Battlefield board, Cell from, Cell target)
+    {
+        if (from == null || target == null)
+            return from;
+
+        int dx = target.X - from.X;
+        int dy = target.Y - from.Y;
+        int adx = Mathf.Abs(dx);
+        int ady = Mathf.Abs(dy);
+
+        // Уже соседняя (в т.ч. король / пешка-взятие)
+        if (adx <= 1 && ady <= 1 && (adx + ady) > 0)
+            return from;
+
+        // Конь: 2+1 — approach = клетка рядом с target ближе к from
+        if ((adx == 2 && ady == 1) || (adx == 1 && ady == 2))
+        {
+            if (board == null)
+                return from;
+
+            Cell best = from;
+            float bestDist = float.MaxValue;
+            for (int ox = -1; ox <= 1; ox++)
+            for (int oy = -1; oy <= 1; oy++)
+            {
+                if (ox == 0 && oy == 0) continue;
+                var c = board.GetCell(target.X + ox, target.Y + oy);
+                if (c == null) continue;
+                if (c.Unit != null && c != from) continue;
+                float d = (c.X - from.X) * (c.X - from.X) + (c.Y - from.Y) * (c.Y - from.Y);
+                if (d < bestDist)
+                {
+                    bestDist = d;
+                    best = c;
+                }
+            }
+
+            return best;
+        }
+
+        // Скольжение (ладья/слон/ферзь/пешка double не сюда): клетка на 1 шаг до target
+        int sx = dx == 0 ? 0 : (dx > 0 ? 1 : -1);
+        int sy = dy == 0 ? 0 : (dy > 0 ? 1 : -1);
+
+        if (board != null)
+        {
+            var cell = board.GetCell(target.X - sx, target.Y - sy);
+            if (cell != null)
+                return cell;
+        }
+
+        return from;
     }
 
     private IEnumerator CastleRoutine(
@@ -151,8 +296,19 @@ public void ExecuteEnPassant(
         Debug.Log(
             $"[Chess] Castle {king.Team}: King→({kingTo.X},{kingTo.Y}), Rook→({rookTo.X},{rookTo.Y})");
 
+        var kingAnim = king.GetComponent<UnitAnimationDriver>();
+        var rookAnim = rook.GetComponent<UnitAnimationDriver>();
+
         king.BindToCell(kingTo, snap: false);
         rook.BindToCell(rookTo, snap: false);
+
+        if (kingAnim != null)
+            yield return kingAnim.FacePoint(kingTo.transform.position);
+        if (rookAnim != null)
+            yield return rookAnim.FacePoint(rookTo.transform.position);
+
+        kingAnim?.StartWalk();
+        rookAnim?.StartWalk();
 
         bool kingDone = false;
         bool rookDone = false;
@@ -162,6 +318,9 @@ public void ExecuteEnPassant(
 
         while (!kingDone || !rookDone)
             yield return null;
+
+        kingAnim?.StopWalkToIdle();
+        rookAnim?.StopWalkToIdle();
 
         king.HasMoved = true;
         rook.HasMoved = true;
@@ -184,13 +343,43 @@ public void ExecuteEnPassant(
             $"[Chess] En passant: {attacker.Team} → ({landing.X},{landing.Y}), " +
             $"captures {victim.Team} pawn");
 
-        // Жертва не на landing
-        victim.BindToCell(null, snap: false);
-        Destroy(victim.gameObject);
+        var anim = attacker.GetComponent<UnitAnimationDriver>();
+        // landing — клетка «удара»; жертва рядом. Approach = landing, final = landing (жертва не на landing)
+        // Идём на landing, бьём, death жертвы; attacker уже на landing.
+
+        if (anim != null)
+            yield return anim.FacePoint(landing.transform.position);
+
+        anim?.StartWalk();
+        yield return AnimateUnitTo(attacker, landing.transform.position);
+        anim?.StopWalkToIdle();
+
+        if (anim != null)
+            yield return anim.FacePoint(victim.transform.position);
+
+        bool deathDone = false;
+        void StartDeath()
+        {
+            victim.BindToCell(null, snap: false);
+            var victimAnim = victim.GetComponent<UnitAnimationDriver>();
+            if (victimAnim != null && !victimAnim.IsDead)
+                StartCoroutine(RunAndFlag(victimAnim.PlayDeathSinkAndHide(), () => deathDone = true));
+            else
+            {
+                Destroy(victim.gameObject);
+                deathDone = true;
+            }
+        }
+
+        if (anim != null)
+            yield return anim.PlayAttackAndWait(StartDeath);
+        else
+            StartDeath();
+
+        while (!deathDone)
+            yield return null;
 
         attacker.BindToCell(landing, snap: false);
-        yield return AnimateUnitTo(attacker, landing.transform.position);
-
         attacker.HasMoved = true;
         _enPassant?.Clear();
 
@@ -212,7 +401,6 @@ public void ExecuteEnPassant(
         if (fromX < 0 || fromY < 0)
             return;
 
-        // Двойной шаг: |Δy| == 2, та же вертикаль (file)
         if (fromX != to.X)
             return;
         if (Mathf.Abs(to.Y - fromY) != 2)

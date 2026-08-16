@@ -82,13 +82,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8551864448254038768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab1f578a398426d92aa9136f409c1f5, type: 3}
+  m_Script: {fileID: 11500000, guid: d5250b95393e4084a0858ebdc69519ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleStateName: RiflemanRig|RiflemanStand1
   _animator: {fileID: 211690297296532989}
-  _sampleInEditMode: 1
+  _idleStateName: RiflemanRig|RiflemanStand1
+  _walkStateName: RiflemanRig|RiflemanWalk
+  _attackStateName: RiflemanRig|RiflemanAttack
+  _deathStateName: RiflemanRig|RiflemanDeath
+  _crossFade: 0.1
   _forceIdleOnStart: 1
+  _sampleInEditMode: 1
+  _forceIdleLoop: 1
+  _turnSpeed: 540
+  _sinkDepth: 1.5
+  _sinkDuration: 0.6
+  _stateNormalizeWait: 0.95
+  _destroyAfterDeath: 1
 --- !u!1001 &6024275464036616300
 PrefabInstance:
   m_ObjectHideFlags: 0

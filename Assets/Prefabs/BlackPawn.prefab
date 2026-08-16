@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3551287208035067508}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -82,13 +82,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 3551287208035067508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab1f578a398426d92aa9136f409c1f5, type: 3}
+  m_Script: {fileID: 11500000, guid: d5250b95393e4084a0858ebdc69519ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleStateName: Stand1
   _animator: {fileID: 2306713558740597055}
-  _sampleInEditMode: 1
+  _idleStateName: Stand1
+  _walkStateName: 
+  _attackStateName: 
+  _deathStateName: 
+  _crossFade: 0.1
   _forceIdleOnStart: 1
+  _sampleInEditMode: 1
+  _forceIdleLoop: 1
+  _turnSpeed: 540
+  _blackFacesBoardCenter: 1
+  _attackHitTime: 0.15
+  _sinkDepth: 1.5
+  _sinkDuration: 0.6
+  _stateNormalizeWait: 0.95
+  _destroyAfterDeath: 1
 --- !u!1001 &8172206396533621934
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class Unit : MonoBehaviour,
 
     public void SetType(ChessPieceType type) => _type = type;
 
-public void BindToCell(Cell cell, bool snap = false)
+    public void BindToCell(Cell cell, bool snap = false)
     {
         if (Cell != null && Cell.Unit == this)
             Cell.Unit = null;
@@ -54,7 +54,7 @@ public void BindToCell(Cell cell, bool snap = false)
         HasMoved = false;
     }
 
-public void PromoteTo(ChessPieceType newType)
+    public void PromoteTo(ChessPieceType newType)
     {
         if (newType == ChessPieceType.Pawn || newType == ChessPieceType.King)
         {
@@ -91,9 +91,18 @@ public void PromoteTo(ChessPieceType newType)
         }
 
         ReplaceVisualFromPrefab(prefab.gameObject);
+
+        // После смены mesh/Animator — заново найти Animator и Idle
+        var anim = GetComponent<UnitAnimationDriver>();
+        if (anim != null)
+        {
+            anim.CacheAnimator();
+            if (!anim.IsDead)
+                anim.PlayIdle(0f);
+        }
     }
 
-private void ReplaceVisualFromPrefab(GameObject prefabRoot)
+    private void ReplaceVisualFromPrefab(GameObject prefabRoot)
     {
         if (prefabRoot == null)
             return;
@@ -167,13 +176,13 @@ private void ReplaceVisualFromPrefab(GameObject prefabRoot)
         Cell?.OnPointerClick(eventData);
     }
 
-public void Move(Cell targetCell)
+    public void Move(Cell targetCell)
     {
         if (targetCell == null || _isMoving) return;
         StartCoroutine(MoveRoutine(targetCell));
     }
 
-public IEnumerator AnimateMoveTo(Vector3 worldTarget)
+    public IEnumerator AnimateMoveTo(Vector3 worldTarget)
     {
         _isMoving = true;
 
