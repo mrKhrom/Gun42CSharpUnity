@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3896805901790014770}
   - component: {fileID: 2962705373738874901}
   - component: {fileID: 628781083743171144}
+  - component: {fileID: 2945193360333086538}
   m_Layer: 0
   m_Name: WhiteKnight
   m_TagString: Untagged
@@ -94,11 +95,48 @@ MonoBehaviour:
   _forceIdleOnStart: 1
   _sampleInEditMode: 1
   _forceIdleLoop: 1
+  _forceWalkLoop: 1
   _turnSpeed: 540
+  _blackFacesBoardCenter: 1
+  _attackHitTime: 0.15
   _sinkDepth: 1.5
   _sinkDuration: 0.6
   _stateNormalizeWait: 0.95
   _destroyAfterDeath: 1
+--- !u!114 &2945193360333086538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945542384058897871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7f939cc44b4018bdf9f2ac571aa0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectClips:
+  - {fileID: 8300000, guid: f873c1b4f80c84722a72ab5faa073cb2, type: 3}
+  - {fileID: 8300000, guid: a0701170f83594c81bcbf2538a7f21d0, type: 3}
+  - {fileID: 8300000, guid: a6f597d0a52334aefa4e7a776ca1318d, type: 3}
+  - {fileID: 8300000, guid: a316b8eb08c3c4a7c98d4cc73eba5a3f, type: 3}
+  _moveStartClips:
+  - {fileID: 8300000, guid: fc7ca9f322a774ad2b75c6c64cc6dc4c, type: 3}
+  - {fileID: 8300000, guid: 1192a28cedf2f4845b487cddc3d8be1f, type: 3}
+  - {fileID: 8300000, guid: a336ba625e23344818c26bd8dc5919b3, type: 3}
+  - {fileID: 8300000, guid: 090d0102be2da4ca2a1505c647196b9d, type: 3}
+  _attackDeclareClips:
+  - {fileID: 8300000, guid: 51d6c5f6f966f43e9a6a2eb8ed1c26fb, type: 3}
+  - {fileID: 8300000, guid: 7e5a19fdc6110454e8ecbe8dfc3e8628, type: 3}
+  - {fileID: 8300000, guid: b71630c917bfa496c96370685c36a6a3, type: 3}
+  _attackClips:
+  - {fileID: 8300000, guid: 6732a893378fd4c4b92cef1b535861ba, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: fc2d92d471c4f4230a441be0d02df9c6, type: 3}
+  _source: {fileID: 0}
+  _volume: 1
+  _ignoreIfEmpty: 1
+  _spatialBlend: 0
 --- !u!1001 &1438023991347661282
 PrefabInstance:
   m_ObjectHideFlags: 0

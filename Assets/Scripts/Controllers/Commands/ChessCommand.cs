@@ -61,6 +61,9 @@ public class ChessCommand : IGameplayCommand
         // --- Клик по своей фигуре: перевыбор ---
         if (cell.Unit != null && cell.Unit.Team == _currentTeam)
         {
+            // Тот же юнит — не дёргать Select/SFX снова
+            if (cell.Unit == _selected)
+                return;
             SelectUnit(cell.Unit);
             return;
         }
@@ -140,6 +143,8 @@ public class ChessCommand : IGameplayCommand
         _selected = unit;
         _targets.Clear();
         _targets.AddRange(legal);
+
+        unit.GetComponent<UnitAudio>()?.PlaySelect();
 
         if (_board != null)
         {

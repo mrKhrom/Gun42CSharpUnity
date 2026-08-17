@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1875923303070857219}
   - component: {fileID: 8390168355694153377}
   - component: {fileID: 4646459012284111798}
+  - component: {fileID: 2967912992384678987}
   m_Layer: 0
   m_Name: BlackKnigt
   m_TagString: Untagged
@@ -94,6 +95,7 @@ MonoBehaviour:
   _forceIdleOnStart: 1
   _sampleInEditMode: 1
   _forceIdleLoop: 1
+  _forceWalkLoop: 1
   _turnSpeed: 540
   _blackFacesBoardCenter: 1
   _attackHitTime: 0.15
@@ -101,6 +103,40 @@ MonoBehaviour:
   _sinkDuration: 0.6
   _stateNormalizeWait: 0.95
   _destroyAfterDeath: 1
+--- !u!114 &2967912992384678987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120538219267081352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7f939cc44b4018bdf9f2ac571aa0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectClips:
+  - {fileID: 8300000, guid: bf6dd55905a74448c91ca8d1d3fc130e, type: 3}
+  - {fileID: 8300000, guid: fb3a568dde2734f3ea77f0f0ce2d2ce0, type: 3}
+  - {fileID: 8300000, guid: a1064deb7eb0f40928982bb2585e336b, type: 3}
+  - {fileID: 8300000, guid: 1d80dd523d5ad40408ac102a62d23b0f, type: 3}
+  _moveStartClips:
+  - {fileID: 8300000, guid: a984d0e8888324af19aab822f8588387, type: 3}
+  - {fileID: 8300000, guid: ce58ba57746e84a9e9f93f0472f6ccbf, type: 3}
+  - {fileID: 8300000, guid: 21f93d18236764facb5bb811c3b5749c, type: 3}
+  - {fileID: 8300000, guid: e10e83ae95f2c4b2abf3a9bddd098630, type: 3}
+  _attackDeclareClips:
+  - {fileID: 8300000, guid: dd2c65033a1294e2e9a78f99f422f082, type: 3}
+  - {fileID: 8300000, guid: e4e314ab72e8e4528b010065ba618f86, type: 3}
+  - {fileID: 8300000, guid: c59bf9939073243c7b55595d30e71039, type: 3}
+  _attackClips:
+  - {fileID: 8300000, guid: d2156d890db7b49c3b789b792431a789, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: 72dc71dfd3b3a4bfc88bd3131929dd7c, type: 3}
+  _source: {fileID: 0}
+  _volume: 1
+  _ignoreIfEmpty: 1
+  _spatialBlend: 0
 --- !u!1001 &7669475297440146819
 PrefabInstance:
   m_ObjectHideFlags: 0

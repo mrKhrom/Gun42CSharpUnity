@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4632452258381918225}
   - component: {fileID: 1527047310899082172}
   - component: {fileID: 8368977066981475519}
+  - component: {fileID: 1647668272915907129}
   m_Layer: 0
   m_Name: BlackQween
   m_TagString: Untagged
@@ -93,11 +94,51 @@ MonoBehaviour:
   _crossFade: 0.1
   _forceIdleOnStart: 1
   _sampleInEditMode: 1
+  _forceIdleLoop: 1
+  _forceWalkLoop: 1
   _turnSpeed: 540
+  _blackFacesBoardCenter: 1
+  _attackHitTime: 0.15
   _sinkDepth: 1.5
   _sinkDuration: 0.6
-  _deathNormalizeWait: 0.95
+  _stateNormalizeWait: 0.95
   _destroyAfterDeath: 1
+--- !u!114 &1647668272915907129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74416100210125738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7f939cc44b4018bdf9f2ac571aa0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectClips:
+  - {fileID: 8300000, guid: 193156c007d2d4543b21225b3de2233e, type: 3}
+  - {fileID: 8300000, guid: e4582ed16267544259969ecf061a2f89, type: 3}
+  - {fileID: 8300000, guid: b826d979d96764a08bdf7a7aea5b50f2, type: 3}
+  - {fileID: 8300000, guid: a5170328cf7fa48638ec66444096d982, type: 3}
+  _moveStartClips:
+  - {fileID: 8300000, guid: 8f986ee2f84f646d8b142a4bc26d4db9, type: 3}
+  - {fileID: 8300000, guid: 55da9d7589388488ca2336078683e8e5, type: 3}
+  - {fileID: 8300000, guid: db5d059f7aac64078bbbb46f46276b4f, type: 3}
+  - {fileID: 8300000, guid: 23d319ea30fe44895bd701885715ae69, type: 3}
+  - {fileID: 8300000, guid: c50d8bdd7c84947edadedf7b8a869ec0, type: 3}
+  _attackDeclareClips:
+  - {fileID: 8300000, guid: 38ab81bd73be0490da043789ac22058f, type: 3}
+  - {fileID: 8300000, guid: 8cbd68294560e438f80474f3e7e44fd2, type: 3}
+  - {fileID: 8300000, guid: 26d02e33ec5ce47f98511516732335da, type: 3}
+  - {fileID: 8300000, guid: 999f261dabc484393be981c1c2c1b817, type: 3}
+  _attackClips:
+  - {fileID: 8300000, guid: 9667ee7049e0b47dc89fc7b9565da64f, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: 5d70764f4cd5a4b6085f61c8889afbd7, type: 3}
+  _source: {fileID: 0}
+  _volume: 1
+  _ignoreIfEmpty: 1
+  _spatialBlend: 0
 --- !u!1 &509884548662358835
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6203274519752010395}
   - component: {fileID: 7166932534564548524}
   - component: {fileID: 7976261503164360940}
+  - component: {fileID: 8446467319246035892}
   m_Layer: 0
   m_Name: BlackRook
   m_TagString: Untagged
@@ -94,6 +95,7 @@ MonoBehaviour:
   _forceIdleOnStart: 1
   _sampleInEditMode: 1
   _forceIdleLoop: 1
+  _forceWalkLoop: 1
   _turnSpeed: 540
   _blackFacesBoardCenter: 1
   _attackHitTime: 0.15
@@ -101,6 +103,38 @@ MonoBehaviour:
   _sinkDuration: 0.6
   _stateNormalizeWait: 0.95
   _destroyAfterDeath: 1
+--- !u!114 &8446467319246035892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517974957578060797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7f939cc44b4018bdf9f2ac571aa0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectClips:
+  - {fileID: 8300000, guid: f7f72284c025c4309b17c5ed626ccebd, type: 3}
+  - {fileID: 8300000, guid: 0c6937910fbb64c00ba262129e56232c, type: 3}
+  - {fileID: 8300000, guid: 04774e7ef5ba94bbcb5c217e9b55768a, type: 3}
+  _moveStartClips:
+  - {fileID: 8300000, guid: dda92ec7ec6344861bc5d02a8f02fd9c, type: 3}
+  - {fileID: 8300000, guid: dfc86585fd09349b99f5be455f7471c0, type: 3}
+  - {fileID: 8300000, guid: 9c1e67a9fa5c040feb6813684a822842, type: 3}
+  _attackDeclareClips:
+  - {fileID: 8300000, guid: 14d3dc7ab644a402cb93cb0f29acdc56, type: 3}
+  - {fileID: 8300000, guid: de53012ffb658488b82a42444f5c165d, type: 3}
+  - {fileID: 8300000, guid: 45fd87a67011646739527e5604ba76e8, type: 3}
+  _attackClips:
+  - {fileID: 8300000, guid: 4a8fcbaa92ca646feaf1afc9f8480431, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: feac58a7f016e4eabab9c676c71f1e1b, type: 3}
+  _source: {fileID: 0}
+  _volume: 1
+  _ignoreIfEmpty: 1
+  _spatialBlend: 0
 --- !u!1001 &5478366976557434207
 PrefabInstance:
   m_ObjectHideFlags: 0

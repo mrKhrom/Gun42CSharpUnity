@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1979251525039899934}
   - component: {fileID: 5199111764923151280}
   - component: {fileID: 8492353980780113308}
+  - component: {fileID: 8545422671983599373}
   m_Layer: 0
   m_Name: WhiteQween
   m_TagString: Untagged
@@ -93,11 +94,48 @@ MonoBehaviour:
   _crossFade: 0.1
   _forceIdleOnStart: 1
   _sampleInEditMode: 1
+  _forceIdleLoop: 1
+  _forceWalkLoop: 1
   _turnSpeed: 540
+  _blackFacesBoardCenter: 1
+  _attackHitTime: 0.15
   _sinkDepth: 1.5
   _sinkDuration: 0.6
-  _deathNormalizeWait: 0.95
+  _stateNormalizeWait: 0.95
   _destroyAfterDeath: 1
+--- !u!114 &8545422671983599373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655332266417818410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7f939cc44b4018bdf9f2ac571aa0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectClips:
+  - {fileID: 8300000, guid: a3cc4b26616644c598923a058a562a71, type: 3}
+  - {fileID: 8300000, guid: c1e030abb0ccf45ca867f3b052f65e00, type: 3}
+  - {fileID: 8300000, guid: 4255d02c600f3455aa003b80efc1df43, type: 3}
+  - {fileID: 8300000, guid: 955c40803ec254b9f931e28b244a190a, type: 3}
+  _moveStartClips:
+  - {fileID: 8300000, guid: 32c9a8f5d852b4687b632c9867a858ed, type: 3}
+  - {fileID: 8300000, guid: 2733d946059554443817ed99b64586a1, type: 3}
+  - {fileID: 8300000, guid: 35a48a9bfca35403293617b9a1befd1a, type: 3}
+  - {fileID: 8300000, guid: 20dd506a1b1c643869fca133a066dd33, type: 3}
+  _attackDeclareClips:
+  - {fileID: 8300000, guid: 3b216de0773c645c385d9662a5d0ae97, type: 3}
+  - {fileID: 8300000, guid: 349fcdc87efa74be4b83823ed052711e, type: 3}
+  _attackClips:
+  - {fileID: 8300000, guid: d143b5c3819024408a9d5476f84d3670, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: abff4d6de466d4467af3045e24f1fe31, type: 3}
+  _source: {fileID: 0}
+  _volume: 1
+  _ignoreIfEmpty: 1
+  _spatialBlend: 0
 --- !u!1001 &4288318352967310756
 PrefabInstance:
   m_ObjectHideFlags: 0

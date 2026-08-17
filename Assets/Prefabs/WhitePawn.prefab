@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1129390694565534879}
   - component: {fileID: 7195055194417691763}
   - component: {fileID: 7416955023500490794}
+  - component: {fileID: 4072820918218063805}
   m_Layer: 0
   m_Name: WhitePawn
   m_TagString: Untagged
@@ -94,6 +95,7 @@ MonoBehaviour:
   _forceIdleOnStart: 1
   _sampleInEditMode: 1
   _forceIdleLoop: 1
+  _forceWalkLoop: 1
   _turnSpeed: 540
   _blackFacesBoardCenter: 1
   _attackHitTime: 0.15
@@ -101,6 +103,41 @@ MonoBehaviour:
   _sinkDuration: 0.6
   _stateNormalizeWait: 0.95
   _destroyAfterDeath: 1
+--- !u!114 &4072820918218063805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139529145482895191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7f939cc44b4018bdf9f2ac571aa0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectClips:
+  - {fileID: 8300000, guid: 97db650c947264c169063d2077588033, type: 3}
+  - {fileID: 8300000, guid: 6b48d507b28594bac8b20e728234563c, type: 3}
+  - {fileID: 8300000, guid: 5981dedb3de214ee8951582fd4e5837a, type: 3}
+  - {fileID: 8300000, guid: be06a77902bc54853a912f04552da043, type: 3}
+  _moveStartClips:
+  - {fileID: 8300000, guid: f3938d2562d014ce9a8c3885de369781, type: 3}
+  - {fileID: 8300000, guid: c32c5af6b8ca24cb99f2351412470278, type: 3}
+  - {fileID: 8300000, guid: a3b19cb62f5c44460ac2f7de303f30d9, type: 3}
+  - {fileID: 8300000, guid: d9f8572d7dd134750a7029cc9929e3b3, type: 3}
+  _attackDeclareClips:
+  - {fileID: 8300000, guid: 0f44776e808ec467a8ade99f540e06fb, type: 3}
+  - {fileID: 8300000, guid: 512e12ed17e9c45c5b07bd65681e210b, type: 3}
+  - {fileID: 8300000, guid: 9e5ec498c606c45b98c5a3274bdee603, type: 3}
+  - {fileID: 8300000, guid: 8f0a43039502b48e3aaa9cb698468974, type: 3}
+  _attackClips:
+  - {fileID: 8300000, guid: bdf1e755256d947f88b7fe3034d8766f, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: dae8bef6b34bb48e88cd515559b27743, type: 3}
+  _source: {fileID: 0}
+  _volume: 1
+  _ignoreIfEmpty: 1
+  _spatialBlend: 0
 --- !u!1001 &869185031003982593
 PrefabInstance:
   m_ObjectHideFlags: 0

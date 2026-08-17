@@ -129,9 +129,11 @@ public class PlayerController : MonoBehaviour
         onCompleted?.Invoke();
     }
 
-    // Тихий ход: Face → Walk → клетка → Idle
+    // Тихий ход: MoveStart SFX → Face → Walk → клетка → Idle
     private IEnumerator QuietMoveSequence(Unit unit, Cell target, UnitAnimationDriver anim)
     {
+        unit.GetComponent<UnitAudio>()?.PlayMoveStart();
+
         if (anim != null)
             yield return anim.FacePoint(target.transform.position);
 
@@ -141,10 +143,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Взятие:
-    // 1) подойти на соседнюю к жертве клетку
-    // 2) Attack; через attackHitTime — Death жертвы
-    // 3) дождаться Death
-    // 4) встать на клетку жертвы
+    // AttackDeclare сразу → approach → Face → Attack SFX + anim → hit: Death SFX + anim → на клетку
     private IEnumerator CaptureSequence(
         Unit unit,
         Cell fromCell,
@@ -153,14 +152,18 @@ public class PlayerController : MonoBehaviour
         UnitAnimationDriver anim)
     {
         var enemyAnim = enemy.GetComponent<UnitAnimationDriver>();
+        var attackerAudio = unit.GetComponent<UnitAudio>();
+        var victimAudio = enemy.GetComponent<UnitAudio>();
         var board = _board != null ? _board : FindObjectOfType<Battlefield>();
+
+        // Сразу: «назначена атака» (не MoveStart)
+        attackerAudio?.PlayAttackDeclare();
 
         Cell approach = GetApproachCell(board, fromCell, target);
         Vector3 approachPos = approach != null
             ? approach.transform.position
             : Vector3.Lerp(unit.transform.position, target.transform.position, 0.85f);
 
-        // Уже стоим на approach (например король бьёт соседнюю) — не ходим
         bool needApproachWalk = approach == null
             || fromCell == null
             || approach != fromCell
@@ -176,11 +179,9 @@ public class PlayerController : MonoBehaviour
             anim?.StopWalkToIdle();
         }
 
-        // Лицом к жертве
         if (anim != null)
             yield return anim.FacePoint(enemy.transform.position);
 
-        // Death стартует на hit-frame, ждём завершения death после/во время attack
         bool deathStarted = false;
         bool deathDone = false;
 
@@ -190,6 +191,7 @@ public class PlayerController : MonoBehaviour
                 return;
             deathStarted = true;
 
+            victimAudio?.PlayDeath();
             enemy.BindToCell(null, snap: false);
 
             if (enemyAnim != null && !enemyAnim.IsDead)
@@ -204,6 +206,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Стар анимации атаки + attack SFX
+        attackerAudio?.PlayAttack();
+
         if (anim != null)
             yield return anim.PlayAttackAndWait(StartDeath);
         else
@@ -212,7 +217,6 @@ public class PlayerController : MonoBehaviour
         while (!deathDone)
             yield return null;
 
-        // Занять клетку убитой
         if (anim != null)
             yield return anim.FacePoint(target.transform.position);
 
@@ -299,6 +303,10 @@ public class PlayerController : MonoBehaviour
         var kingAnim = king.GetComponent<UnitAnimationDriver>();
         var rookAnim = rook.GetComponent<UnitAnimationDriver>();
 
+        // Рокировка: move start у короля и ладьи
+        king.GetComponent<UnitAudio>()?.PlayMoveStart();
+        rook.GetComponent<UnitAudio>()?.PlayMoveStart();
+
         king.BindToCell(kingTo, snap: false);
         rook.BindToCell(rookTo, snap: false);
 
@@ -344,8 +352,11 @@ public class PlayerController : MonoBehaviour
             $"captures {victim.Team} pawn");
 
         var anim = attacker.GetComponent<UnitAnimationDriver>();
-        // landing — клетка «удара»; жертва рядом. Approach = landing, final = landing (жертва не на landing)
-        // Идём на landing, бьём, death жертвы; attacker уже на landing.
+        var attackerAudio = attacker.GetComponent<UnitAudio>();
+        var victimAudio = victim.GetComponent<UnitAudio>();
+
+        // Как capture: declare сразу, без MoveStart
+        attackerAudio?.PlayAttackDeclare();
 
         if (anim != null)
             yield return anim.FacePoint(landing.transform.position);
@@ -360,6 +371,7 @@ public class PlayerController : MonoBehaviour
         bool deathDone = false;
         void StartDeath()
         {
+            victimAudio?.PlayDeath();
             victim.BindToCell(null, snap: false);
             var victimAnim = victim.GetComponent<UnitAnimationDriver>();
             if (victimAnim != null && !victimAnim.IsDead)
@@ -370,6 +382,8 @@ public class PlayerController : MonoBehaviour
                 deathDone = true;
             }
         }
+
+        attackerAudio?.PlayAttack();
 
         if (anim != null)
             yield return anim.PlayAttackAndWait(StartDeath);

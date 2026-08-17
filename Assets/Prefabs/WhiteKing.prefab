@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7184884484814328470}
   - component: {fileID: 4487499302654207903}
   - component: {fileID: 7110404567598300166}
+  - component: {fileID: 8937888415371013016}
   m_Layer: 0
   m_Name: WhiteKing
   m_TagString: Untagged
@@ -93,11 +94,53 @@ MonoBehaviour:
   _crossFade: 0.1
   _forceIdleOnStart: 1
   _sampleInEditMode: 1
+  _forceIdleLoop: 1
+  _forceWalkLoop: 1
   _turnSpeed: 540
+  _blackFacesBoardCenter: 1
+  _attackHitTime: 0.15
   _sinkDepth: 1.5
   _sinkDuration: 0.6
-  _deathNormalizeWait: 0.95
+  _stateNormalizeWait: 0.95
   _destroyAfterDeath: 1
+--- !u!114 &8937888415371013016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089919659706909006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7f939cc44b4018bdf9f2ac571aa0e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectClips:
+  - {fileID: 8300000, guid: 4e275487bb5ad4b6aa5de83134ea95d9, type: 3}
+  - {fileID: 8300000, guid: 8d91e49ef061a4fa094659e09f80369c, type: 3}
+  - {fileID: 8300000, guid: b8df41b5c44c24a03882a528364060b7, type: 3}
+  - {fileID: 8300000, guid: 4c914b6cd49a04e6dafea71a8f992fd1, type: 3}
+  - {fileID: 8300000, guid: 0c9f0a3b272bc4990bf8fb0e659b7396, type: 3}
+  _moveStartClips:
+  - {fileID: 8300000, guid: 62d6e29e833614e90b55f21ed8e6dae5, type: 3}
+  - {fileID: 8300000, guid: f5f3b7748121445cb8f6fda0a90c1f10, type: 3}
+  - {fileID: 8300000, guid: dbc7028eaa5514a768eeda65644b18b7, type: 3}
+  - {fileID: 8300000, guid: 05800974a89ad42b29349c427c53d512, type: 3}
+  _attackDeclareClips:
+  - {fileID: 8300000, guid: c448f1375d76345ff9fbfbc988b9f568, type: 3}
+  - {fileID: 8300000, guid: 44f1ac3e5419645349980b6b477dbead, type: 3}
+  - {fileID: 8300000, guid: 22c8fb16f756543048656730bdb1ebad, type: 3}
+  - {fileID: 8300000, guid: 9c9b534606eed44a2881095e426b197b, type: 3}
+  - {fileID: 8300000, guid: 7b70cdc3ca9ab4175a370eb59bf7cf58, type: 3}
+  - {fileID: 8300000, guid: 304c96cf35f88462698757a873bde686, type: 3}
+  _attackClips:
+  - {fileID: 8300000, guid: feb7e83cd48ea4256b8ed7a4f36de832, type: 3}
+  _deathClips:
+  - {fileID: 8300000, guid: 5b6870052402d4682b0b8b4b8a8bbf15, type: 3}
+  _source: {fileID: 0}
+  _volume: 1
+  _ignoreIfEmpty: 1
+  _spatialBlend: 0
 --- !u!1001 &1529957993908725673
 PrefabInstance:
   m_ObjectHideFlags: 0
