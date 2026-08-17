@@ -59,6 +59,21 @@ public class SceneInstaller : MonoInstaller
         BindFromHierarchyOptional<InputManager>();
         BindFromHierarchyOptional<CellManager>();
 
+        // --- Камера hot-seat (после хода) ---
+        var turnCam = FindObjectOfType<TurnCameraController>(true);
+        if (turnCam == null)
+        {
+            var systems = GameObject.Find("Systems");
+            var go = new GameObject("TurnCameraController");
+            if (systems != null)
+                go.transform.SetParent(systems.transform, false);
+            turnCam = go.AddComponent<TurnCameraController>();
+        }
+
+        Container.Bind<TurnCameraController>()
+            .FromInstance(turnCam)
+            .AsSingle();
+
         // --- UI (этап 14) ---
         var turnView = FindObjectOfType<TurnInfoView>(true);
         if (turnView == null)

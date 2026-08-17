@@ -8,6 +8,7 @@ public class ChessCommand : IGameplayCommand
     private readonly PlayerController _player;
     private readonly ITurnInfoView _turnView;
     private readonly EnPassantState _enPassant;
+    private readonly TurnCameraController _turnCamera;
 
     private Team _currentTeam = Team.White;
     private Unit _selected;
@@ -21,12 +22,14 @@ public class ChessCommand : IGameplayCommand
         Battlefield board,
         PlayerController player,
         [InjectOptional] ITurnInfoView turnView,
-        [InjectOptional] EnPassantState enPassant)
+        [InjectOptional] EnPassantState enPassant,
+        [InjectOptional] TurnCameraController turnCamera)
     {
         _board = board;
         _player = player;
         _turnView = turnView;
         _enPassant = enPassant;
+        _turnCamera = turnCamera;
     }
 
     public void SetFirstTeam(Team team)
@@ -34,6 +37,8 @@ public class ChessCommand : IGameplayCommand
         _gameOver = false;
         _currentTeam = team;
         _turnView?.ShowTurn(_currentTeam);
+        // Старт: snap без анимации
+        _turnCamera?.OnTurnChanged(_currentTeam, snap: true);
         EvaluatePosition(showTurnIfQuiet: true);
     }
 
@@ -188,6 +193,8 @@ public class ChessCommand : IGameplayCommand
     {
         _currentTeam = _currentTeam == Team.White ? Team.Black : Team.White;
         Debug.Log($"[Chess] Now playing: {_currentTeam}");
+        // После IsBusy=false / onCompleted: камера на сторону того, кто ходит
+        _turnCamera?.OnTurnChanged(_currentTeam, snap: false);
         EvaluatePosition(showTurnIfQuiet: true);
     }
 
@@ -208,6 +215,9 @@ public void EvaluatePosition(bool showTurnIfQuiet)
             var winner = ChessMoveGenerator.Opposite(_currentTeam);
             _turnView?.ShowCheckmate(winner);
             Debug.Log($"[Chess] CHECKMATE — {winner} wins. {_currentTeam} is mated.");
+
+            // Анимация + звук смерти короля проигравшей стороны
+            PlayMatedKingDeath(_currentTeam);
             return;
         }
 
@@ -233,5 +243,31 @@ public void EvaluatePosition(bool showTurnIfQuiet)
 
         if (showTurnIfQuiet)
             _turnView?.ShowTurn(_currentTeam);
+    }
+
+    // Мат: Death + sink у короля стороны, которой поставили мат
+    private void PlayMatedKingDeath(Team matedTeam)
+    {
+        var king = ChessMoveGenerator.FindKing(_board, matedTeam);
+        if (king == null)
+        {
+            Debug.LogWarning($"[Chess] Нет короля {matedTeam} для анимации мата");
+            return;
+        }
+
+        king.GetComponent<UnitAudio>()?.PlayDeath();
+
+        var anim = king.GetComponent<UnitAnimationDriver>();
+        if (anim == null)
+        {
+            Debug.LogWarning($"[Chess] У короля {matedTeam} нет UnitAnimationDriver");
+            return;
+        }
+
+        if (anim.IsDead)
+            return;
+
+        // ChessCommand не MonoBehaviour — корутина на компоненте короля
+        anim.StartCoroutine(anim.PlayDeathSinkAndHide());
     }
 }

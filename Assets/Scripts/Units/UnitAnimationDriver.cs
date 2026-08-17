@@ -51,6 +51,13 @@ public class UnitAnimationDriver : MonoBehaviour
     [SerializeField] private bool _forceIdleLoop = true;
     [SerializeField] private bool _forceWalkLoop = true;
 
+    [Header("Animator params (Knight и др.)")]
+    [Tooltip("Float-параметр: > threshold = Walk, иначе Idle. Пусто = не использовать.")]
+    [SerializeField] private string _speedParameter = "Speed";
+    [SerializeField] private float _speedWalkValue = 1f;
+    [SerializeField] private float _speedIdleValue = 0f;
+    [SerializeField] private float _speedWalkThreshold = 0.1f;
+
     [Header("Turn")]
     [SerializeField] private float _turnSpeed = 540f;
     [Tooltip("Чёрные уже смотрят в центр (mesh/−Z). true = не крутить их на 180° при ходе вперёд.")]
@@ -101,6 +108,13 @@ public class UnitAnimationDriver : MonoBehaviour
     bool _loggedMissingWalk;
     bool _loggedMissingAttack;
     bool _loggedMissingDeath;
+
+    // Анти-дёрганье: не рестартить Walk/Idle каждый кадр
+    float _nextAllowedWalkRestartTime;
+    float _nextAllowedIdleRestartTime;
+    int _walkMissingFrames;
+    int _idleMissingFrames;
+    bool? _hasSpeedParam;
 
     void Awake()
     {
@@ -153,10 +167,10 @@ public class UnitAnimationDriver : MonoBehaviour
         if (!_animator.isInitialized)
             return;
 
-        // Walk loop на всё время движения
+        // Walk: держим Speed (если есть) и не дёргаем Play каждый кадр
         if (_walking && _forceWalkLoop)
         {
-            MaintainLoopingState(_walkHash, _resolvedWalk, ForcePlayWalk);
+            MaintainWalkLoop();
             return;
         }
 
@@ -167,39 +181,162 @@ public class UnitAnimationDriver : MonoBehaviour
         if (string.IsNullOrEmpty(_resolvedIdle) || _idleHash == 0)
             return;
 
-        MaintainLoopingState(_idleHash, _resolvedIdle, ForcePlayIdle);
+        MaintainIdleLoop();
     }
 
-    // Удерживает state в loop: re-enter если ушли / клип без Loop Time закончился
-    void MaintainLoopingState(int stateHash, string stateName, System.Action<float> forcePlay)
+    // Knight.controller: Walk↔Stand через float Speed. При Speed=0 Walk сразу уходит в Idle —
+    // ForcePlay(0) каждый кадр = дёрганье начала. Нужно держать Speed >= threshold.
+    void MaintainWalkLoop()
     {
-        if (stateHash == 0 || string.IsNullOrEmpty(stateName))
-            return;
-
-        var info = _animator.GetCurrentAnimatorStateInfo(0);
-        bool inState = IsCurrentState(info, stateHash, stateName);
-
-        if (!inState && !_animator.IsInTransition(0))
+        // Параметр Speed: достаточно поддерживать значение — transition остаётся в Walk, клип loop сам
+        if (HasSpeedParameter())
         {
-            forcePlay(0f);
+            SetSpeedParameter(_speedWalkValue);
             return;
         }
 
-        if (!inState)
+        if (_walkHash == 0 || string.IsNullOrEmpty(_resolvedWalk))
             return;
 
-        float cycle = info.normalizedTime;
-        float frac = cycle - Mathf.Floor(cycle);
+        var cur = _animator.GetCurrentAnimatorStateInfo(0);
+        var next = _animator.GetNextAnimatorStateInfo(0);
+        bool inWalk = IsCurrentState(cur, _walkHash, _resolvedWalk)
+                      || (_animator.IsInTransition(0) && IsCurrentState(next, _walkHash, _resolvedWalk));
 
-        if (!info.loop)
+        if (inWalk)
         {
-            if (cycle >= 0.95f)
-                forcePlay(0f);
+            _walkMissingFrames = 0;
+
+            // Нативный loop — не рестартить
+            if (cur.loop || IsClipMarkedLooping(_resolvedWalk))
+                return;
+
+            // Non-loop: только после полного конца
+            if (IsCurrentState(cur, _walkHash, _resolvedWalk)
+                && cur.normalizedTime >= 0.99f
+                && !_animator.IsInTransition(0)
+                && Time.time >= _nextAllowedWalkRestartTime)
+            {
+                _nextAllowedWalkRestartTime = Time.time + 0.05f;
+                ForcePlayWalk(0f);
+            }
+
+            return;
         }
-        else if (frac >= 0.99f && cycle >= 1f)
+
+        _walkMissingFrames++;
+        if (_walkMissingFrames < 5)
+            return;
+
+        if (Time.time < _nextAllowedWalkRestartTime)
+            return;
+
+        _nextAllowedWalkRestartTime = Time.time + 0.15f;
+        _walkMissingFrames = 0;
+        ForcePlayWalk(0f);
+    }
+
+    void MaintainIdleLoop()
+    {
+        if (_idleHash == 0 || string.IsNullOrEmpty(_resolvedIdle))
+            return;
+
+        var cur = _animator.GetCurrentAnimatorStateInfo(0);
+        var next = _animator.GetNextAnimatorStateInfo(0);
+        bool inIdle = IsCurrentState(cur, _idleHash, _resolvedIdle)
+                      || (_animator.IsInTransition(0) && IsCurrentState(next, _idleHash, _resolvedIdle));
+
+        if (inIdle)
         {
-            forcePlay(0f);
+            _idleMissingFrames = 0;
+
+            if (HasSpeedParameter())
+                SetSpeedParameter(_speedIdleValue);
+
+            if (cur.loop || IsClipMarkedLooping(_resolvedIdle))
+                return;
+
+            if (IsCurrentState(cur, _idleHash, _resolvedIdle)
+                && cur.normalizedTime >= 0.99f
+                && !_animator.IsInTransition(0)
+                && Time.time >= _nextAllowedIdleRestartTime)
+            {
+                _nextAllowedIdleRestartTime = Time.time + 0.05f;
+                ForcePlayIdle(0f);
+            }
+
+            return;
         }
+
+        // При Speed-driven контроллере Idle = Speed≈0, не форсим Play
+        if (HasSpeedParameter())
+        {
+            SetSpeedParameter(_speedIdleValue);
+            return;
+        }
+
+        _idleMissingFrames++;
+        if (_idleMissingFrames < 3)
+            return;
+        if (Time.time < _nextAllowedIdleRestartTime)
+            return;
+
+        _nextAllowedIdleRestartTime = Time.time + 0.1f;
+        _idleMissingFrames = 0;
+        ForcePlayIdle(0f);
+    }
+
+    bool HasSpeedParameter()
+    {
+        if (_hasSpeedParam.HasValue)
+            return _hasSpeedParam.Value;
+
+        _hasSpeedParam = false;
+        if (_animator == null || string.IsNullOrEmpty(_speedParameter))
+            return false;
+
+        foreach (var p in _animator.parameters)
+        {
+            if (p.type == AnimatorControllerParameterType.Float && p.name == _speedParameter)
+            {
+                _hasSpeedParam = true;
+                break;
+            }
+        }
+
+        return _hasSpeedParam.Value;
+    }
+
+    void SetSpeedParameter(float value)
+    {
+        if (!HasSpeedParameter())
+            return;
+        _animator.SetFloat(_speedParameter, value);
+    }
+
+    bool IsClipMarkedLooping(string stateOrClipName)
+    {
+        if (_animator == null || _animator.runtimeAnimatorController == null
+            || string.IsNullOrEmpty(stateOrClipName))
+            return false;
+
+        var clips = _animator.runtimeAnimatorController.animationClips;
+        if (clips == null)
+            return false;
+
+        foreach (var clip in clips)
+        {
+            if (clip == null)
+                continue;
+            if (clip.name != stateOrClipName
+                && !stateOrClipName.EndsWith(clip.name, System.StringComparison.Ordinal))
+                continue;
+            // isLooping — import Loop Time
+            if (clip.isLooping)
+                return true;
+        }
+
+        return false;
     }
 
 #if UNITY_EDITOR
@@ -252,6 +389,7 @@ public class UnitAnimationDriver : MonoBehaviour
             _animator.applyRootMotion = false;
 
         _statesResolved = false;
+        _hasSpeedParam = null; // перечитать parameters
         return _animator.runtimeAnimatorController != null;
     }
 
@@ -262,15 +400,29 @@ public class UnitAnimationDriver : MonoBehaviour
         if (!EnsureAnimatorAndStates())
             return;
 
+        _walking = false;
+        _wantIdle = true;
+
+        // Knight: Idle через Speed=0 (transition Walk→Stand)
+        if (HasSpeedParameter())
+        {
+            SetSpeedParameter(_speedIdleValue);
+            // подстраховка, если уже не в idle
+            if (!string.IsNullOrEmpty(_resolvedIdle) && _idleHash != 0)
+            {
+                var cur = _animator.GetCurrentAnimatorStateInfo(0);
+                if (!IsCurrentState(cur, _idleHash, _resolvedIdle))
+                    ForcePlayIdle(normalizedTime);
+            }
+            return;
+        }
+
         if (string.IsNullOrEmpty(_resolvedIdle) || _idleHash == 0)
         {
             LogMissingOnce(ref _loggedMissingIdle, "Idle", _idleStateName);
             return;
         }
 
-        _walking = false;
-        _wantIdle = true;
-        // Idle всегда через Play (не CrossFade) — иначе loop/restart часто ломается
         ForcePlayIdle(normalizedTime);
     }
 
@@ -305,15 +457,27 @@ public class UnitAnimationDriver : MonoBehaviour
         if (!EnsureAnimatorAndStates())
             return;
 
+        _walking = true;
+        _wantIdle = false;
+        _walkMissingFrames = 0;
+        _nextAllowedWalkRestartTime = Time.time + 0.2f;
+
+        // СНАЧАЛА Speed (иначе transition Speed<0.1 сразу выкинет из Walk)
+        if (HasSpeedParameter())
+        {
+            SetSpeedParameter(_speedWalkValue);
+            // Play Walk один раз, чтобы не ждать transition; Speed держит loop
+            if (!string.IsNullOrEmpty(_resolvedWalk) && _walkHash != 0)
+                ForcePlayWalk(0f);
+            return;
+        }
+
         if (string.IsNullOrEmpty(_resolvedWalk) || _walkHash == 0)
         {
             LogMissingOnce(ref _loggedMissingWalk, "Walk", _walkStateName);
             return;
         }
 
-        _walking = true;
-        _wantIdle = false;
-        // Walk через Play (не CrossFade) — loop restart в Update
         ForcePlayWalk(0f);
     }
 
@@ -322,6 +486,9 @@ public class UnitAnimationDriver : MonoBehaviour
         if (_dead)
             return;
         _walking = false;
+        _walkMissingFrames = 0;
+        if (HasSpeedParameter())
+            SetSpeedParameter(_speedIdleValue);
         PlayIdle(0f);
     }
 
@@ -417,6 +584,7 @@ public class UnitAnimationDriver : MonoBehaviour
 
             _walking = false;
             _wantIdle = false;
+            SetSpeedParameter(_speedIdleValue); // снять Walk (Speed), иначе transition держит Walk
             if (!TryPlayState(_resolvedAttack, _attackHash, 0f, "Attack"))
             {
                 onHitFrame?.Invoke();
@@ -480,6 +648,7 @@ public class UnitAnimationDriver : MonoBehaviour
         _dead = true;
         _walking = false;
         _wantIdle = false;
+        SetSpeedParameter(_speedIdleValue);
         BeginBusy();
 
         try
