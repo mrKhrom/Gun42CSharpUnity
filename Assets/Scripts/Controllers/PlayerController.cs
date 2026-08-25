@@ -118,11 +118,16 @@ public class PlayerController : MonoBehaviour
             if (!IsPromotable(chosen))
                 chosen = ChessPieceType.Queen;
 
-            unit.PromoteTo(chosen);
-            Debug.Log($"[Chess] {unit.Team} pawn promoted to {chosen}");
+            // PromoteTo может заменить GO — берём возвращённый Unit
+            var promoted = unit.PromoteTo(chosen);
+            if (promoted != null)
+                unit = promoted;
+
+            Debug.Log($"[Chess] {unit.Team} pawn promoted to {unit.Type}");
         }
 
-        unit.HasMoved = true;
+        if (unit != null)
+            unit.HasMoved = true;
         RegisterEnPassantAfterMove(unit, fromX, fromY, target);
 
         IsBusy = false;

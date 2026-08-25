@@ -55,10 +55,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3399281
-  m_Height: 0.8470589
+  m_Radius: 0.24537744
+  m_Height: 0.7368983
   m_Direction: 1
-  m_Center: {x: -0.00516361, y: 0.52250797, z: 0}
+  m_Center: {x: 0.0047148317, y: 0.46742767, z: 0}
 --- !u!114 &7195055194417691763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +96,10 @@ MonoBehaviour:
   _sampleInEditMode: 1
   _forceIdleLoop: 1
   _forceWalkLoop: 1
+  _speedParameter: Speed
+  _speedWalkValue: 1
+  _speedIdleValue: 0
+  _speedWalkThreshold: 0.1
   _turnSpeed: 540
   _blackFacesBoardCenter: 1
   _attackHitTime: 0.15

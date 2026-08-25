@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7935896871437957391}
   - component: {fileID: 254811623104227619}
   m_Layer: 0
-  m_Name: Blackking
+  m_Name: BlackKing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,9 +30,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 4, y: 0, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7858024420344741108}
   - {fileID: 1557628253742620423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -55,10 +56,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3575107
-  m_Height: 1.2530867
+  m_Radius: 0.35751072
+  m_Height: 1.1696894
   m_Direction: 1
-  m_Center: {x: -0.031169534, y: 0.7478195, z: 0}
+  m_Center: {x: -0.031169541, y: 0.70612097, z: 0}
 --- !u!114 &6845146988477180327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +97,10 @@ MonoBehaviour:
   _sampleInEditMode: 1
   _forceIdleLoop: 1
   _forceWalkLoop: 1
+  _speedParameter: Speed
+  _speedWalkValue: 1
+  _speedIdleValue: 0
+  _speedWalkThreshold: 0.1
   _turnSpeed: 540
   _blackFacesBoardCenter: 1
   _attackHitTime: 0.15
@@ -686,6 +691,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thrall
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 40da4062d0c348d78fdbe0a0af67376d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1234279849924444142, guid: 40da4062d0c348d78fdbe0a0af67376d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.00000006198883
@@ -1100,6 +1109,68 @@ Animator:
 Transform:
   m_CorrespondingSourceObject: {fileID: -639763325267172598, guid: 40da4062d0c348d78fdbe0a0af67376d, type: 3}
   m_PrefabInstance: {fileID: 1303642393635829996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7676375595634350879
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4210167104516003126}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+      propertyPath: m_Name
+      value: ThrallMDX
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+--- !u!4 &7858024420344741108 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 86d511aa15f84d718ca73c7a9c3d9d1f, type: 3}
+  m_PrefabInstance: {fileID: 7676375595634350879}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8320041837232421036
 PrefabInstance:

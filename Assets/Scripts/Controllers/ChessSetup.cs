@@ -143,11 +143,12 @@ public void TrySpawnIfConfigured()
             unit.transform.rotation = Quaternion.identity;
     }
 
-public Unit GetPrefab(Team team, ChessPieceType type)
+    public Unit GetPrefab(Team team, ChessPieceType type)
     {
+        Unit u = null;
         if (team == Team.White)
         {
-            return type switch
+            u = type switch
             {
                 ChessPieceType.Pawn => _whitePawn,
                 ChessPieceType.Rook => _whiteRook,
@@ -158,16 +159,22 @@ public Unit GetPrefab(Team team, ChessPieceType type)
                 _ => null
             };
         }
-
-        return type switch
+        else
         {
-            ChessPieceType.Pawn => _blackPawn,
-            ChessPieceType.Rook => _blackRook,
-            ChessPieceType.Knight => _blackKnight,
-            ChessPieceType.Bishop => _blackBishop,
-            ChessPieceType.Queen => _blackQueen,
-            ChessPieceType.King => _blackKing,
-            _ => null
-        };
+            u = type switch
+            {
+                ChessPieceType.Pawn => _blackPawn,
+                ChessPieceType.Rook => _blackRook,
+                ChessPieceType.Knight => _blackKnight,
+                ChessPieceType.Bishop => _blackBishop,
+                ChessPieceType.Queen => _blackQueen,
+                ChessPieceType.King => _blackKing,
+                _ => null
+            };
+        }
+
+        // Слоты могут ссылаться на instance в сцене (stripped) — для Instantiate это ок.
+        // Если ссылка битая — null.
+        return u;
     }
 }

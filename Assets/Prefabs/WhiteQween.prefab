@@ -33,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1021424304374000941}
   - {fileID: 4326151297680734799}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -56,9 +57,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.27543044
-  m_Height: 1.1009307
+  m_Height: 0.9144453
   m_Direction: 1
-  m_Center: {x: -0.02635765, y: 0.66080296, z: 0}
+  m_Center: {x: -0.02635765, y: 0.56756026, z: 0}
 --- !u!114 &5199111764923151280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +97,10 @@ MonoBehaviour:
   _sampleInEditMode: 1
   _forceIdleLoop: 1
   _forceWalkLoop: 1
+  _speedParameter: Speed
+  _speedWalkValue: 1
+  _speedIdleValue: 0
+  _speedWalkThreshold: 0.1
   _turnSpeed: 540
   _blackFacesBoardCenter: 1
   _attackHitTime: 0.15
@@ -136,6 +141,68 @@ MonoBehaviour:
   _volume: 1
   _ignoreIfEmpty: 1
   _spatialBlend: 0
+--- !u!1001 &695360304515959494
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5408100149358338244}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+      propertyPath: m_Name
+      value: JainaMDX
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+--- !u!4 &1021424304374000941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3e6a090c08ed4a5398e12dd4e62f0b5f, type: 3}
+  m_PrefabInstance: {fileID: 695360304515959494}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4288318352967310756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -731,6 +798,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d5e9bf303a2c47df9b8ba7456a2b4aed, type: 3}
       propertyPath: m_Name
       value: Jaina
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d5e9bf303a2c47df9b8ba7456a2b4aed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1234279849924444142, guid: d5e9bf303a2c47df9b8ba7456a2b4aed, type: 3}
       propertyPath: m_LocalScale.x

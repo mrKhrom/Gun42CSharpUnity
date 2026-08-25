@@ -8,107 +8,162 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: DefaultMaterial
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Fbx Default Material
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Knight
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: KnightTexture.png
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_0
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_1
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_10
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_11
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_12
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_14
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_16
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_18
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_19
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_2
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_20
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_22
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_3
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_4
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_5
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_6
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_7
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_8
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_9
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: No Name
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Scene
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

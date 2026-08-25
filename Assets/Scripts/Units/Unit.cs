@@ -54,109 +54,109 @@ public class Unit : MonoBehaviour,
         HasMoved = false;
     }
 
-    public void PromoteTo(ChessPieceType newType)
+    // Превращение пешки: спавн префаба выбранной фигуры (полная модель + Animator),
+    // старая пешка уничтожается. Возвращает новый Unit (или this, если только смена Type).
+    public Unit PromoteTo(ChessPieceType newType)
     {
         if (newType == ChessPieceType.Pawn || newType == ChessPieceType.King)
         {
             Debug.LogWarning($"[Unit] PromoteTo rejected: {newType}");
-            return;
+            return this;
         }
 
-        _type = newType;
-        name = $"{_team}_{_type}";
-
-        ApplyPromotedVisual(newType);
-
-        Debug.Log($"[Unit] {_team} promoted → {_type}");
-    }
-
-    private void ApplyPromotedVisual(ChessPieceType newType)
-    {
-        // includeInactive: ChessSetup может быть выключен на Systems
         var setup = FindObjectOfType<ChessSetup>(true);
         if (setup == null)
         {
-            Debug.LogWarning(
-                $"[Unit] Нет ChessSetup — визуал {_team}/{newType} не сменён. " +
-                "Назначь префабы в ChessSetup на Systems.");
-            return;
+            Debug.LogWarning("[Unit] Нет ChessSetup — только Type, визуал не сменён");
+            _type = newType;
+            name = $"{_team}_{_type}";
+            return this;
         }
 
-        var prefab = setup.GetPrefab(_team, newType);
-        if (prefab == null)
+        var prefabUnit = setup.GetPrefab(_team, newType);
+        if (prefabUnit == null)
         {
             Debug.LogWarning(
-                $"[Unit] Нет префаба {_team}/{newType} в ChessSetup — тип изменён, визуал старый.");
-            return;
+                $"[Unit] Нет префаба {_team}/{newType} в ChessSetup — только Type");
+            _type = newType;
+            name = $"{_team}_{_type}";
+            return this;
         }
 
-        ReplaceVisualFromPrefab(prefab.gameObject);
+        // Источник: префаб-ассет предпочтительнее scene-instance (полная иерархия модели)
+        GameObject sourceGo = ResolvePrefabSource(prefabUnit.gameObject);
 
-        // После смены mesh/Animator — заново найти Animator и Idle
-        var anim = GetComponent<UnitAnimationDriver>();
+        var cell = Cell;
+        var team = _team;
+        var parent = transform.parent;
+        var worldPos = transform.position;
+        var worldRot = transform.rotation;
+        var localScale = transform.localScale;
+
+        // Отвязать пешку от клетки
+        if (Cell != null && Cell.Unit == this)
+            Cell.Unit = null;
+        Cell = null;
+
+        var neuGo = Instantiate(sourceGo, parent);
+        neuGo.SetActive(true);
+        neuGo.transform.SetPositionAndRotation(worldPos, worldRot);
+        neuGo.transform.localScale = localScale;
+        neuGo.name = $"{team}_{newType}";
+
+        var neu = neuGo.GetComponent<Unit>();
+        if (neu == null)
+        {
+            Debug.LogError($"[Unit] В префабе {sourceGo.name} нет Unit");
+            Destroy(neuGo);
+            _type = newType;
+            name = $"{_team}_{_type}";
+            if (cell != null)
+                BindToCell(cell, snap: false);
+            return this;
+        }
+
+        // Логика новой фигуры
+        neu.Setup(team, newType, cell, snap: false);
+        neu.transform.SetPositionAndRotation(worldPos, worldRot);
+        neu.HasMoved = true;
+
+        // Анимации новой модели (имена states с префаба ферзя/ладьи/…)
+        var anim = neu.GetComponent<UnitAnimationDriver>();
         if (anim != null)
         {
             anim.CacheAnimator();
             if (!anim.IsDead)
                 anim.PlayIdle(0f);
         }
+
+        // Обновить список фигур на доске
+        var board = FindObjectOfType<Battlefield>();
+        board?.RelinkUnits();
+
+        Debug.Log($"[Unit] Promote visual: {name} → {neu.name} (from {sourceGo.name})");
+
+        // Удалить старую пешку (в конце кадра)
+        if (Application.isPlaying)
+            Destroy(gameObject);
+        else
+            DestroyImmediate(gameObject);
+
+        return neu;
     }
 
-    private void ReplaceVisualFromPrefab(GameObject prefabRoot)
+    static GameObject ResolvePrefabSource(GameObject go)
     {
-        if (prefabRoot == null)
-            return;
+        if (go == null)
+            return null;
 
-        var hostTf = transform;
-
-        for (int i = hostTf.childCount - 1; i >= 0; i--)
-            DestroyImmediate(hostTf.GetChild(i).gameObject);
-
-        var temp = Instantiate(prefabRoot);
-        temp.name = $"{prefabRoot.name}_PromoteTemp";
-        temp.transform.SetPositionAndRotation(hostTf.position, hostTf.rotation);
-
-        var srcAnim = temp.GetComponent<Animator>();
-        var dstAnim = GetComponent<Animator>();
-        if (srcAnim != null)
-        {
-            if (dstAnim == null)
-                dstAnim = gameObject.AddComponent<Animator>();
-
-            dstAnim.runtimeAnimatorController = srcAnim.runtimeAnimatorController;
-            dstAnim.avatar = srcAnim.avatar;
-            dstAnim.applyRootMotion = false;
-            dstAnim.cullingMode = srcAnim.cullingMode;
-            dstAnim.updateMode = srcAnim.updateMode;
-        }
-
-        while (temp.transform.childCount > 0)
-        {
-            var child = temp.transform.GetChild(0);
-            child.SetParent(hostTf, false);
-        }
-
-        var rootMf = temp.GetComponent<MeshFilter>();
-        if (rootMf != null)
-        {
-            var visualGo = new GameObject("PromotedMesh");
-            visualGo.transform.SetParent(hostTf, false);
-            var mf = visualGo.AddComponent<MeshFilter>();
-            mf.sharedMesh = rootMf.sharedMesh;
-            var mrSrc = temp.GetComponent<MeshRenderer>();
-            if (mrSrc != null)
-            {
-                var mr = visualGo.AddComponent<MeshRenderer>();
-                mr.sharedMaterials = mrSrc.sharedMaterials;
-            }
-        }
-
-        if (Application.isPlaying)
-            Destroy(temp);
-        else
-            DestroyImmediate(temp);
-
-        Debug.Log($"[Unit] Visual → {prefabRoot.name} on {name}");
+#if UNITY_EDITOR
+        var asset = UnityEditor.PrefabUtility.GetCorrespondingObjectFromSource(go);
+        if (asset != null)
+            return asset;
+#endif
+        // Runtime: Instantiate prefab-instance копирует визуал (вложенные mesh/rig)
+        return go;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

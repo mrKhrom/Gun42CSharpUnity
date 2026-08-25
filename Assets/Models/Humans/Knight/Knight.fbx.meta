@@ -22,11 +22,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: KnightTexture.png
-    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Mat_0
     second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
   - first:
@@ -47,7 +42,67 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_12
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_14
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_16
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_18
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_19
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_2
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_20
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_22
+    second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23
     second: {fileID: 2100000, guid: a4228381beb641709f4104976f161b6b, type: 2}
   - first:
       type: UnityEngine:Material
@@ -784,7 +839,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
