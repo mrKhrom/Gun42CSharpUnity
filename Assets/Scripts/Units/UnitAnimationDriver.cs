@@ -781,6 +781,9 @@ public class UnitAnimationDriver : MonoBehaviour
             return;
         }
 
+        if (!_animator.gameObject.activeInHierarchy)
+            return;
+
         _animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
         try
         {
