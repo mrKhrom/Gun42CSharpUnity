@@ -55,7 +55,7 @@ public class Unit : MonoBehaviour,
     }
 
     // Превращение пешки: спавн префаба выбранной фигуры (полная модель + Animator),
-    // старая пешка уничтожается. Возвращает новый Unit (или this, если только смена Type).
+    // старая пешка уничтожается сразу. Возвращает новый Unit (или this, если только Type).
     public Unit PromoteTo(ChessPieceType newType)
     {
         if (newType == ChessPieceType.Pawn || newType == ChessPieceType.King)
@@ -64,71 +64,57 @@ public class Unit : MonoBehaviour,
             return this;
         }
 
-        var setup = FindObjectOfType<ChessSetup>(true);
-        if (setup == null)
-        {
-            Debug.LogWarning("[Unit] Нет ChessSetup — только Type, визуал не сменён");
-            _type = newType;
-            name = $"{_team}_{_type}";
-            return this;
-        }
-
-        var prefabUnit = setup.GetPrefab(_team, newType);
-        if (prefabUnit == null)
+        var setup = FindChessSetup();
+        GameObject sourceGo = setup != null ? setup.GetSpawnSource(_team, newType) : null;
+        if (sourceGo == null)
         {
             Debug.LogWarning(
-                $"[Unit] Нет префаба {_team}/{newType} в ChessSetup — только Type");
+                $"[Unit] Нет префаба {_team}/{newType} — визуал пешки не сменён");
             _type = newType;
             name = $"{_team}_{_type}";
             return this;
         }
-
-        // Источник: префаб-ассет предпочтительнее scene-instance (полная иерархия модели)
-        GameObject sourceGo = ResolvePrefabSource(prefabUnit.gameObject);
 
         var cell = Cell;
         var team = _team;
         var parent = transform.parent;
         var worldPos = transform.position;
         var worldRot = transform.rotation;
-        var localScale = transform.localScale;
-
         var board = FindObjectOfType<Battlefield>();
-
-        // Отвязать пешку и сразу выключить: Destroy отложен до конца кадра,
-        // а RelinkUnits иначе снова сажает пешку на ту же клетку и затирает ферзя.
-        BindToCell(null, snap: false);
-        board?.UnregisterUnit(this);
-        gameObject.SetActive(false);
 
         var neuGo = Instantiate(sourceGo, parent);
         neuGo.SetActive(true);
         neuGo.transform.SetPositionAndRotation(worldPos, worldRot);
-        neuGo.transform.localScale = localScale;
         neuGo.name = $"{team}_{newType}";
 
-        var neu = neuGo.GetComponent<Unit>();
+        var neu = neuGo.GetComponent<Unit>() ?? neuGo.GetComponentInChildren<Unit>(true);
         if (neu == null)
         {
             Debug.LogError($"[Unit] В префабе {sourceGo.name} нет Unit");
-            Destroy(neuGo);
+            if (Application.isPlaying)
+                Destroy(neuGo);
+            else
+                DestroyImmediate(neuGo);
             _type = newType;
             name = $"{_team}_{_type}";
-            gameObject.SetActive(true);
-            if (cell != null)
-                BindToCell(cell, snap: false);
-            board?.RegisterUnit(this);
             return this;
         }
 
-        // Логика новой фигуры — BindToCell в Setup, без полного Relink
+        if (neu.transform != neuGo.transform)
+            neu.transform.SetPositionAndRotation(worldPos, worldRot);
+
+        // Пешка ещё жива: сначала сажаем новую фигуру на клетку, потом удаляем пешку
+        // в том же кадре (DestroyImmediate), чтобы RelinkUnits не вернул пешку.
+        BindToCell(null, snap: false);
+        board?.UnregisterUnit(this);
+
         neu.Setup(team, newType, cell, snap: false);
         neu.transform.SetPositionAndRotation(worldPos, worldRot);
         neu.HasMoved = true;
         board?.RegisterUnit(neu);
 
-        // Анимации новой модели (имена states с префаба ферзя/ладьи/…)
-        var anim = neu.GetComponent<UnitAnimationDriver>();
+        var anim = neu.GetComponent<UnitAnimationDriver>()
+                   ?? neu.GetComponentInChildren<UnitAnimationDriver>(true);
         if (anim != null)
         {
             anim.CacheAnimator();
@@ -138,26 +124,23 @@ public class Unit : MonoBehaviour,
 
         Debug.Log($"[Unit] Promote visual: {name} → {neu.name} (from {sourceGo.name})");
 
-        if (Application.isPlaying)
-            Destroy(gameObject);
-        else
-            DestroyImmediate(gameObject);
-
+        DestroyImmediate(gameObject);
         return neu;
     }
 
-    static GameObject ResolvePrefabSource(GameObject go)
+    static ChessSetup FindChessSetup()
     {
-        if (go == null)
-            return null;
+        var setup = FindFirstObjectByType<ChessSetup>(FindObjectsInactive.Include);
+        if (setup != null)
+            return setup;
 
-#if UNITY_EDITOR
-        var asset = UnityEditor.PrefabUtility.GetCorrespondingObjectFromSource(go);
-        if (asset != null)
-            return asset;
-#endif
-        // Runtime: Instantiate prefab-instance копирует визуал (вложенные mesh/rig)
-        return go;
+        foreach (var s in Resources.FindObjectsOfTypeAll<ChessSetup>())
+        {
+            if (s != null && s.gameObject.scene.IsValid())
+                return s;
+        }
+
+        return null;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

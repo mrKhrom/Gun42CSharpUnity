@@ -173,8 +173,89 @@ public void TrySpawnIfConfigured()
             };
         }
 
-        // Слоты могут ссылаться на instance в сцене (stripped) — для Instantiate это ок.
-        // Если ссылка битая — null.
-        return u;
+        // Слоты могут ссылаться на instance в сцене. Если фигуру срубили — ссылка битая.
+        if (u != null)
+            return u;
+
+        return LoadPrefabAsset(team, type);
+    }
+
+    /// <summary>
+    /// GameObject to Instantiate on promotion. Prefab asset, not a board piece
+    /// (board pieces can be captured and the ChessSetup slot becomes missing).
+    /// </summary>
+    public GameObject GetSpawnSource(Team team, ChessPieceType type)
+    {
+        var unit = GetPrefab(team, type);
+        if (unit != null)
+        {
+            var fromSlot = ResolveSpawnSource(unit.gameObject);
+            if (fromSlot != null)
+                return fromSlot;
+        }
+
+        var assetUnit = LoadPrefabAsset(team, type);
+        if (assetUnit != null)
+            return assetUnit.gameObject;
+
+        return null;
+    }
+
+    static GameObject ResolveSpawnSource(GameObject go)
+    {
+        if (go == null)
+            return null;
+
+#if UNITY_EDITOR
+        string path = UnityEditor.PrefabUtility.GetPrefabAssetPathOfNearestInstanceRoot(go);
+        if (string.IsNullOrEmpty(path) && UnityEditor.PrefabUtility.IsPartOfPrefabAsset(go))
+            return go;
+        if (!string.IsNullOrEmpty(path))
+        {
+            var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (asset != null)
+                return asset;
+        }
+#endif
+        return go;
+    }
+
+    static Unit LoadPrefabAsset(Team team, ChessPieceType type)
+    {
+#if UNITY_EDITOR
+        string path = PrefabAssetPath(team, type);
+        if (string.IsNullOrEmpty(path))
+            return null;
+        var go = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        return go != null ? go.GetComponent<Unit>() : null;
+#else
+        return null;
+#endif
+    }
+
+    static string PrefabAssetPath(Team team, ChessPieceType type)
+    {
+        string file = team == Team.White
+            ? type switch
+            {
+                ChessPieceType.Pawn => "WhitePawn",
+                ChessPieceType.Rook => "WhiteRook",
+                ChessPieceType.Knight => "WhiteKnight",
+                ChessPieceType.Bishop => "WhiteBishop",
+                ChessPieceType.Queen => "WhiteQween",
+                ChessPieceType.King => "WhiteKing",
+                _ => null
+            }
+            : type switch
+            {
+                ChessPieceType.Pawn => "BlackPawn",
+                ChessPieceType.Rook => "BlackRook",
+                ChessPieceType.Knight => "BlackKnigt",
+                ChessPieceType.Bishop => "BlackBishop",
+                ChessPieceType.Queen => "BlackQween",
+                ChessPieceType.King => "BlackKing",
+                _ => null
+            };
+        return file == null ? null : "Assets/Prefabs/" + file + ".prefab";
     }
 }

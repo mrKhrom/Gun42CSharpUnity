@@ -5249,18 +5249,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _board: {fileID: 0}
   _unitsRoot: {fileID: 0}
-  _whitePawn: {fileID: 8039755524420521097}
-  _whiteRook: {fileID: 7677530530517483891}
-  _whiteKnight: {fileID: 8365322740676284017}
-  _whiteBishop: {fileID: 5660835527657222773}
-  _whiteQueen: {fileID: 711826924}
-  _whiteKing: {fileID: 5063830433101410373}
-  _blackPawn: {fileID: 2975009935266824571}
-  _blackRook: {fileID: 7873567857555551300}
-  _blackKnight: {fileID: 8811649320568901922}
-  _blackBishop: {fileID: 8092113609590800737}
-  _blackQueen: {fileID: 2891984500151290918}
-  _blackKing: {fileID: 2671990351885179623}
+  _whitePawn: {fileID: 7195055194417691763, guid: 2886e9ce03a6e45339742f203fa60b77, type: 3}
+  _whiteRook: {fileID: 7121207422509866438, guid: 7daea23df8ed044faa4df4c39ff007e2, type: 3}
+  _whiteKnight: {fileID: 2962705373738874901, guid: b9ab2e68e291e475ea681609c08bff87, type: 3}
+  _whiteBishop: {fileID: 1677713140223204327, guid: 0ba3a7eab7935409387dc49d89c647b7, type: 3}
+  _whiteQueen: {fileID: 5199111764923151280, guid: 71def1ebf558041198b247c7d3b44e8b, type: 3}
+  _whiteKing: {fileID: 4487499302654207903, guid: 9a72f0fc9149f44c3a8e72cd1fecdd2a, type: 3}
+  _blackPawn: {fileID: 715176007666477505, guid: f4b6f74b846a946aa812aa5e579a38d7, type: 3}
+  _blackRook: {fileID: 7166932534564548524, guid: 0ecf5027b6e3a4d3ca65bd64fa2ddbc9, type: 3}
+  _blackKnight: {fileID: 8390168355694153377, guid: 8de125a61d7b6471897bd9b575c7ac66, type: 3}
+  _blackBishop: {fileID: 6614275884483340873, guid: 6242ddf3eaaef47c5a07892e5169e15d, type: 3}
+  _blackQueen: {fileID: 1527047310899082172, guid: 3d9e32196584047f2a119e2d5c19da4b, type: 3}
+  _blackKing: {fileID: 6845146988477180327, guid: ff00edbae4cf84677b43fa8ed823dc27, type: 3}
   _clearExistingUnits: 0
   _spawnOnStart: 0
   _heightOffset: 0
