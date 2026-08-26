@@ -25,6 +25,7 @@ public class Cell : MonoBehaviour,
 public CellHighlight HighlightMode { get; private set; } = CellHighlight.None;
 
     public event Action<Cell> OnPointerClickEvent;
+    public event Action<Cell> OnPointerEnterEvent;
     public event Action<Cell> Clicked
     {
         add => OnPointerClickEvent += value;
@@ -51,6 +52,8 @@ public CellHighlight HighlightMode { get; private set; } = CellHighlight.None;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        OnPointerEnterEvent?.Invoke(this);
+
         // Не перебиваем Selected / Move / Attack
         if (IsPersistentHighlight())
             return;

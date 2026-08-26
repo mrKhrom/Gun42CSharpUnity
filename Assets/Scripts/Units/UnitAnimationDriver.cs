@@ -620,7 +620,7 @@ public class UnitAnimationDriver : MonoBehaviour
         }
     }
 
-    public IEnumerator PlayDeathSinkAndHide()
+    public IEnumerator PlayDeathSinkAndHide(bool destroyGameObject = true)
     {
         if (_dead)
             yield break;
@@ -649,7 +649,8 @@ public class UnitAnimationDriver : MonoBehaviour
 
             yield return SinkBelowBoard();
 
-            if (_destroyAfterDeath)
+            bool destroy = destroyGameObject && _destroyAfterDeath;
+            if (destroy)
             {
                 if (Application.isPlaying)
                     Destroy(gameObject);
@@ -1024,6 +1025,25 @@ public class UnitAnimationDriver : MonoBehaviour
             if (col != null)
                 col.enabled = false;
         }
+    }
+
+    public void ReviveForUndo()
+    {
+        StopAllCoroutines();
+        _dead = false;
+        _walking = false;
+        _wantIdle = false;
+        _busyCount = 0;
+        foreach (var col in GetComponentsInChildren<Collider>(true))
+        {
+            if (col != null)
+                col.enabled = true;
+        }
+
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
+        PlayIdle(0f);
     }
 
     void BeginBusy() => _busyCount++;

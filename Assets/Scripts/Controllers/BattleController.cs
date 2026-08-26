@@ -5,8 +5,10 @@ using Zenject;
 public class BattleController : MonoBehaviour
 {
     private IGameplayCommand _command;
+    private ICheatCommands _cheats;
     private Battlefield _board;
     private Controls.GameActions _game;
+    private InputAction _undo;
     private bool _injected;
 
     private bool _subscribedToBoard;
@@ -16,11 +18,13 @@ public class BattleController : MonoBehaviour
     private void Construct(
         IGameplayCommand command,
         Battlefield board,
-        Controls.GameActions gameActions)
+        Controls.GameActions gameActions,
+        [InjectOptional] ICheatCommands cheats)
     {
         _command = command;
         _board = board;
         _game = gameActions;
+        _cheats = cheats;
         _injected = true;
 
         // OnEnable мог сработать до Inject — подпишемся сейчас.
@@ -46,6 +50,7 @@ public class BattleController : MonoBehaviour
 
         _game.Cancel.performed += OnCancelPerformed;
         _game.Confirm.performed += OnConfirmPerformed;
+        BindUndoAction();
         _inputBound = true;
         SubscribeBoard();
     }
@@ -56,10 +61,35 @@ public class BattleController : MonoBehaviour
         {
             _game.Cancel.performed -= OnCancelPerformed;
             _game.Confirm.performed -= OnConfirmPerformed;
+            UnbindUndoAction();
             _inputBound = false;
         }
 
         UnsubscribeBoard();
+    }
+
+    private void BindUndoAction()
+    {
+        if (_undo != null)
+            return;
+
+        _undo = new InputAction("UndoMove", InputActionType.Button);
+        _undo.AddCompositeBinding("OneModifier")
+            .With("modifier", "<Keyboard>/ctrl")
+            .With("binding", "<Keyboard>/z");
+        _undo.performed += OnUndoPerformed;
+        _undo.Enable();
+    }
+
+    private void UnbindUndoAction()
+    {
+        if (_undo == null)
+            return;
+
+        _undo.performed -= OnUndoPerformed;
+        _undo.Disable();
+        _undo.Dispose();
+        _undo = null;
     }
 
     private void Start()
@@ -120,5 +150,15 @@ public void EnsureSubscribed()
     {
         _command?.Confirm();
         Debug.Log("[BattleController] Confirm (Space)");
+    }
+
+    private void OnUndoPerformed(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+        if (_cheats == null || _cheats.IsBusy)
+            return;
+
+        _cheats.CheatUndo();
     }
 }

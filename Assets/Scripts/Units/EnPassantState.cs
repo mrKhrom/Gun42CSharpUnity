@@ -32,6 +32,19 @@ public class EnPassantState
         LandingCell = null;
     }
 
+    public void Restore(bool available, Unit victim, Cell landing)
+    {
+        if (!available || victim == null || landing == null)
+        {
+            Clear();
+            return;
+        }
+
+        IsAvailable = true;
+        VictimPawn = victim;
+        LandingCell = landing;
+    }
+
     public bool MatchesLanding(Cell cell)
     {
         return IsAvailable && cell != null && LandingCell == cell;

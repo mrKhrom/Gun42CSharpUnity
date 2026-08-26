@@ -100,6 +100,10 @@ public class SceneInstaller : MonoInstaller
             .FromInstance(promotion)
             .AsSingle();
 
+        // --- Читы / undo (EditorCheatWindow резолвит ICheatCommands из SceneContext) ---
+        Container.Bind<CheatCommandStack>()
+            .AsSingle();
+
         // --- Команда: один instance как интерфейс и класс ---
         Container.BindInterfacesAndSelfTo<ChessCommand>()
             .AsSingle();

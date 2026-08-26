@@ -22,6 +22,7 @@ public event Action<Cell> OnCellClicked;
 
     public bool IsReady => _ready;
     public IReadOnlyList<Unit> Units => _units;
+    public Cell LastHoveredCell { get; private set; }
 
     private void Awake()
     {
@@ -302,7 +303,10 @@ public void HighlightMovesFor(Unit unit)
         if (_clicksSubscribed) return;
 
         foreach (var cell in AllCells())
+        {
             cell.OnPointerClickEvent += HandleCellClicked;
+            cell.OnPointerEnterEvent += HandleCellHovered;
+        }
 
         _clicksSubscribed = true;
     }
@@ -313,8 +317,9 @@ public void HighlightMovesFor(Unit unit)
 
         foreach (var cell in AllCells())
         {
-            if (cell != null)
-                cell.OnPointerClickEvent -= HandleCellClicked;
+            if (cell == null) continue;
+            cell.OnPointerClickEvent -= HandleCellClicked;
+            cell.OnPointerEnterEvent -= HandleCellHovered;
         }
 
         _clicksSubscribed = false;
@@ -323,6 +328,11 @@ public void HighlightMovesFor(Unit unit)
     private void HandleCellClicked(Cell cell)
     {
         OnCellClicked?.Invoke(cell);
+    }
+
+    private void HandleCellHovered(Cell cell)
+    {
+        LastHoveredCell = cell;
     }
 
     private void TryAutoAssignHighlightMaterials()
