@@ -7,7 +7,97 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ASilvana.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AncientOfLore
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: AncientOfLore.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Annihil
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Annihil.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Archemonde
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Archemonde.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BE_Robe
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BE_Robe.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BansheeRanger
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BansheeRanger.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoneYardCreepy
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoneYardCreepy.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Clouds8x8Black
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Clouds8x8Black.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: DefaultMaterial
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DranaiAkama
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DranaiAkama.png
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -17,7 +107,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: HeroShadowHunter
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeroShadowHunter.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_0
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_0_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -32,7 +137,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_10_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_11
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_11_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -42,7 +157,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_12_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_13
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -52,7 +177,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_14_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_15
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -62,7 +197,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_16_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_17
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -72,7 +217,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_18_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_19
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_19_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -87,7 +247,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_20_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_21
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -97,7 +267,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_22_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_23
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_2_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -107,7 +292,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_3_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_4
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_4_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -117,7 +312,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_5_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_6
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_6_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -127,7 +332,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_7_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_8
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_8_ASilvana
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -137,7 +352,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_9_ASilvana
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Necromancer
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Necromancer.png
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
@@ -147,12 +377,82 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Ranger
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ranger.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red_Glow3
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red_Glow3.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RunesOfGuldan
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RunesOfGuldan.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Scene
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ShockwaveWater1Black
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShockwaveWater1Black.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpiritLodge
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpiritLodge.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: SylvanasMDX
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UndeadAirBarge
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UndeadAirBarge.png
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UndeadArthas
+    second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: UndeadArthas.png
     second: {fileID: 2100000, guid: cfa327b36acc499281e91aabc386fc29, type: 2}
   - first:
       type: UnityEngine:Material

@@ -17,7 +17,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: HeroFarseer
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: HeroFarseer.png
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_0
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_0_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -32,7 +47,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_10_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_11
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_11_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -42,7 +67,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_12_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_13
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -52,7 +87,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_14_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_15
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -62,7 +107,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_16_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_17
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -72,7 +127,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_18_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_19
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_19_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -87,7 +157,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_20_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_21
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -97,7 +177,22 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_22_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_23
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_2_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -107,7 +202,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_3_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_4
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_4_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -117,7 +222,17 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_5_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_6
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_6_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -127,12 +242,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_7_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_8
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_8_Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_9
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_9_Thrall
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material
@@ -152,7 +282,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Thrall
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Thrall.png
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: ThrallMDX
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TimberWolf
+    second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TimberWolf.png
     second: {fileID: 2100000, guid: c4c47b74d4d540118d18120eaaaa9550, type: 2}
   - first:
       type: UnityEngine:Material

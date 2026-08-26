@@ -12,7 +12,27 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Dust3x
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dust3x.png
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Fbx Default Material
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Footman
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Footman.png
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
@@ -22,8 +42,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KnightTexture 2.png
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KnightTexture.png
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_0
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_0_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_0_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -37,8 +87,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_10_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_10_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_11
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_11_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_11_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -47,8 +117,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_12_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_12_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_13
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -57,8 +147,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_14_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_14_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_15
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -67,8 +177,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_16_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_16_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_17
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -77,8 +207,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_18_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_18_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_19
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_19_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_19_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -92,8 +252,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_20_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_20_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_21
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -102,8 +282,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_22_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_22_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_23
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_2_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_2_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -112,8 +322,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_3_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_3_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_4
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_4_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_4_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -122,8 +352,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_5_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_5_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_6
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_6_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_6_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -132,13 +382,43 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_7_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_7_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_8
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_8_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_8_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_9
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_9_KnightTexture
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_9_KnightTexture 2
+    second: {fileID: 2100000, guid: bc8a489081cd242838caf03b77e408ee, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -152,7 +432,57 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: RibbonBlur1
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RibbonBlur1.png
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Scene
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShockwaveWater1
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ShockwaveWater1.png
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TheCaptain
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TheCaptain.png
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yellow_Star
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yellow_Star.png
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gutz
+    second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gutz.png
     second: {fileID: 2100000, guid: 99f7883b745c343e99fa906249d38c5e, type: 2}
   - first:
       type: UnityEngine:Material

@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Arthas
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: ArthasMDX
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
@@ -22,22 +27,37 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: BatTroll
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BloodElf-SpellThief
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: DefaultMaterial
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Factory
-    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Factory.png
-    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Fbx Default Material
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrostMorne
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
       type: UnityEngine:Material
@@ -52,6 +72,21 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_0_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_0_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_0_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_1
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
@@ -62,8 +97,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_10_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_10_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_10_PandarenBrewMaster
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_10_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -72,8 +122,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_11_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_11_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_11_RibbonBlur1
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_11_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -82,8 +147,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_12_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_12_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_12_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_13
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_13_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -92,8 +187,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_14_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_14_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_14_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_15
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_15_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -102,8 +227,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_16_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_16_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_16_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_17
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_17_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -112,13 +267,58 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_18_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_18_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_18_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_19
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_19_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_19_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_19_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_1_None
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_1_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -132,8 +332,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_20_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_20_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_20_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_21
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_21_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -142,8 +372,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_22_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_22_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_22_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_23
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_23_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_2_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_2_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -152,13 +422,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_2_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_3
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Mat_3_Factory
+      name: Mat_3_Arthas_Sword
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_3_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_3_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -167,8 +452,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_4_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_4_BloodElfSpellThief
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_4_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_4_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -182,13 +482,38 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_5_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_5_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_5_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_6
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Mat_6_Uther
+      name: Mat_6_Arthas_Sword
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_6_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_6_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -197,8 +522,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_7_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_7_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_7_FrostMorne
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_7_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -207,8 +547,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_8_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_8_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_8_UndeadArthas
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_8_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -217,8 +572,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Mat_9_Arthas_Sword
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat_9_BatTroll
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_9_Factory
+    second: {fileID: 2100000, guid: 6137854b630434931bcc5902119a5823, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_9_Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -232,17 +602,37 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: PandarenBrewMaster
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Scene
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Uther
+      name: TeamGlow
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: UndeadArthas
+    second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Uther
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Uther.png
+    second: {fileID: 2100000, guid: 8228cce024a9240698041c92fa99d7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: human_mage
     second: {fileID: 2100000, guid: 89e90f7fb338841feae45acfeb002e59, type: 2}
   - first:
       type: UnityEngine:Material
