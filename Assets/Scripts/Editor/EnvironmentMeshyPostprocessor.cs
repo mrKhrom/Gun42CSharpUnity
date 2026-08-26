@@ -71,7 +71,7 @@ public class EnvironmentMeshyPostprocessor : AssetPostprocessor
         imp.materialSearch = ModelImporterMaterialSearch.Local;
         imp.globalScale = 1f;
         imp.addCollider = false;
-        // File claims Y-up but vertex data is Z-up; bake does nothing. Stand up via MeshyModelOrient.
+        // Transform is authored in the Editor. Do not bake axis conversion.
         imp.bakeAxisConversion = false;
         imp.preserveHierarchy = true;
         imp.useFileScale = true;
@@ -106,11 +106,9 @@ public class EnvironmentMeshyPostprocessor : AssetPostprocessor
             }
         }
 
-        var orient = go.GetComponent<MeshyModelOrient>();
-        if (orient == null)
-            orient = go.AddComponent<MeshyModelOrient>();
-        orient.eulerOffset = new Vector3(90f, 0f, 0f);
-        orient.Apply();
+        // Strip leftover 90° runtime offset. Do not touch position/rotation/scale.
+        foreach (var orient in go.GetComponentsInChildren<MeshyModelOrient>(true))
+            UnityEngine.Object.DestroyImmediate(orient, true);
     }
 
     [MenuItem("Tools/Setup Environment Meshy Models")]
@@ -250,5 +248,69 @@ public class EnvironmentMeshyPostprocessor : AssetPostprocessor
 
         if (mat.HasProperty("_Mode")) mat.SetFloat("_Mode", 0f);
         if (mat.HasProperty("_Color")) mat.color = Color.white;
+    }
+}
+
+/// <summary>
+/// MeshyModelOrient was baked onto env FBX and overwrote rotation on Play.
+/// Strip leftovers from the scene; never touch Transform.
+/// </summary>
+[InitializeOnLoad]
+static class StripEnvMeshyOrient
+{
+    const string PrefKey = "CSharpUnity.StripEnvMeshyOrient.20260826";
+
+    static StripEnvMeshyOrient()
+    {
+        EditorApplication.delayCall += OnEditorReady;
+        EditorApplication.playModeStateChanged += OnPlayMode;
+    }
+
+    static void OnPlayMode(PlayModeStateChange state)
+    {
+        if (state == PlayModeStateChange.ExitingEditMode)
+            StripFromOpenScenes();
+    }
+
+    static void OnEditorReady()
+    {
+        StripFromOpenScenes();
+        if (EditorPrefs.GetBool(PrefKey, false)) return;
+        EditorPrefs.SetBool(PrefKey, true);
+        EnvironmentMeshyPostprocessor.SetupSelectedOrAll();
+    }
+
+    static void StripFromOpenScenes()
+    {
+        var orients = Object.FindObjectsByType<MeshyModelOrient>(
+            FindObjectsInactive.Include, FindObjectsSortMode.None);
+        int n = 0;
+        foreach (var orient in orients)
+        {
+            if (orient == null) continue;
+            if (!IsEnvObject(orient.gameObject)) continue;
+            Object.DestroyImmediate(orient, true);
+            n++;
+        }
+        if (n > 0)
+            Debug.Log("[EnvironmentMeshy] Removed " + n + " MeshyModelOrient from scene (Transform unchanged)");
+    }
+
+    static bool IsEnvObject(GameObject go)
+    {
+        for (var t = go.transform; t != null; t = t.parent)
+        {
+            var src = PrefabUtility.GetCorrespondingObjectFromOriginalSource(t.gameObject);
+            if (src == null)
+                src = PrefabUtility.GetCorrespondingObjectFromSource(t.gameObject);
+            if (src == null) continue;
+            string path = AssetDatabase.GetAssetPath(src);
+            if (string.IsNullOrEmpty(path)) continue;
+            string n = path.Replace('\\', '/');
+            if (n.StartsWith("Assets/Models/Environment/", System.StringComparison.OrdinalIgnoreCase)
+                && n.IndexOf("NatureStarterKit", System.StringComparison.OrdinalIgnoreCase) < 0)
+                return true;
+        }
+        return false;
     }
 }

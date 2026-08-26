@@ -8,112 +8,112 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: DefaultMaterial
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Fbx Default Material
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_0
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_1
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_2
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_3
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_4
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_5
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_6
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mat_7
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.001
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.002
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.003
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: No Name
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Scene
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Trees1
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Trees1.png
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert1
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: phong1
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: standardSurface1
-    second: {fileID: 2100000, guid: 5c064fd32366a43eb8db988a3bdc9e07, type: 2}
+    second: {fileID: 2100000, guid: f2ba24ff13484922b2c4437337752892, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -163,7 +163,7 @@ ModelImporter:
     keepQuads: 0
     weldVertices: 1
     bakeAxisConversion: 0
-    preserveHierarchy: 0
+    preserveHierarchy: 1
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
