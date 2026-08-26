@@ -204,22 +204,63 @@ public void HighlightMovesFor(Unit unit)
             _cells[x, y].SetNeighbour(type, n);
     }
 
+    public void RegisterUnit(Unit unit)
+    {
+        if (unit == null)
+            return;
+        if (!_units.Contains(unit))
+            _units.Add(unit);
+    }
+
+    public void UnregisterUnit(Unit unit)
+    {
+        if (unit == null)
+            return;
+        _units.Remove(unit);
+    }
+
     private void LinkUnitsToCells()
     {
-        // Сброс старых связей unit → cell
-        foreach (var cell in AllCells())
-            cell.Unit = null;
-
         _units.Clear();
-        _units.AddRange(FindObjectsOfType<Unit>());
+        foreach (var unit in FindObjectsOfType<Unit>())
+        {
+            if (unit == null || !unit.gameObject.activeInHierarchy)
+                continue;
+            _units.Add(unit);
+        }
+
+        foreach (var cell in AllCells())
+        {
+            if (cell.Unit == null)
+                continue;
+            if (!cell.Unit.gameObject.activeInHierarchy)
+                cell.Unit = null;
+        }
+
+        // Две фигуры на одной клетке (пешка + новый ферзь в том же кадре):
+        // не чистим cell.Unit вслепую и не отдаём клетку «последнему» из FindObjects.
+        // Сначала оставляем уже корректную привязку, свободные клетки — остальным.
+        var claimed = new HashSet<Cell>();
 
         foreach (var unit in _units)
         {
-            if (unit == null) continue;
+            var cell = unit.Cell;
+            if (cell == null)
+                continue;
+            if (cell.Unit != null && cell.Unit != unit)
+                continue;
+            if (!claimed.Add(cell))
+                continue;
+            unit.BindToCell(cell, snap: false);
+        }
+
+        foreach (var unit in _units)
+        {
+            if (unit.Cell != null && unit.Cell.Unit == unit)
+                continue;
 
             Cell closest = null;
             float bestDist = float.MaxValue;
-
             foreach (var cell in AllCells())
             {
                 float dist = HorizontalDistance(unit.transform.position, cell.transform.position);
@@ -230,16 +271,24 @@ public void HighlightMovesFor(Unit unit)
                 }
             }
 
-            if (closest != null && bestDist <= UnitLinkMaxDistance)
-            {
-                unit.BindToCell(closest, snap: false);
-            }
-            else
+            if (closest == null || bestDist > UnitLinkMaxDistance)
             {
                 unit.BindToCell(null, snap: false);
                 Debug.LogWarning(
                     $"[Battlefield] Не удалось привязать {unit.name} (dist={bestDist:F2})");
+                continue;
             }
+
+            if (claimed.Contains(closest) || (closest.Unit != null && closest.Unit != unit))
+            {
+                unit.BindToCell(null, snap: false);
+                Debug.LogWarning(
+                    $"[Battlefield] Клетка ({closest.X},{closest.Y}) уже занята, пропускаем {unit.name}");
+                continue;
+            }
+
+            claimed.Add(closest);
+            unit.BindToCell(closest, snap: false);
         }
     }
 

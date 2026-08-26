@@ -60,7 +60,7 @@ public class UnitAnimationDriver : MonoBehaviour
 
     [Header("Turn")]
     [SerializeField] private float _turnSpeed = 540f;
-    [Tooltip("Чёрные уже смотрят в центр (mesh/−Z). true = не крутить их на 180° при ходе вперёд.")]
+    [Tooltip("Меш чёрных смотрит в −Z (спина = transform.forward). Лицо = −forward, иначе ходят задом.")]
     [SerializeField] private bool _blackFacesBoardCenter = true;
 
     [Header("Attack hit")]
@@ -492,9 +492,9 @@ public class UnitAnimationDriver : MonoBehaviour
         PlayIdle(0f);
     }
 
-    // Поворот к направлению хода: дельта от «лица» модели, без абсолютного LookRotation.
-    // Чёрные уже смотрят в центр: лицо ≈ −transform.forward (или root 180).
-    // Ход к центру → угол ≈ 0 (без разворота на 180°). Вбок/назад — обычный поворот.
+    // Поворот к направлению хода/атаки.
+    // У чёрных меш смотрит в −Z, поэтому лицо = −transform.forward всегда
+    // (не зависит от текущего yaw). Разворот на 180° не пропускаем.
     public IEnumerator FaceWorldDirection(Vector3 worldDirection)
     {
         worldDirection.y = 0f;
@@ -509,22 +509,12 @@ public class UnitAnimationDriver : MonoBehaviour
         else
             faceAxis.Normalize();
 
-        // Уже смотрим вдоль dir — не крутим (в т.ч. чёрные «вперёд» к белым)
         if (Vector3.Dot(faceAxis, worldDirection) > 0.985f)
             yield break;
 
         float signedYaw = Vector3.SignedAngle(faceAxis, worldDirection, Vector3.up);
         if (Mathf.Abs(signedYaw) < 2f)
             yield break;
-
-        // Не разворачиваем чёрных «задом наперёд» на ~180°, если это ложный flip
-        // (лицо уже к центру, а transform.forward смотрит назад)
-        if (IsBlackFacingCenter() && Mathf.Abs(Mathf.Abs(signedYaw) - 180f) < 15f)
-        {
-            // Если визуально уже близко к dir — пропуск
-            if (Vector3.Dot(faceAxis, worldDirection) > -0.2f)
-                yield break;
-        }
 
         float targetYaw = transform.eulerAngles.y + signedYaw;
         var targetRot = Quaternion.Euler(0f, targetYaw, 0f);
@@ -538,24 +528,14 @@ public class UnitAnimationDriver : MonoBehaviour
         yield return FaceWorldDirection(dir);
     }
 
-    // Ось «куда смотрит модель» в мире (XZ).
     Vector3 GetVisualFaceAxis()
     {
-        // Чёрные: часто mesh/сцена смотрит в −Z при root.forward = +Z → инвертируем.
-        // Если root уже Y≈180, transform.forward уже к центру — инверсия не нужна.
-        if (IsBlackFacingCenter())
-        {
-            float yaw = transform.eulerAngles.y;
-            bool rootAbout180 = Mathf.Abs(Mathf.DeltaAngle(yaw, 180f)) < 45f;
-            if (rootAbout180)
-                return transform.forward;
+        if (UsesBlackMeshFacing())
             return -transform.forward;
-        }
-
         return transform.forward;
     }
 
-    bool IsBlackFacingCenter()
+    bool UsesBlackMeshFacing()
     {
         if (!_blackFacesBoardCenter)
             return false;
@@ -996,26 +976,26 @@ public class UnitAnimationDriver : MonoBehaviour
 
     IEnumerator RotateTo(Quaternion targetRot)
     {
-        // Только yaw
-        targetRot = Quaternion.Euler(0f, targetRot.eulerAngles.y, 0f);
+        float targetYaw = targetRot.eulerAngles.y;
 
         if (_turnSpeed <= 0f)
         {
-            transform.rotation = targetRot;
+            transform.rotation = Quaternion.Euler(0f, targetYaw, 0f);
             yield break;
         }
 
-        // Кратчайший путь — без полного оборота
-        while (Quaternion.Angle(transform.rotation, targetRot) > 0.5f)
+        // MoveTowardsAngle стабильно проходит и ровно 180° (RotateTowards на антиподах может зависнуть).
+        while (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetYaw)) > 0.5f)
         {
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                targetRot,
+            float y = Mathf.MoveTowardsAngle(
+                transform.eulerAngles.y,
+                targetYaw,
                 _turnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0f, y, 0f);
             yield return null;
         }
 
-        transform.rotation = targetRot;
+        transform.rotation = Quaternion.Euler(0f, targetYaw, 0f);
     }
 
     IEnumerator SinkBelowBoard()

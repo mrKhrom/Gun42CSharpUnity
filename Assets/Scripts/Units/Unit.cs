@@ -93,10 +93,13 @@ public class Unit : MonoBehaviour,
         var worldRot = transform.rotation;
         var localScale = transform.localScale;
 
-        // Отвязать пешку от клетки
-        if (Cell != null && Cell.Unit == this)
-            Cell.Unit = null;
-        Cell = null;
+        var board = FindObjectOfType<Battlefield>();
+
+        // Отвязать пешку и сразу выключить: Destroy отложен до конца кадра,
+        // а RelinkUnits иначе снова сажает пешку на ту же клетку и затирает ферзя.
+        BindToCell(null, snap: false);
+        board?.UnregisterUnit(this);
+        gameObject.SetActive(false);
 
         var neuGo = Instantiate(sourceGo, parent);
         neuGo.SetActive(true);
@@ -111,15 +114,18 @@ public class Unit : MonoBehaviour,
             Destroy(neuGo);
             _type = newType;
             name = $"{_team}_{_type}";
+            gameObject.SetActive(true);
             if (cell != null)
                 BindToCell(cell, snap: false);
+            board?.RegisterUnit(this);
             return this;
         }
 
-        // Логика новой фигуры
+        // Логика новой фигуры — BindToCell в Setup, без полного Relink
         neu.Setup(team, newType, cell, snap: false);
         neu.transform.SetPositionAndRotation(worldPos, worldRot);
         neu.HasMoved = true;
+        board?.RegisterUnit(neu);
 
         // Анимации новой модели (имена states с префаба ферзя/ладьи/…)
         var anim = neu.GetComponent<UnitAnimationDriver>();
@@ -130,13 +136,8 @@ public class Unit : MonoBehaviour,
                 anim.PlayIdle(0f);
         }
 
-        // Обновить список фигур на доске
-        var board = FindObjectOfType<Battlefield>();
-        board?.RelinkUnits();
-
         Debug.Log($"[Unit] Promote visual: {name} → {neu.name} (from {sourceGo.name})");
 
-        // Удалить старую пешку (в конце кадра)
         if (Application.isPlaying)
             Destroy(gameObject);
         else
