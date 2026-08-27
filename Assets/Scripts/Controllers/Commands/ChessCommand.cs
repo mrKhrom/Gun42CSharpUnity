@@ -273,8 +273,8 @@ public void EvaluatePosition(bool showTurnIfQuiet)
         if (anim.IsDead)
             return;
 
-        // ChessCommand не MonoBehaviour — корутина на компоненте короля
-        anim.StartCoroutine(anim.PlayDeathSinkAndHide());
+        // Не Destroy: undo после мата должен вернуть короля на клетку.
+        anim.StartCoroutine(anim.PlayDeathSinkAndHide(destroyGameObject: false));
     }
 
     public void CheatNextTurn()
