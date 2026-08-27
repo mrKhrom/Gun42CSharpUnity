@@ -1,8 +1,10 @@
 using UnityEngine;
 
-// Аудио фигуры: select / move start / attack declare / attack / death.
-// Клипы — массивы (random). Пустой массив = тишина.
-// Death: one-shot на temporary AudioSource, чтобы sink/Destroy не обрезал звук.
+/// <summary>
+/// Звуки фигуры: выбор, ход, удар, смерть. Клипы — случайный из массива.
+/// Методы: PlaySelect — звук выбора; PlayMoveStart — звук начала хода;
+/// PlayAttackDeclare — звук намерения удара; PlayAttack — звук удара; PlayDeath — звук смерти.
+/// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Unit))]
 public class UnitAudio : MonoBehaviour

@@ -2,8 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-// Единый драйвер анимаций фигуры: Idle (всегда loop) / Walk / Attack / Death + поворот + sink.
-// Вызовы Walk/Attack/Death — из PlayerController. Имя фигуры — в warning'ах.
+/// <summary>
+/// Анимации фигуры: Idle / Walk / Attack / Death, поворот, погружение после смерти.
+/// Методы: PlayIdle — стойка; StartWalk — начать ходьбу; StopWalkToIdle — остановить ходьбу;
+/// FaceWorldDirection / FacePoint — повернуть к цели; PlayAttackAndWait — удар и ждать кадр попадания;
+/// PlayDeathSinkAndHide — смерть и скрыть; ReviveForUndo — вернуть после undo; CacheAnimator — найти Animator.
+/// </summary>
 [DisallowMultipleComponent]
 [ExecuteAlways]
 public class UnitAnimationDriver : MonoBehaviour

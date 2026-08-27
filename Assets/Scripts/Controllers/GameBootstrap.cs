@@ -1,6 +1,11 @@
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Старт GameScene: доска, расстановка, первый ход, UI.
+/// Методы: Construct — получить зависимости Zenject; RunBootstrap — запустить партию один раз;
+/// ForceRunBootstrap — перезапустить инициализацию.
+/// </summary>
 public class GameBootstrap : MonoBehaviour
 {
     private Battlefield _board;

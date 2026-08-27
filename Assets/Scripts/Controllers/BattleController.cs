@@ -2,6 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
+/// <summary>
+/// Ввод партии: клик по клетке, Cancel (Esc), Confirm (Space), Ctrl+Z.
+/// Методы: Construct — получить зависимости Zenject; EnsureSubscribed — подписаться на клики доски.
+/// Клики уходят в IGameplayCommand.Interact.
+/// </summary>
 public class BattleController : MonoBehaviour
 {
     private IGameplayCommand _command;
@@ -14,6 +19,9 @@ public class BattleController : MonoBehaviour
     private bool _subscribedToBoard;
     private bool _inputBound;
 
+    // Получаем доступ через DI (Zenject) к объектам, которые находятся в сцене. 
+    // Например: BattleController не знает, что где-то есть класс ChessCommand. 
+    // Он знает только: «мне нужен кто-то, у кого есть Interact / Cancel / Confirm».
     [Inject]
     private void Construct(
         IGameplayCommand command,

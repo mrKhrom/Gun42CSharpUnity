@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Одна клетка доски: координаты, сосед, фигура, подсветка, клик/наведение.
+/// Методы: Init — задать координаты; SetNeighbour — записать соседа; TryGetNeighbour — найти соседа;
+/// SetHighlight — сменить подсветку; SetFocusVisible — показать фокус; SetSelect — выделить клетку;
+/// ResetSelect — снять выделение; ClearHighlight — убрать подсветку;
+/// OnPointerEnter / Exit / Click — наведение и клик.
+/// </summary>
 public class Cell : MonoBehaviour,
     IPointerEnterHandler,
     IPointerExitHandler,

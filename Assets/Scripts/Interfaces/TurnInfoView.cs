@@ -2,6 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
+/// <summary>
+/// Текст хода на экране (White/Black, шах, мат, пат).
+/// Методы: ShowTurn — показать чья очередь; ShowCheck — показать шах;
+/// ShowCheckmate — показать мат; ShowStalemate — показать пат; ShowStatus — произвольный текст.
+/// </summary>
 public class TurnInfoView : MonoBehaviour, ITurnInfoView
 {
     [SerializeField] private Text _label;

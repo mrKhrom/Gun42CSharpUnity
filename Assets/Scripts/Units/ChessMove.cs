@@ -1,3 +1,6 @@
+/// <summary>
+/// Особый ход: рокировка короткая/длинная, взятие на проходе.
+/// </summary>
 public enum SpecialMoveKind
 {
     None = 0,
@@ -6,6 +9,11 @@ public enum SpecialMoveKind
     EnPassant = 3
 }
 
+/// <summary>
+/// Описание хода: кто, откуда, куда, взятие, рокировка / en passant.
+/// Методы: конструктор — обычный ход; EnPassant — ход взятия на проходе.
+/// Свойства: IsCastle — это рокировка; IsEnPassant — это взятие на проходе.
+/// </summary>
 public readonly struct ChessMove
 {
     public readonly Unit Mover;

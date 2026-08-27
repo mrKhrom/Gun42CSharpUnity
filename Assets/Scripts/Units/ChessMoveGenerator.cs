@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Генерация псевдолегальных ходов по типу фигуры, рокировка, en passant, шах.
+/// Методы: GetTargets — все клетки хода; GetTargetsSplit — отдельно ходы и атаки;
+/// TryGetCastleMove — собрать рокировку; TryGetEnPassantMove — собрать взятие на проходе;
+/// IsSquareAttacked — клетка под боем; IsKingInCheck — король под шахом; FindKing — найти короля;
+/// IsCapture — ход берёт фигуру; IsAttackTarget — клетка для атаки.
+/// </summary>
 public static class ChessMoveGenerator
 {
     public const int KingStartX = 4;

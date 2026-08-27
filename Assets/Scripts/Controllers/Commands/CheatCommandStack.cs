@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Стек снимков доски для отмены хода (Play Mode, не Unity Editor Undo). Глубина MaxDepth.
+/// Методы: Push — сохранить снимок; TryPop — взять последний; Clear — опустошить стек.
+/// </summary>
 public class CheatCommandStack
 {
     public const int MaxDepth = 16;
@@ -39,6 +43,9 @@ public class CheatCommandStack
     }
 }
 
+/// <summary>
+/// Снимок партии: сторона хода, фигуры на клетках, en passant, выбор.
+/// </summary>
 public sealed class BoardSnapshot
 {
     public Team CurrentTeam;

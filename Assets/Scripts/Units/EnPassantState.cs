@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// Взятие на проходе на текущий ход: жертва и клетка приземления.
+/// Методы: Set — открыть окно en passant; Clear — закрыть окно; Restore — восстановить из снимка;
+/// MatchesLanding — клетка приземления совпала; CanCaptureBy — эта пешка может бить.
+/// </summary>
 public class EnPassantState
 {
     public bool IsAvailable { get; private set; }

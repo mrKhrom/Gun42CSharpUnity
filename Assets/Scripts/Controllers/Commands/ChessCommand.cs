@@ -2,6 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Команда шахмат: выбор фигуры, ход, шах/мат, читы и undo.
+/// Методы: SetFirstTeam — задать сторону первого хода; Interact — обработать клик по клетке;
+/// Cancel — сбросить выбор; Confirm — подтвердить действие; EvaluatePosition — проверить шах/мат;
+/// CheatNextTurn — отдать ход сопернику; CheatKillSelectedEnemy — убить выбранного врага;
+/// CheatUndo — отменить последний ход.
+/// </summary>
 public class ChessCommand : IGameplayCommand, ICheatCommands
 {
     private readonly Battlefield _board;

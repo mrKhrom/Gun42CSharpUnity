@@ -3,6 +3,10 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
+/// <summary>
+/// Editor: заполняет слоты префабов на ChessSetup в GameScene.
+/// Методы: Setup — проставить ссылки на префабы (меню Tools/Chess/Fill ChessSetup Prefabs).
+/// </summary>
 public static class SetupChessSetupPrefabs
 {
     private const string PrefabFolder = "Assets/Prefabs";

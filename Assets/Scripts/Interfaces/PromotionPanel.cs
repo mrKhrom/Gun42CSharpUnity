@@ -3,6 +3,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Панель превращения пешки (ферзь / ладья / слон / конь).
+/// Методы: WaitForSelection — дождаться выбора игрока; Hide — скрыть панель.
+/// </summary>
 public class PromotionPanel : MonoBehaviour, IPromotionUI
 {
     [SerializeField] private GameObject _panelRoot;

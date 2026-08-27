@@ -96,6 +96,10 @@ MonoBehaviour:
   _sampleInEditMode: 1
   _forceIdleLoop: 1
   _forceWalkLoop: 1
+  _speedParameter: Speed
+  _speedWalkValue: 1
+  _speedIdleValue: 0
+  _speedWalkThreshold: 0.1
   _turnSpeed: 540
   _blackFacesBoardCenter: 1
   _attackHitTime: 0.15
@@ -128,7 +132,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: de53012ffb658488b82a42444f5c165d, type: 3}
   - {fileID: 8300000, guid: 45fd87a67011646739527e5604ba76e8, type: 3}
   _attackClips:
-  - {fileID: 8300000, guid: 4a8fcbaa92ca646feaf1afc9f8480431, type: 3}
+  - {fileID: 8300000, guid: 72a9fa98252ed4100877a2626c59215c, type: 3}
   _deathClips:
   - {fileID: 8300000, guid: feac58a7f016e4eabab9c676c71f1e1b, type: 3}
   _source: {fileID: 0}

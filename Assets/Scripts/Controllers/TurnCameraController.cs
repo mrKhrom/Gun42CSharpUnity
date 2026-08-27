@@ -1,6 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Камера hot-seat: после хода смотрит на сторону, которая ходит.
+/// Методы: BindGameplayCamera — привязать камеру доски; SnapToTeam — мгновенно на сторону;
+/// AnimateToTeam — плавно переехать; OnTurnChanged — реакция на смену хода.
+/// </summary>
 [DisallowMultipleComponent]
 public class TurnCameraController : MonoBehaviour
 {

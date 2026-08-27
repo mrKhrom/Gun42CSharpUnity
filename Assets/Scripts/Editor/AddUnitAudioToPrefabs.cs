@@ -2,7 +2,10 @@
 using UnityEditor;
 using UnityEngine;
 
-// Добавляет UnitAudio на все префабы с Unit (клипы заполняются вручную).
+/// <summary>
+/// Editor: вешает UnitAudio на префабы с Unit. Клипы заполняются вручную.
+/// Методы: Add — добавить компонент на префабы (меню Tools/Chess/Add UnitAudio to Unit Prefabs).
+/// </summary>
 public static class AddUnitAudioToPrefabs
 {
     [MenuItem("Tools/Chess/Add UnitAudio to Unit Prefabs")]

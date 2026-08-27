@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// Расстановка фигур: префабы сторон и спавн классической позиции.
+/// Методы: TrySpawnIfConfigured — спавн, если включён флаг; SpawnStandardPosition — поставить стартовую позицию;
+/// ClearAllUnits — убрать фигуры со сцены; GetPrefab — префаб фигуры; GetSpawnSource — объект для Instantiate.
+/// </summary>
 public class ChessSetup : MonoBehaviour
 {
     [Header("Ссылки")]
@@ -181,8 +186,7 @@ public void TrySpawnIfConfigured()
     }
 
     /// <summary>
-    /// GameObject to Instantiate on promotion. Prefab asset, not a board piece
-    /// (board pieces can be captured and the ChessSetup slot becomes missing).
+    /// Префаб для Instantiate при превращении (не фигура со сцены — её могут срубить).
     /// </summary>
     public GameObject GetSpawnSource(Team team, ChessPieceType type)
     {

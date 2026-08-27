@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Прокси кликов по доске (логирование). Игровой ввод идёт через BattleController.
+/// Событие: OnCellClicked.
+/// </summary>
 public class CellManager : MonoBehaviour
 {
     [SerializeField] private Battlefield _battlefield;

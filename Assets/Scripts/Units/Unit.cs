@@ -1,6 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Фигура на доске: сторона, тип, клетка, превращение, клик/наведение.
+/// Методы: SetTeam — задать сторону; SetType — задать тип; BindToCell — привязать к клетке;
+/// Setup — полная инициализация; PromoteTo — превратить пешку; OnPointerEnter / Exit / Click — наведение и клик.
+/// </summary>
 public class Unit : MonoBehaviour,
     IPointerEnterHandler,
     IPointerExitHandler,

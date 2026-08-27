@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Фоновая музыка сцены: один клип зацикливается, несколько — очередь вперемешку.
+/// Методы: StartLoop — запустить плейлист; StopLoop — остановить музыку.
+/// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(AudioSource))]
 public class SceneLoopAudio : MonoBehaviour

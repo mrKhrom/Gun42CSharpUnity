@@ -2,6 +2,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Меню: Play грузит GameScene additive, прячет кнопку, выключает камеру меню.
+/// Методы: OpenMainScene — открыть меню; OpenGameScene — загрузить бой;
+/// EnsureSingleEventSystem — оставить один EventSystem.
+/// </summary>
 public class SceneController : MonoBehaviour
 {
     [Header("UI меню")]
@@ -48,11 +53,16 @@ public class SceneController : MonoBehaviour
             return;
         }
 
+        // Необходимо запустить корутину, чтобы проиграть звук клика PlayButton перед загрузкой сцены.
         StartCoroutine(OpenGameSceneRoutine());
     }
 
     System.Collections.IEnumerator OpenGameSceneRoutine()
     {
+        // Запоминаем камеру меню, чтобы выключить её после загрузки GameScene.
+        // _mainMenuCamera — камера меню из Inspector. Если слот пустой, до загрузки боя берётся Camera.main (ещё меню). 
+        // После additive в сцене две MainCamera, и Camera.main может указать уже на доску — её нельзя выключать. 
+        // Поэтому ссылку на меню запоминают заранее.
         Camera menuCamera = _mainMenuCamera != null ? _mainMenuCamera : Camera.main;
 
         yield return PlayPlayButtonClickRoutine();

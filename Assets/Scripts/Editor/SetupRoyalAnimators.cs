@@ -6,7 +6,10 @@ using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
-// Создаёт AnimatorController для MDX королей/ферзей и вешает на префабы.
+/// <summary>
+/// Editor: AnimatorController для королей/ферзей MDX и назначение на префабы.
+/// Методы: Setup — создать контроллеры и повесить на префабы (меню Tools/Chess/Setup Royal Animators).
+/// </summary>
 public static class SetupRoyalAnimators
 {
     struct RoyalSpec

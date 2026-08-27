@@ -2,6 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Игровое поле 8×8: клетки, граф соседей, фигуры, подсветка, клики.
+/// Методы: InitializeFromScene — собрать доску из сцены; EnsureInitialized — инициализировать один раз;
+/// GetCell — клетка по координатам; GetNeighbour(s) — сосед(и) клетки; AllCells — все клетки;
+/// HighlightCells / HighlightCell — подсветить клетки; HighlightMovesFor — ходы фигуры;
+/// ClearAllHighlights — снять подсветку; RegisterUnit / UnregisterUnit — учесть / снять фигуру;
+/// RelinkUnits — заново привязать фигуры к клеткам.
+/// Событие: OnCellClicked — клик по клетке.
+/// </summary>
 public class Battlefield : MonoBehaviour
 {
     public const int Size = 8;

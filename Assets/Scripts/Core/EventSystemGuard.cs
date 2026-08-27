@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Один активный EventSystem при additive-сценах (клики UI и доски).
+/// Методы: CleanupDuplicates — удалить лишние EventSystem; EnsureOneActive — оставить один включённым.
+/// </summary>
 [DefaultExecutionOrder(-10000)]
 public class EventSystemGuard : MonoBehaviour
 {

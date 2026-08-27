@@ -1,6 +1,10 @@
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Zenject-установщик GameScene: ввод, доска, команда, UI, читы.
+/// Методы: InstallBindings — зарегистрировать сервисы сцены (иерархия + создание UI при отсутствии).
+/// </summary>
 public class SceneInstaller : MonoInstaller
 {
     [Header("Настройки (этап 13)")]
@@ -10,6 +14,9 @@ public class SceneInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        // Создаем инстансы, чтобы можно было пользоваться их методами в дргуих классах через DI. 
+        // Например, Controls.GameActions в BattleController.
+        
         // --- Ввод ---
         _controls = new Controls();
         _controls.Enable();

@@ -3,6 +3,11 @@ using System.Collections;
 using UnityEngine;
 using Zenject;
 
+/// <summary>
+/// Визуализация хода: движение, рокировка, взятие, превращение. Блокирует ввод (IsBusy).
+/// Методы: ExecuteMove — провести обычный ход; ExecuteCastle — провести рокировку;
+/// ExecuteEnPassant — провести взятие на проходе.
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     private GameSettings _settings;

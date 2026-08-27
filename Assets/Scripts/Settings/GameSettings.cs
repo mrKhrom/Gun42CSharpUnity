@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Настройки партии (ScriptableObject): сетка, скорость фигур, первый ход, restart, формат UI.
+/// Поля: cellSize — шаг сетки; unitMoveSpeed — скорость фигур; randomFirstPlayer — случайный первый ход;
+/// firstTeam — кто ходит первым; restartHoldDuration — время удержания Restart;
+/// turnLabelFormat — шаблон текста хода.
+/// </summary>
 [CreateAssetMenu(
     fileName = "GameSettings",
     menuName = "Chess/Game Settings")]

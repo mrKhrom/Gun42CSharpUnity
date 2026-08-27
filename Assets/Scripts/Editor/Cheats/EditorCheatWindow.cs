@@ -3,6 +3,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
+/// <summary>
+/// Окно читов Play Mode (клавиши 1 / 2). Undo всегда в BattleController.
+/// Методы: Open — открыть окно (меню Netologia/Windows/Editor Cheat Window).
+/// </summary>
 public class EditorCheatWindow : EditorWindow
 {
     EditorControls _controls;

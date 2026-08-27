@@ -1,5 +1,10 @@
 using System;
 
+// Общие enum’ы проекта: соседи клетки, стороны, подсветка, типы фигур.
+
+/// <summary>
+/// Направление соседа на сетке (ортогональ и диагональ).
+/// </summary>
 [Flags]
 public enum NeighbourType
 {
@@ -22,12 +27,18 @@ public enum NeighbourType
     All = Orthogonal | Diagonal
 }
 
+/// <summary>
+/// Сторона игрока: White / Black.
+/// </summary>
 public enum Team
 {
     White = 0,
     Black = 1
 }
 
+/// <summary>
+/// Режим подсветки клетки: hover, выбор, ход, атака.
+/// </summary>
 public enum CellHighlight
 {
     None,
@@ -37,6 +48,9 @@ public enum CellHighlight
     Attack
 }
 
+/// <summary>
+/// Тип шахматной фигуры: пешка, ладья, конь, слон, ферзь, король.
+/// </summary>
 public enum ChessPieceType
 {
     Pawn = 0,

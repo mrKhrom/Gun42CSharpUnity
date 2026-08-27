@@ -6,12 +6,9 @@ using UnityEditor.Animations;
 using UnityEngine;
 
 /// <summary>
-/// Generic importer for FBX files produced by mdx2fbx.
-/// Copy to Assets/Scripts/Editor/.
-///
-/// Detects converted files by the "mdx2fbx" header or a sibling .anim.json / .mdx.
-/// Menu: Tools/Setup MDX Model  — runs on the selected FBX (or all selected).
-/// Does not SaveAndReimport from OnPostprocessAllAssets (avoids import loops).
+/// Импорт FBX из mdx2fbx: материалы, аниматор, Generic rig.
+/// Методы: Run — настроить выбранные FBX (меню Tools/Setup MDX Model);
+/// OnPreprocessModel — правки до импорта; OnPostprocessAllAssets — правки после импорта.
 /// </summary>
 public class MdxFbxPostprocessor : AssetPostprocessor
 {

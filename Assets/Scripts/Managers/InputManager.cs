@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Zenject;
 
+/// <summary>
+/// Удержание Restart: заполняет UI и перезагружает сцену.
+/// Методы: Construct — получить ввод и настройки; Restart (Input) — начать/отменить удержание.
+/// </summary>
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private GameObject _restartPanel;

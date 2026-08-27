@@ -1,7 +1,16 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// Легальность ходов: король не остаётся под шахом. Симуляция хода туда-обратно.
+/// Методы: GetLegalTargets — клетки без шаха своему королю; WouldLeaveKingInCheck — ход оставляет шах;
+/// SideHasLegalMove — есть ли легальный ход; TryBuildDelta — собрать дельту хода;
+/// Apply — применить ход на доске; Unapply — откатить ход.
+/// </summary>
 public static class ChessLegality
 {
+/// <summary>
+/// Дельта одного хода для проверки шаха (кто куда, взятие, ладья при рокировке).
+/// </summary>
 public struct BoardDelta
     {
         public Unit Mover;
