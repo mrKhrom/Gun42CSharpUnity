@@ -473,17 +473,16 @@ public void EvaluatePosition(bool showTurnIfQuiet)
             if (anim != null)
                 anim.StopAllCoroutines();
 
-            if (rec.Active && rec.Dead == false)
+            if (rec.Active && !rec.Dead)
             {
-                if (anim != null && anim.IsDead)
+                if (anim != null)
                     anim.ReviveForUndo();
                 else if (!unit.gameObject.activeSelf)
                     unit.gameObject.SetActive(true);
             }
-            else
+            else if (unit.gameObject.activeSelf != rec.Active)
             {
-                if (unit.gameObject.activeSelf)
-                    unit.gameObject.SetActive(rec.Active);
+                unit.gameObject.SetActive(rec.Active);
             }
 
             unit.transform.SetPositionAndRotation(rec.Position, rec.Rotation);

@@ -197,18 +197,7 @@ public class PlayerController : MonoBehaviour
             deathStarted = true;
 
             victimAudio?.PlayDeath();
-            enemy.BindToCell(null, snap: false);
-
-            if (enemyAnim != null && !enemyAnim.IsDead)
-            {
-                StartCoroutine(RunAndFlag(enemyAnim.PlayDeathSinkAndHide(), () => deathDone = true));
-            }
-            else
-            {
-                if (enemy != null)
-                    Destroy(enemy.gameObject);
-                deathDone = true;
-            }
+            HideCapturedUnit(enemy, enemyAnim, () => deathDone = true);
         }
 
         // Стар анимации атаки + attack SFX
@@ -377,15 +366,8 @@ public class PlayerController : MonoBehaviour
         void StartDeath()
         {
             victimAudio?.PlayDeath();
-            victim.BindToCell(null, snap: false);
             var victimAnim = victim.GetComponent<UnitAnimationDriver>();
-            if (victimAnim != null && !victimAnim.IsDead)
-                StartCoroutine(RunAndFlag(victimAnim.PlayDeathSinkAndHide(), () => deathDone = true));
-            else
-            {
-                Destroy(victim.gameObject);
-                deathDone = true;
-            }
+            HideCapturedUnit(victim, victimAnim, () => deathDone = true);
         }
 
         attackerAudio?.PlayAttack();
@@ -466,5 +448,30 @@ public class PlayerController : MonoBehaviour
         }
 
         unit.transform.position = worldTarget;
+    }
+
+    // Не Destroy: undo должен вернуть фигуру. Death прячет объект.
+    void HideCapturedUnit(Unit victim, UnitAnimationDriver victimAnim, Action onDone)
+    {
+        if (victim == null)
+        {
+            onDone?.Invoke();
+            return;
+        }
+
+        victim.BindToCell(null, snap: false);
+        var board = _board != null ? _board : FindObjectOfType<Battlefield>();
+        board?.UnregisterUnit(victim);
+
+        if (victimAnim != null && !victimAnim.IsDead)
+        {
+            StartCoroutine(RunAndFlag(
+                victimAnim.PlayDeathSinkAndHide(destroyGameObject: false),
+                onDone));
+            return;
+        }
+
+        victim.gameObject.SetActive(false);
+        onDone?.Invoke();
     }
 }
