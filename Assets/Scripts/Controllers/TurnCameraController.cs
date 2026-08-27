@@ -34,15 +34,91 @@ public class TurnCameraController : MonoBehaviour
         EnsureAnchors();
     }
 
+    public void BindGameplayCamera(Camera cam)
+    {
+        if (cam == null)
+            return;
+
+        StopMove();
+        _camera = cam;
+        _cameraTransform = cam.transform;
+        RebuildAutoAnchors();
+    }
+
     void ResolveCamera()
     {
-        if (_camera == null)
-            _camera = Camera.main;
-        if (_camera == null)
-            _camera = FindObjectOfType<Camera>();
+        if (IsUsable(_camera))
+        {
+            if (_cameraTransform == null)
+                _cameraTransform = _camera.transform;
+            return;
+        }
 
-        if (_cameraTransform == null && _camera != null)
-            _cameraTransform = _camera.transform;
+        _camera = FindCameraInSameScene();
+        if (!IsUsable(_camera))
+        {
+            foreach (var cam in FindObjectsOfType<Camera>())
+            {
+                if (!IsUsable(cam))
+                    continue;
+                if (cam.gameObject.scene == gameObject.scene)
+                {
+                    _camera = cam;
+                    break;
+                }
+            }
+        }
+
+        _cameraTransform = IsUsable(_camera) ? _camera.transform : null;
+    }
+
+    static bool IsUsable(Camera cam)
+    {
+        return cam != null && cam.enabled && cam.gameObject.activeInHierarchy;
+    }
+
+    Camera FindCameraInSameScene()
+    {
+        var scene = gameObject.scene;
+        if (!scene.IsValid() || !scene.isLoaded)
+            return null;
+
+        var roots = scene.GetRootGameObjects();
+        Camera tagged = null;
+        foreach (var root in roots)
+        {
+            var cams = root.GetComponentsInChildren<Camera>(true);
+            foreach (var cam in cams)
+            {
+                if (!IsUsable(cam))
+                    continue;
+                if (cam.CompareTag("MainCamera"))
+                    return cam;
+                if (tagged == null)
+                    tagged = cam;
+            }
+        }
+
+        return tagged;
+    }
+
+    void RebuildAutoAnchors()
+    {
+        DestroyAutoAnchor(ref _whiteAnchor, "CamAnchor_White");
+        DestroyAutoAnchor(ref _blackAnchor, "CamAnchor_Black");
+        EnsureAnchors();
+    }
+
+    static void DestroyAutoAnchor(ref Transform anchor, string name)
+    {
+        if (anchor == null)
+            return;
+        if (anchor.name != name)
+            return;
+        var go = anchor.gameObject;
+        anchor = null;
+        if (go != null)
+            Destroy(go);
     }
 
     // Если якоря не назначены — создаём из текущей позы камеры (White) и зеркала (Black)
@@ -112,6 +188,13 @@ public class TurnCameraController : MonoBehaviour
     // teamNowToMove — кто ходит сейчас (после смены хода)
     public void OnTurnChanged(Team teamNowToMove, bool snap = false)
     {
+        if (!IsUsable(_camera) || _cameraTransform == null)
+        {
+            ResolveCamera();
+            if (_whiteAnchor == null || _blackAnchor == null)
+                EnsureAnchors();
+        }
+
         if (snap || !_animate || _moveDuration <= 0.001f)
             SnapToTeam(teamNowToMove);
         else

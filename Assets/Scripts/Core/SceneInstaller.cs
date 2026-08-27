@@ -70,6 +70,18 @@ public class SceneInstaller : MonoInstaller
             turnCam = go.AddComponent<TurnCameraController>();
         }
 
+        Camera gameCam = null;
+        foreach (var cam in FindObjectsOfType<Camera>())
+        {
+            if (cam != null && cam.gameObject.scene.name == "GameScene" && cam.enabled)
+            {
+                gameCam = cam;
+                break;
+            }
+        }
+        if (gameCam != null)
+            turnCam.BindGameplayCamera(gameCam);
+
         Container.Bind<TurnCameraController>()
             .FromInstance(turnCam)
             .AsSingle();
