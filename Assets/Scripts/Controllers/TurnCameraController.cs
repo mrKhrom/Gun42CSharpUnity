@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-// Одна Main Camera: после хода плавно переезжает на сторону текущего игрока (hot-seat).
-// Якоря White/Black в сцене; если не заданы — строятся зеркально вокруг центра доски.
 [DisallowMultipleComponent]
 public class TurnCameraController : MonoBehaviour
 {

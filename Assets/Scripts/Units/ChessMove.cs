@@ -43,11 +43,6 @@ public readonly Unit CapturedUnit;
         CapturedUnit = capturedUnit;
     }
 
-    public static ChessMove Normal(Unit mover, Cell to)
-    {
-        return new ChessMove(mover, mover?.Cell, to);
-    }
-
     public static ChessMove EnPassant(Unit attacker, Cell landing, Unit victim)
     {
         return new ChessMove(

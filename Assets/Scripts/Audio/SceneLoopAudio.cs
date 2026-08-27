@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Фоновая музыка сцены: старт при запуске, цикл.
-/// Один клип — обычный loop. Несколько — очередь, по желанию перемешанная.
-/// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(AudioSource))]
 public class SceneLoopAudio : MonoBehaviour

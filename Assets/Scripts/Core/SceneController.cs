@@ -55,15 +55,12 @@ public class SceneController : MonoBehaviour
     {
         Camera menuCamera = _mainMenuCamera != null ? _mainMenuCamera : Camera.main;
 
-        // Клик, пока AudioListener меню ещё включён. Камеру меню не трогаем
-        // до BindGameplayCamera в SceneInstaller.
         yield return PlayPlayButtonClickRoutine();
 
         Debug.Log("[SceneController] Loading GameScene (additive)...");
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
 
         HidePlayButton();
-        // Якоря хода уже сняты с камеры доски — меню можно выключать.
         DisableMenuCameraAndAudio(menuCamera);
         yield return EnsureSingleEventSystemNextFrame();
     }
@@ -105,7 +102,6 @@ public class SceneController : MonoBehaviour
         src.ignoreListenerPause = true;
         src.PlayOneShot(clip, 1f);
 
-        // Слышимый старт клика на слушателе меню, до LoadScene и выключения камеры.
         float audible = clip.length > 0.01f ? Mathf.Min(0.2f, clip.length) : 0.2f;
         yield return new WaitForSecondsRealtime(audible);
 
@@ -187,7 +183,6 @@ public static void EnsureSingleEventSystem()
             return;
         }
 
-        // Выключаем весь объект камеры: и Camera, и AudioListener (ровно один слушатель останется в GameScene)
         menuCamera.gameObject.SetActive(false);
     }
 }

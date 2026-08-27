@@ -450,7 +450,6 @@ public class PlayerController : MonoBehaviour
         unit.transform.position = worldTarget;
     }
 
-    // Не Destroy: undo должен вернуть фигуру. Death прячет объект.
     void HideCapturedUnit(Unit victim, UnitAnimationDriver victimAnim, Action onDone)
     {
         if (victim == null)

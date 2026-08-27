@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Play-mode undo stack for cheats and committed chess moves. Not Unity Editor Undo.
-/// </summary>
 public class CheatCommandStack
 {
     public const int MaxDepth = 16;

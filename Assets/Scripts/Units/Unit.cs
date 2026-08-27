@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -16,12 +14,7 @@ public class Unit : MonoBehaviour,
     public Team Team => _team;
     public ChessPieceType Type => _type;
     public float MoveSpeed => _moveSpeed;
-    public bool IsMoving => _isMoving;
     public bool HasMoved { get; set; }
-
-    public event Action OnMoveEndCallback;
-
-    private bool _isMoving;
 
     public void SetTeam(Team team) => _team = team;
 
@@ -54,8 +47,6 @@ public class Unit : MonoBehaviour,
         HasMoved = false;
     }
 
-    // Превращение пешки: спавн префаба выбранной фигуры (полная модель + Animator),
-    // старая пешка уничтожается сразу. Возвращает новый Unit (или this, если только Type).
     public Unit PromoteTo(ChessPieceType newType)
     {
         if (newType == ChessPieceType.Pawn || newType == ChessPieceType.King)
@@ -158,43 +149,6 @@ public class Unit : MonoBehaviour,
     {
         EnsureCellLinked();
         Cell?.OnPointerClick(eventData);
-    }
-
-    public void Move(Cell targetCell)
-    {
-        if (targetCell == null || _isMoving) return;
-        StartCoroutine(MoveRoutine(targetCell));
-    }
-
-    public IEnumerator AnimateMoveTo(Vector3 worldTarget)
-    {
-        _isMoving = true;
-
-        worldTarget.y = transform.position.y;
-
-        while ((transform.position - worldTarget).sqrMagnitude > 0.0001f)
-        {
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                worldTarget,
-                _moveSpeed * Time.deltaTime);
-            yield return null;
-        }
-
-        transform.position = worldTarget;
-        _isMoving = false;
-    }
-
-    private IEnumerator MoveRoutine(Cell targetCell)
-    {
-        if (Cell != null && Cell.Unit == this)
-            Cell.Unit = null;
-
-        yield return AnimateMoveTo(targetCell.transform.position);
-
-        BindToCell(targetCell, snap: false);
-        HasMoved = true;
-        OnMoveEndCallback?.Invoke();
     }
 
     private void EnsureCellLinked()

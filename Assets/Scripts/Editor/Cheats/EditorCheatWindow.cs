@@ -3,10 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-/// <summary>
-/// Editor-only cheat window. Input is live only while this window is open AND Play Mode is active.
-/// OnEnable/OnDisable fire on open/close, not on Play — we also hook playModeStateChanged.
-/// </summary>
 public class EditorCheatWindow : EditorWindow
 {
     EditorControls _controls;
